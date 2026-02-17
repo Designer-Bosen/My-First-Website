@@ -1,3 +1,22 @@
+.hero {
+    width: 100%;
+    height: 250px;
+    background-image: url("../images/malay_profile_top.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
 body {
     font-family: Arial, sans-serif;
     max-width: 900px;
