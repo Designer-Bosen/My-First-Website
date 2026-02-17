@@ -1,11 +1,8 @@
 .hero {
-    width: 100%;
-    height: 250px;
-    background-image: url("../images/banner.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    width: 100vw;              /* full viewport width */
+    margin-left: calc(50% - 50vw);
 }
+
 
 body {
     font-family: Arial, sans-serif;
