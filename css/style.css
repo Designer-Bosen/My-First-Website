@@ -159,19 +159,19 @@ h1 {
 /* for banners on different pages */
 
 .arrangement1-hero--home {
-    background-image: url("/images/banner.jpg");
+    background-image: url("../images/banner.jpg");
 }
 
 .arrangement1-hero--projects {
-    background-image: url("/images/projects_banner.jpg");
+    background-image: url("../images/projects_banner.jpg");
 }
 
 .arrangement1-hero--life {
-    background-image: url("/images/life_banner.jpg");
+    background-image: url("../images/life_banner.jpg");
 }
 
 .arrangement1-hero--math {
-    background-image: url("/images/math_banner.jpg");
+    background-image: url("../images/math_banner.jpg");
 }
 
 
