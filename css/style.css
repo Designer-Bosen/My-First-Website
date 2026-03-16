@@ -117,7 +117,34 @@ h1 {
     font-size: 18px;
 }
 
-/* Navigate Bar*/
+/* Content Links */
+
+.arrangement1-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.arrangement1-list li {
+    margin: 12px 0;
+}
+
+.arrangement1-list a {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-decoration: none;
+    color: black;
+    transition: all 0.2s ease;
+}
+
+.arrangement1-list a:hover {
+    background: #eb55ff;
+    color: white;
+    border-color: #eb55ff;
+}
+
+/* Navigate Bar */
 
 .arrangement1-navbar {
     position: sticky;
