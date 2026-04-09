@@ -15,7 +15,7 @@
 
 Given predictor variables: $\mathbf{Z}_1, \dots, \mathbf{Z}_N \in \mathbb{R}^d$ and independent response variables: $X_1, \dots, X_N \in \{-1,1\}$, the logistic regression model for hte probability of a positive outcome is given by:
 
-$$\mathbb{P}(X_i=1 \mid \mathbf{Z}_i)=\frac{e^{\mathbf{\theta}^T \mathbf{Z}_i}}{e^{\mathbf{\theta}^T \mathbf{Z}_i}+e^{-\mathbf{\theta}^T \mathbf{Z}_i}}$$
+$$\log(\frac{\mathbb{P}(X_i=1 \mid \mathbf{Z}_i)}{1 - \mathbb{P}(X_i=1 \mid \mathbf{Z}_i)}) = \mathbf{\theta}^T \mathbf{Z}_i \quad \text{or} \quad \mathbb{P}(X_i=1 \mid \mathbf{Z}_i)=\frac{e^{\mathbf{\theta}^T \mathbf{Z}_i}}{e^{\mathbf{\theta}^T \mathbf{Z}_i}+e^{-\mathbf{\theta}^T \mathbf{Z}_i}}$$
 
 for $1 \leq i \leq N$ and $\mathbf{\theta}=(\theta_1 ,\dots, \theta_d)^T \in \mathbb{R}^d$. Assuming conditional independence of $X_i$ given $\mathbf{Z}_i$, the joint distribution can be written as:
 
@@ -45,23 +45,40 @@ $$\ell(\theta)=\sum_{i=1}^N X_i \theta^T \mathbf{Z}_i+\sum_{i,j} A_{ij} X_i X_j-
 
 For Large $N$, the presence of the partition function makes it extreme computational expensive to compute the sum of over $2^N$ configurations. In addition, gradient formulation requires taking difference of observed and implied sufficient statistics, but expectation of sufficient statistics involves full-joint distribution.
 
-### PMPL Estimator
+pseudo-likelihood replaces the joint likelihood with a product of conditional distributions.
 
-**Pseudo-Likelihood:** 
+### Pseudo-Likelihood:
 
-The conditional distribution of $X_i$ given $(X_j)_{j\neq i}$ is:
+The parameter $\mathbf{\theta} \in \mathbb{R}$ is the effect of node-wise covariates under sparsity assumption. The $\beta \in \mathbb{R}$ is a measure of the strength of dependence ('peer effect') beteween neighboring nodes in the network. Therefore, the model can be decomposes into 2 terms:
+- Exogenous effect: $\theta^T Z_i$
+- Endogenous network effect: $\beta m_i(X)$
+
+Define $m_i(X) = \sum_{j=1}^N a_{ij}X_j$ to be total influence on node $i$ from its neighbors. The conditional distribution of $X_i$ given $(X_j)_{j\neq i}$ is:
 
 $$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_i\mathbf{\theta}^T\mathbf{Z}_i+\beta X_i m_i(\mathbf{X})}}{e^{\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})} + e^{-\mathbf{\theta}^T\mathbf{Z}_i-\beta m_i(\mathbf{X})}}$$
 
-The negative Log Pseudo-Likelihood (LPL) is given as 
+Then the Pseudo-Likelihood is $\mathcal{PL}(\beta,\mathbf{\theta})=\prod_{i=1}^N \mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})$, and the negative Log Pseudo-Likelihood (LPL) is given as 
 
-$$L_N(\beta,\mathbf{\theta})=-\frac{1}{N}\sum_{i=1}^N \log \mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=-\frac{1}{N}\sum_{i=1}^N \{X_i(\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})) - \log \cosh(\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X}))\} + \log(2)$$
+$$\begin{aligned}
+L_N(\beta,\mathbf{\theta})
+&= -\frac{1}{N}\sum_{i=1}^N \log \mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z}) \\
+&= -\frac{1}{N}\sum_{i=1}^N \Big\{ X_i(\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})) - \log \cosh(\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})) \Big\} + \log(2)
+\end{aligned}$$
 
 The proposed Penalized Maximum Pseudo-likelihood (PMPL) in the paper is given as the estimator of $(\beta, \mathbf{\theta}^T)$ with a L1 regularization (tuning) parameter $\lambda$ as follows:
 
-$$(\hat{\beta}, \hat{\mathbf{\theta}}^T):=\text{arg}\min_{(\beta,\mathbf{\theta})}=\{L_N(\beta,\mathbf{\theta})+\lambda\|\theta\|_1\}$$
+$$(\hat{\beta}, \hat{\mathbf{\theta}}^T):=\arg\min_{(\beta,\mathbf{\theta})}=\{L_N(\beta,\mathbf{\theta})+\lambda\|\theta\|_1\}$$
 
-under various regularization assumptions, Theorem 1 states if $\lambda$ is chosen proportional to $\sqrt{\log(\frac{d}{n})}$
+under various regularization assumptions, Theorem 1 states if $\lambda$ is chosen proportional to $\sqrt{\log(\frac{d}{n})}$, with high probability that:
+
+$$\|(\hat{\beta}, \hat{\mathbf{\theta}}^T) - (\beta,\mathbf{\theta}^T)\| \lesssim_s \sqrt{\frac{\log d}{N}}$$
+
+where $s \geq \|\theta\|_0$ is the sparsity level. 
+
+The pseudo-likelihood formulation allows to reduce a complex dependent model into summation of logistic type terms. It achieves high computational efficiency while ensuring good approximation. Despite ignoring the global dependence, PMPL retains high probability of convergence under some conditions such as sparsity and weak dependence. In particular, the rate $\sqrt{\frac{\log d}{N}}$ does not degrade as much as the dimension increases compared with the standard MLE rate $\sqrt{\frac{1}{N}}$.
+
+**Connections to Bayesian Perspective:**
+
 
 
 
@@ -69,7 +86,7 @@ under various regularization assumptions, Theorem 1 states if $\lambda$ is chose
 
 ### Restricted Strong Convexity (RSC)
 
-### Main Contribution of the Anchored Paper
+### Main Contribution of the Anchor Paper
 
 This motivates the question of whether similar gradient concentration and curvature properties (e.g., restricted strong convexity) can still be established under weak dependence, particularly when using pseudo-likelihood or Bayesian formulations.
 
@@ -91,9 +108,9 @@ $$f(\theta \mid Y) = \frac{f(Y \mid \theta) \cdot f(\theta)}{f(Y)} = \frac{\text
 
 **Bayesian Logistic Regression Model:**
 
+---
 
-
-## Informal Reference
+## Informal Reference Section
 
 Bayesian Data Analysis Third Edition, Gelman
 
@@ -101,3 +118,23 @@ High-Dimensional Bayesian Regularized Regression with the bayesreg Package (arXi
 
 
 ---
+
+## WEEKLY MEETING SUMMARY
+
+**Week 2**
+
+- A simulation-based study is a feasible direction, given that theoretical derivations may be complex and time-consuming.
+
+- curvature assumption such as RSC should be established on the loss function, not the prior. 
+
+- Even with independent priors, the network dependence in the data leads to a complex posterior dependence structure.
+
+- Sampling in a sequential order (e.g. Gibbs sampling / coordinate-wise MCMC)
+
+    Sample $\beta_1 \mid \text{Other Parameters}$
+
+    Sample $\beta_2 \mid \text{Other Parameters}$
+
+    $\dots$
+
+- MCMC could be computationally very expensive, so Variational Inference could be one choice to approximate posterior distribution.
