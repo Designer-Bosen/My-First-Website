@@ -45,8 +45,10 @@ $$f(\theta \mid Y) = \frac{f(Y \mid \theta) \cdot f(\theta)}{f(Y)} = \frac{\text
 
 **Covariate Matrix** $Z \in \mathbb{R}^{N\times p}$ represent the collection of node-specific features, where $Z_i$ corresponds to the covariate vector of node $i$. $Z$ captures the individual effects, and entries of Z are generated independent from a chosen distribution.
 
-**Outcome Vector** $X \in \mathbb{R}^{N}$ where $X_i \in \{0, 1\}$ is generated through a iterative updating process inspired by Gibbs samppling.
-For each node in each iteration, $X_i$ is mapped from a probablistic model using the score vector $S$ and $S_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$ where individual effect is determined by the node-specific features $Z_i$; neighbor influence is computed from the current states of neighboring nodes; and $\beta$ controls the strength of peer effect.
+**Outcome Vector** $X \in \{0,1\}^{N}$ where $X_i \in \{0, 1\}$ is generated through a iterative updating process inspired by Gibbs samppling.
+For each node in each iteration, $X_i$ is mapped from a probablistic function $\sigma$ using the score vector $S$ and $S_i=Z_i\theta + \beta \cdot m_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$ where individual effect $k_i = Z_i \cdot \theta$ is determined by the node-specific features $Z_i$ with weights $\theta$; neighbor influence $\beta \cdot m_i$ is computed from the current states of neighboring nodes; $m_i=\frac{1}{d_i}\sum_{j=1}^N A_{ij}X_j$ is the averaged neighbor influence with strength of peer effect $\beta$. Finally, the node specific conditional probability of the following form can be achieved through the modeling process:
+
+$$\mathbb{P}(X_i = 1 \mid X_{-i})=\sigma(Z_i\theta + \beta \cdot m_i)$$
 
 **Note:** there is a trade-off between individual features and neighbor influence, and the outcome depends on which effect is stronger. For example, If a node’s own features strongly favor 1, but neighbors are mostly 0, this means the node's own feature dominates. If a node has most of its neighbors being 1, the probability for itself being one increases.
 
@@ -60,7 +62,7 @@ For each node in each iteration, $X_i$ is mapped from a probablistic model using
 - Number of iterations `num_iter`
 
 **STEP 2: Initialize:**  
-Initialize $X^(0)$ randomly through a distribution (e.g. Bernoulli(0.5))
+Initialize $X^{(0)}$ randomly through a distribution (e.g. Bernoulli(0.5))
 
 **STEP 3: Gibbs Process:**  
 For t = 1 to `num_iter`:  
@@ -70,7 +72,6 @@ For each node i:
 - Compute Score: $S_i = k_i + \beta \cdot m_i$  
 - Convert to Probability: $p_i = sigmoid(S_i)$  
 - Sample New State: $X_i \sim Bernoulli(P_i)$  
-
 
 #### Code:
 
