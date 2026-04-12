@@ -60,7 +60,7 @@ w(A) -> w*(A*) (stable state)
 winning condition: summation of rows
 
 
-OASIS -> take 2 agents and check validity (chat)
+OASIS -> take 2 agents and (enabling chatting)
 opensiel -> prisoner dilemma (chat version -> based on the open source code of prisoner delimnma)
 
 

@@ -39,19 +39,40 @@ $$f(\theta \mid Y) = \frac{f(Y \mid \theta) \cdot f(\theta)}{f(Y)} = \frac{\text
 
 ---
 
-### STEP 1 - Model the network in Python
+## Phase 1: Model the network in Python
 
-**Adjacency Matrix:** $A \in \mathbb{R}^{N\times N}_sym$ represent the network struture. If node $i$ is connected to node $j$, then $A_{ij} = A_{ji} = 1$. Otherwise $A_{ij} = A_{ji} = 0$. Each non-diagonal entry is generated using a Bernoulli distribution with tunable parameter $s$ controlling sparsity.
+**Adjacency Matrix** $A \in \mathbb{R}^{N\times N}_{sym}$ represent the network struture. If node $i$ is connected to node $j$, then $A_{ij} = A_{ji} = 1$. Otherwise $A_{ij} = A_{ji} = 0$. Each non-diagonal entry is generated using a Bernoulli distribution with tunable parameter $s$ controlling sparsity.
 
-**Covariate Matrix:** $Z \in \mathbb{R}^{N\times p}$ represent the collection of node-specific features, where $Z_i$ corresponds to the covariate vector of node $i$. $Z$ captures the individual effects, and entries of Z are generated independent from a chosen distribution.
+**Covariate Matrix** $Z \in \mathbb{R}^{N\times p}$ represent the collection of node-specific features, where $Z_i$ corresponds to the covariate vector of node $i$. $Z$ captures the individual effects, and entries of Z are generated independent from a chosen distribution.
 
-#### Determination of the Outcome Vector X
-Each node's outcome $X_i \in {0, 1}$ for $i = 1,\dots, N$ could be determined by a probablistic model (map) using the score vector $S$ and $S_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$. $\beta$ is the "Peer Effect"
+**Outcome Vector** $X \in \mathbb{R}^{N}$ where $X_i \in \{0, 1\}$ is generated through a iterative updating process inspired by Gibbs samppling.
+For each node in each iteration, $X_i$ is mapped from a probablistic model using the score vector $S$ and $S_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$ where individual effect is determined by the node-specific features $Z_i$; neighbor influence is computed from the current states of neighboring nodes; and $\beta$ controls the strength of peer effect.
 
-**Notes:** There is a trade-off between individual features and neighbor influence, and the outcome depends on which effect is stronger. For example, If a node’s own features strongly favor 1, but neighbors are mostly 0, this means the node's own feature dominates. If a node has most of its neighbors being 1, the probability for itself being one increases.
+**Note:** there is a trade-off between individual features and neighbor influence, and the outcome depends on which effect is stronger. For example, If a node’s own features strongly favor 1, but neighbors are mostly 0, this means the node's own feature dominates. If a node has most of its neighbors being 1, the probability for itself being one increases.
+
+#### Pseudo Code:
+
+**STEP 1: Create:**
+- Adjacency matrix $A \in \mathbb{R}^{N\times N}_{sym}$ (network frame)
+- Covariate matrix $Z \in \mathbb{R}^{N\times p}$ (node features)
+- Parameter vector $\theta \in \mathbb{R}^{p}$ (feature effect)
+- Parameter scalar $\beta \in \mathbb{R}$ (peer effect)
+- Number of iterations `num_iter`
+
+**STEP 2: Initialize:**  
+Initialize $X^(0)$ randomly through a distribution (e.g. Bernoulli(0.5))
+
+**STEP 3: Gibbs Process:**  
+For t = 1 to `num_iter`:  
+For each node i:  
+- Compute Neighbor Influence: $m_i = \sum_j A_{ij} \cdot X_j$  
+- Compute Individual Effect: $k_i = f(Z_i)$ e.g. weighted combination of features  
+- Compute Score: $S_i = k_i + \beta \cdot m_i$  
+- Convert to Probability: $p_i = sigmoid(S_i)$  
+- Sample New State: $X_i \sim Bernoulli(P_i)$  
 
 
-**Code:**
+#### Code:
 
 
 
