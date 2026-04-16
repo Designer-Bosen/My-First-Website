@@ -19,3 +19,17 @@
     $\dots$
 
 - MCMC could be computationally very expensive, so Variational Inference could be one choice to approximate posterior distribution.
+
+## Week 3
+
+- This week's goal is to construct the prior for Bayesian Logistic Regression Model. 
+
+- To keep it simple, we just use Bernoulli distribution with some sparsity $s\in [0,1]$ to generate non-diag entries of adjacency matrix, and Gaussian distribution to generate covariates.
+
+- For now, we assume $\beta$ (sparsity) is fixed, neighbors of a node is known. Therefore the conditional distribution for individual node
+
+$$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_i\mathbf{\theta}^T\mathbf{Z}_i+\beta X_i m_i(\mathbf{X})}}{e^{\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})} + e^{-\mathbf{\theta}^T\mathbf{Z}_i-\beta m_i(\mathbf{X})}}$$
+
+has neighbor effects $\beta m_i$ becomes a fixed term. And this is a logistic-type conditional model Setup.
+
+- After finishing constructing the prior and setup the basic model correctly, we can then consider neighbor effects.
