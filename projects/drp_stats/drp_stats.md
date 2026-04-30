@@ -25,15 +25,11 @@ Motivated by my research interest in high dimensional Bayesian inference...
 ---
 ## My Direction
 
-Given above results from the anchor paper, I want to formulate a Bayesian logistic regression model under network dependence. Then analyze its properties under this regime e.g. posterior contraction rates, consistency, computational approaches such as MCMC.
-
-Keywords: High-dimensional Bayesian Inference, restricted strong convexity
-
-### Prior Knowledge on Bayesian Inference
+Given the above results from the anchor paper, I aims to conduct a simulation study of a logistic regression model under network dependence in Bayesian perspective. The goal is to empirically evaluate its performance under this regime, including posterior contraction behavior, estimation accuracy, and computational efficiency of inference methods such as MCMC. **Keywords**: High-dimensional Bayesian Inference, restricted strong convexity
 
 **Bayesian Theorem:** $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(B \mid A)\cdot \mathbb{P}(A)}{\mathbb{P}(B)}$
 
-From Bayesian perspective, parameter $\theta$ is treated as a random variable and follows some distribution. If $Y$ represents the data, the probability density function of $\theta$ give $Y$ can be represented as:
+From Bayesian perspective, parameter $\theta$ is treated as a random variable and follows some distribution. If $Y$ represents the outcome data, the probability density function of $\theta$ give $Y$ can be represented as:
 
 $$f(\theta \mid Y) = \frac{f(Y \mid \theta) \cdot f(\theta)}{f(Y)} = \frac{\text{Likelihood} \cdot \text{Prior}}{\text{Normalizing Constant}} \propto \text{Likelihood} \cdot \text{Prior}$$
 
@@ -46,9 +42,9 @@ $$f(\theta \mid Y) = \frac{f(Y \mid \theta) \cdot f(\theta)}{f(Y)} = \frac{\text
 **Covariate Matrix** $Z \in \mathbb{R}^{N\times p}$ represent the collection of node-specific features, where $Z_i$ corresponds to the covariate vector of node $i$. $Z$ captures the individual effects, and entries of Z are generated independent from a chosen distribution.
 
 **Outcome Vector** $X \in \{0,1\}^{N}$ where $X_i \in \{0, 1\}$ is generated through a iterative updating process inspired by Gibbs samppling.
-For each node in each iteration, $X_i$ is mapped from a probablistic function $\sigma$ using the score vector $S$ and $S_i=Z_i\theta + \beta \cdot m_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$ where individual effect $k_i = Z_i \cdot \theta$ is determined by the node-specific features $Z_i$ with weights $\theta$; neighbor influence $\beta \cdot m_i$ is computed from the current states of neighboring nodes; $m_i=\frac{1}{d_i}\sum_{j=1}^N A_{ij}X_j$ is the averaged neighbor influence with strength of peer effect $\beta$. Finally, the node specific conditional probability of the following form can be achieved through the modeling process:
+For each node in each iteration, $X_i$ is mapped from a probablistic function $\sigma$ using the score vector $S$ and $S_i=Z_i\theta + \beta m_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$ where individual effect $k_i = Z_i \theta$ is determined by the node-specific features $Z_i$ with weights $\theta$; neighbor influence $\beta  m_i$ is computed from the current states of neighboring nodes; $m_i=\frac{1}{d_i}\sum_{j=1}^N A_{ij}X_j$ is the averaged neighbor influence with strength of peer effect $\beta$. Finally, the node specific conditional probability of the following form can be achieved through the modeling process:
 
-$$\mathbb{P}(X_i = 1 \mid X_{-i})=\sigma(Z_i\theta + \beta \cdot m_i)$$
+$$\mathbb{P}(X_i = 1 \mid X_{-i})=\sigma(Z_i\theta + \beta m_i)$$
 
 **Note:** there is a trade-off between individual features and neighbor influence, and the outcome depends on which effect is stronger. For example, If a node’s own features strongly favor 1, but neighbors are mostly 0, this means the node's own feature dominates. If a node has most of its neighbors being 1, the probability for itself being one increases.
 
@@ -67,17 +63,45 @@ Initialize $X^{(0)}$ randomly through a distribution (e.g. Bernoulli(0.5))
 **STEP 3: Gibbs Process:**  
 For t = 1 to `num_iter`:  
 For each node i:  
-- Compute Neighbor Influence: $m_i = \sum_j A_{ij} \cdot X_j$  
+- Compute Neighbor Influence: $m_i = \sum_j A_{ij} X_j$  
 - Compute Individual Effect: $k_i = f(Z_i)$ e.g. weighted combination of features  
-- Compute Score: $S_i = k_i + \beta \cdot m_i$  
-- Convert to Probability: $p_i = sigmoid(S_i)$  
-- Sample New State: $X_i \sim Bernoulli(P_i)$  
+- Compute Score: $S_i = k_i + \beta m_i$  
+- Convert to Probability: $p_i = \text{sigmoid}(S_i)$  
+- Sample New State: $X_i \sim \text{Ber}(P_i)$  
 
 #### Code:
 
+---
+
+## Phase 2: Set up Simple Bayesian Logistic Regression Model
+
+Without peer effects, $X_1, \dots, X_N$ given $Z_1, \dots, Z_N$ are conditional independent, The conditional probablity of $X_i$ given $\mathbf{Z}$ can be written as
+
+$$\mathbb{P}(X_i \mid \mathbf{Z})=\frac{e^{X_i\mathbf{\theta}^T\mathbf{Z}_i}}{e^{\mathbf{\theta}^T\mathbf{Z}_i} + e^{-\mathbf{\theta}^T\mathbf{Z}_i}}$$
+
+where $\sigma(x)=\frac{1}{1 + e^{-x}}$. The joint distribution (Likelihood) and log-likelihood function are
+
+$$L(\theta \mid X, \mathbf{Z})
+= \prod_{i=1}^N \frac{e^{X_i \theta^T \mathbf{Z}_i}}{e^{\theta^T \mathbf{Z}_i}+e^{-\theta^T \mathbf{Z}_i}} 
+= \frac{1}{\mathcal{Z}_N(\theta, \mathbf{Z})} \exp\left(\sum_{i=1}^N X_i (\theta^T \mathbf{Z}_i)\right)$$
+
+$$\ell(\theta)= \log L(\theta \mid X, \mathbf{Z})= \sum_{i=1}^N \big[ X_i\theta^T \mathbf{Z}_i-\log(e^{\theta^T \mathbf{Z}_i}+e^{\theta^T \mathbf{Z}_i}) \big]$$
+
+where $\mathcal{Z}_N(\theta, \mathbf{Z}) = \prod_{i=1}^N \big(e^{\theta^T \mathbf{Z}_i} + e^{-\theta^T \mathbf{Z}_i}\big)$ is the normalizing constant. 
+
+$$\textcolor{red}{(\text{Continue MLE here, then sample prior})}$$
+
+
+**Property:** Under standard assumptions (e.g. fixed dimension), the maximum likelihood estimator (MLE) achieves rate: $\|\hat{\theta}_{MLE} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$
 
 
 ---
+
+## Phase 3: Set up Bayesian Logistic Regression Model under Network Dependence
+
+**Ising Node-wise Conditional Probablity**: 
+
+$$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_i\mathbf{\theta}^T\mathbf{Z}_i+\beta X_i m_i(\mathbf{X})}}{e^{\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})} + e^{-\mathbf{\theta}^T\mathbf{Z}_i-\beta m_i(\mathbf{X})}}$$
 
 ## Informal Reference Section
 

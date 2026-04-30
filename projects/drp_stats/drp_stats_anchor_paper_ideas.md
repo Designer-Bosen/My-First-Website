@@ -4,23 +4,19 @@
 
 ## Logistic Regression
 
-Given predictor variables: $\mathbf{Z}_1, \dots, \mathbf{Z}_N \in \mathbb{R}^d$ and independent response variables: $X_1, \dots, X_N \in \{-1,1\}$, the logistic regression model for hte probability of a positive outcome is given by:
+The classical logistic regression model assumes Bernoulli outcome variables $Y_1, \dots, Y_N \in \{0,1\}$ with corresponding predictor vectors $\mathbf{X}_1, \dots, \mathbf{X}_N \in \mathbb{R}^d$. Denote $p_i = \mathbb{P}(Y_i=1 \mid \mathbf{X}_i)$ as the conditional probability that $Y_i = 1$ given $\mathbf{X}_i$. The model is given by
 
-$$\log(\frac{\mathbb{P}(X_i=1 \mid \mathbf{Z}_i)}{1 - \mathbb{P}(X_i=1 \mid \mathbf{Z}_i)}) = \mathbf{\theta}^T \mathbf{Z}_i \quad \text{or} \quad \mathbb{P}(X_i=1 \mid \mathbf{Z}_i)=\frac{e^{\mathbf{\theta}^T \mathbf{Z}_i}}{e^{\mathbf{\theta}^T \mathbf{Z}_i}+e^{-\mathbf{\theta}^T \mathbf{Z}_i}}$$
+$$\log(\frac{p_i}{1 - p_i}) = \mathbf{X}_i^T \mathbf{\theta} \quad \text{or} \quad p_i=\frac{1}{1+e^{-\mathbf{X}_i^T \mathbf{\theta}}}=\frac{e^{\mathbf{X}_i^T \mathbf{\theta}}}{1+e^{\mathbf{X}_i^T \mathbf{\theta}}}$$
 
-for $1 \leq i \leq N$ and $\mathbf{\theta}=(\theta_1 ,\dots, \theta_d)^T \in \mathbb{R}^d$. Assuming conditional independence of $X_i$ given $\mathbf{Z}_i$, the joint distribution can be written as:
 
-$$\mathbb{P}(X \mid \mathbf{Z})=\prod_{i=1}^N \frac{e^{X_i \theta^T \mathbf{Z}_i}}{e^{\theta^T \mathbf{Z}_i}+e^{-\theta^T \mathbf{Z}_i}}=\frac{1}{\mathcal{Z}_N(\theta, \mathbf{Z})} \exp{(\sum_{i=1}^N X_i (\theta^T \mathbf{Z}_i))}$$
+In this paper, given predictor variables $\mathbf{Z}_1, \dots, \mathbf{Z}_N \in \mathbb{R}^d$ and independent response variables $X_1, \dots, X_N \in \{-1,1\}$, which is natural for Ising-type network models due to symmetry around zero. The logistic regression model for hte probability of a positive outcome is given by
 
-where $\mathcal{Z}_N(\theta, \mathbf{Z})=\prod_{i=1}^N{\frac{1}{e^{\theta^T \mathbf{Z}_i}+e^{-\theta^T \mathbf{Z}_i}}}$ is the normalizing constant.
+$$\mathbb{P}(X_i=1 \mid \mathbf{Z}_i)=
+\frac{e^{2\mathbf{\theta}^T \mathbf{Z}_i}}{1 + e^{2\mathbf{\theta}^T \mathbf{Z}_i}}=\frac{e^{\mathbf{\theta}^T \mathbf{Z}_i}}{e^{\mathbf{\theta}^T \mathbf{Z}_i}+e^{-\mathbf{\theta}^T \mathbf{Z}_i}}$$
 
-**Property:** Under standard assumptions (e.g. fixed dimension), the maximum likelihood estimator (MLE) achieves rate: $\|\hat{\theta}_{MLE} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$
+for $1 \leq i \leq N$ and $\mathbf{\theta}=(\theta_1 ,\dots, \theta_d)^T \in \mathbb{R}^d$. 
 
 ## Gradient and Hessian:
-
-Log likelihood function for logistic regression is given by:
-
-$$\ell(\theta)=\log L(\theta \mid X, \mathbf{Z})=\log \prod_{i=1}^N{ \mathbb{P}(X_i \mid \mathbf{Z}_i)}$$
 
 with the assumption $X_1, \dots, X_N$ ​are conditionally independent given $\mathbf{Z}_1, \dots, \mathbf{Z}_N$. If we want to optimize $\ell(\theta)$, we need to consider its Gradient and Hessian, which are given by:
 
