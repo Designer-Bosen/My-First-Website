@@ -89,7 +89,9 @@ $$\ell(\theta)= \log L(\theta \mid X, \mathbf{Z})= \sum_{i=1}^N \big[ X_i\theta^
 
 where $\mathcal{Z}_N(\theta, \mathbf{Z}) = \prod_{i=1}^N \big(e^{\theta^T \mathbf{Z}_i} + e^{-\theta^T \mathbf{Z}_i}\big)$ is the normalizing constant. 
 
-$$\textcolor{red}{(\text{Continue MLE here, then sample prior})}$$
+$$\textcolor{red}{(\text{Continue MAP Estimator here, and sample prior})}$$
+
+
 
 
 **Property:** Under standard assumptions (e.g. fixed dimension), the maximum likelihood estimator (MLE) achieves rate: $\|\hat{\theta}_{MLE} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$
