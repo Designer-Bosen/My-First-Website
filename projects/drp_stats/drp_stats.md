@@ -81,21 +81,30 @@ $$\mathbb{P}(X_i \mid \mathbf{Z})=\frac{e^{X_i\mathbf{\theta}^T\mathbf{Z}_i}}{e^
 
 where $\sigma(x)=\frac{1}{1 + e^{-x}}$. The joint distribution (Likelihood) and log-likelihood function are
 
-$$L(\theta \mid X, \mathbf{Z})
+$$L(\theta; X, \mathbf{Z})
 = \prod_{i=1}^N \frac{e^{X_i \theta^T \mathbf{Z}_i}}{e^{\theta^T \mathbf{Z}_i}+e^{-\theta^T \mathbf{Z}_i}} 
 = \frac{1}{\mathcal{Z}_N(\theta, \mathbf{Z})} \exp\left(\sum_{i=1}^N X_i (\theta^T \mathbf{Z}_i)\right)$$
 
-$$\ell(\theta)= \log L(\theta \mid X, \mathbf{Z})= \sum_{i=1}^N \big[ X_i\theta^T \mathbf{Z}_i-\log(e^{\theta^T \mathbf{Z}_i}+e^{\theta^T \mathbf{Z}_i}) \big]$$
+$$\ell(\theta)= \log L(\theta; X, \mathbf{Z})= \sum_{i=1}^N \big[ X_i\theta^T \mathbf{Z}_i-\log(e^{\theta^T \mathbf{Z}_i}+e^{-\theta^T \mathbf{Z}_i}) \big]$$
 
-where $\mathcal{Z}_N(\theta, \mathbf{Z}) = \prod_{i=1}^N \big(e^{\theta^T \mathbf{Z}_i} + e^{-\theta^T \mathbf{Z}_i}\big)$ is the normalizing constant. 
+where $\mathcal{Z}_N(\theta, \mathbf{Z}) = \prod_{i=1}^N \big(e^{\theta^T \mathbf{Z}_i} + e^{-\theta^T \mathbf{Z}_i}\big)$ is the normalizing constant. A general choice is standard Gaussian prior is $\theta \sim N(\vec{0}, \tau^2I_p)$ for some $\tau > 0$. Then 
 
-$$\textcolor{red}{(\text{Continue MAP Estimator here, and sample prior})}$$
+$$P(\theta)=\frac{1}{(2\pi \tau^2)^\frac{d}{2}}\exp(-\frac{1}{2\tau^2}\|\theta\|_2^2) \quad \text{and} \quad \log P(\theta)=-\frac{1}{2\tau^2}\|\theta\|_2^2+\text{const}$$
 
+Finally, the objective function is given as the negative log-posterior such that 
 
+$$
+\begin{aligned}
+-\log P(\theta \mid X, \mathbf{Z}) 
+&\propto -\log (L(\theta; X, \mathbf{Z}) \cdot P(\theta) )\\
+&= -\ell(\theta) - \log P(\theta) \\
+&= -\sum_{i=1}^N \big[ X_i\theta^T \mathbf{Z}_i-\log(e^{\theta^T \mathbf{Z}_i}+e^{-\theta^T \mathbf{Z}_i}) \big] +\frac{1}{2\tau^2}\|\theta\|_2^2+\text{const}
+\end{aligned}
+$$
 
+and Maximum A Posteriori (MAP) is given as $\hat{\theta}_{MAP} = \arg\min_{\theta}-\log P(\theta \mid X, \mathbf{Z})$
 
-**Property:** Under standard assumptions (e.g. fixed dimension), the maximum likelihood estimator (MLE) achieves rate: $\|\hat{\theta}_{MLE} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$
-
+**Property:** Under standard assumptions, MAP estimator achieves rate: $\|\hat{\theta}_{MAP} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$
 
 ---
 
