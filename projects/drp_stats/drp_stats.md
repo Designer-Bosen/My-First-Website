@@ -102,17 +102,57 @@ $$
 \end{aligned}
 $$
 
-and Maximum A Posteriori (MAP) is given as $\hat{\theta}_{MAP} = \arg\min_{\theta}-\log P(\theta \mid X, \mathbf{Z})$
+and Maximum A Posteriori (MAP) is given as $\hat{\theta}_{MAP} = \arg\min_{\theta}-\log P(\theta \mid X, \mathbf{Z})$. Under standard assumptions, MAP estimator achieves rate: $\|\hat{\theta}_{MAP} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$. In high dimensional setting, another induced condition is sparsity achieved by choosing priors $\theta_i \sim \text{Laplace}(\lambda)$, where $P(\theta)\propto \exp(-\lambda \|\theta\|_1)$. Then MAP estimator for L1-regularized logistic regression is given as
 
-**Property:** Under standard assumptions, MAP estimator achieves rate: $\|\hat{\theta}_{MAP} - \theta\| = O\left(\frac{1}{\sqrt{N}}\right)$
+$$\hat{\theta}_{MAP}=\arg\min_\theta\{-\ell(\theta)+\lambda\|\theta\|_1\}$$
 
+**OPTIMIZATION (L1-Regularized MAP Estimator)**
+
+$$\nabla_\theta-\ell(\theta)=-\sum_{i=1}^N \big[X_i\mathbf{Z}_i - \tanh(\theta^T \mathbf{Z}_i)\mathbf{Z}_i\big]=\sum_{i=1}^N \big[(\tanh(\theta^T \mathbf{Z}_i) - X_i)\mathbf{Z}_i\big]$$
+
+The subgradient for L1-regularization term is 
+
+$$
+\partial \|\theta\|_1 =
+\left\{
+s \in \mathbb{R}^p :
+\begin{cases}
+s_j = \mathrm{sign}(\theta_j) & \text{if } \theta_j \neq 0 \\
+s_j \in [-1,1] & \text{if } \theta_j = 0
+\end{cases}
+\right\}
+$$
 ---
 
 ## Phase 3: Set up Bayesian Logistic Regression Model under Network Dependence
 
-**Ising Node-wise Conditional Probablity**: 
+Let $S_i=\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})$, then the Ising Node-wise Conditional Probablity is 
 
-$$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_i\mathbf{\theta}^T\mathbf{Z}_i+\beta X_i m_i(\mathbf{X})}}{e^{\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})} + e^{-\mathbf{\theta}^T\mathbf{Z}_i-\beta m_i(\mathbf{X})}}$$
+$$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_iS_i}}{e^{S_i} + e^{-S_i}}$$
+
+Since $X_i \in \{-1,1\}$, this can be equivalently written in logistic form as
+
+$$
+\mathbb{P}(X_i \mid \cdot) = \sigma(2X_iS_i)=
+\begin{cases}
+\displaystyle \frac{1}{1 + e^{-2S_i}}, & \text{if } X_i = 1 \\[8pt]
+\displaystyle \frac{1}{1 + e^{2S_i}}, & \text{if } X_i = -1
+\end{cases}
+$$
+
+Its negative pseudo log-likelihood is given as
+
+$$-\ell(\theta, \beta)=-\sum_{i=1}^N \log \sigma(2X_iS_i)$$
+
+By taking Laplace prior, the MAP estimator is 
+
+$$(\theta, \beta)_{MAP}=\arg\min_{\theta, \beta} \big\{ -\ell(\theta, \beta) + \log p(\theta,\beta) \big\}$$
+
+In high dimensional setting, self-effect sparsity can be induced by choosing  prior $\theta_i \sim \text{Laplace}(\lambda)$. 
+
+$$\textcolor{red}{\text{consider graph sparsity, choosing a prior for } \beta}$$
+
+
 
 ## Informal Reference Section
 
