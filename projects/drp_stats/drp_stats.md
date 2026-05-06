@@ -37,39 +37,51 @@ $$f(\theta \mid Y) = \frac{f(Y \mid \theta) \cdot f(\theta)}{f(Y)} = \frac{\text
 
 ## Phase 1: Model the network in Python
 
-**Adjacency Matrix** $A \in \mathbb{R}^{N\times N}_{sym}$ represent the network struture. If node $i$ is connected to node $j$, then $A_{ij} = A_{ji} = 1$. Otherwise $A_{ij} = A_{ji} = 0$. Each non-diagonal entry is generated using a Bernoulli distribution with tunable parameter $s$ controlling sparsity.
+**Adjacency Matrix** $A \in \mathbb{R}^{N\times N}_\text{sym}$ represent the network struture. If node $i$ is connected to node $j$, then $A_{ij} = A_{ji} = 1$. Otherwise $A_{ij} = A_{ji} = 0$. Each non-diagonal entry is generated using a Bernoulli distribution with tunable parameter $s$ controlling sparsity.
 
 **Covariate Matrix** $Z \in \mathbb{R}^{N\times p}$ represent the collection of node-specific features, where $Z_i$ corresponds to the covariate vector of node $i$. $Z$ captures the individual effects, and entries of Z are generated independent from a chosen distribution.
 
-**Outcome Vector** $X \in \{0,1\}^{N}$ where $X_i \in \{0, 1\}$ is generated through a iterative updating process inspired by Gibbs samppling.
+**Outcome Vector** $X \in \{-1,1\}^{N}$ where $X_i$ is generated through a iterative updating process inspired by Gibbs samppling.
 For each node in each iteration, $X_i$ is mapped from a probablistic function $\sigma$ using the score vector $S$ and $S_i=Z_i\theta + \beta m_i=\text{Individual Feature} + \beta \times \text{Neighbor Influence}$ where individual effect $k_i = Z_i \theta$ is determined by the node-specific features $Z_i$ with weights $\theta$; neighbor influence $\beta  m_i$ is computed from the current states of neighboring nodes; $m_i=\frac{1}{d_i}\sum_{j=1}^N A_{ij}X_j$ is the averaged neighbor influence with strength of peer effect $\beta$. Finally, the node specific conditional probability of the following form can be achieved through the modeling process:
 
-$$\mathbb{P}(X_i = 1 \mid X_{-i})=\sigma(Z_i\theta + \beta m_i)$$
+$$\mathbb{P}(X_i = 1 \mid X_{-i}, \mathbf{Z})=\sigma(2(Z_i\theta + \beta m_i))$$
 
-**Note:** there is a trade-off between individual features and neighbor influence, and the outcome depends on which effect is stronger. For example, If a node’s own features strongly favor 1, but neighbors are mostly 0, this means the node's own feature dominates. If a node has most of its neighbors being 1, the probability for itself being one increases.
+**Note:** there is a trade-off between individual features and neighbor influence, and the outcome depends on which effect is stronger. For example, If a node’s own features strongly favor 1, but neighbors are mostly -1, this means the node's own feature dominates. If a node has most of its neighbors being 1, the probability for itself being one increases.
 
 #### Pseudo Code:
 
 **STEP 1: Create:**
-- Adjacency matrix $A \in \mathbb{R}^{N\times N}_{sym}$ (network frame)
+- Adjacency matrix $A \in \mathbb{R}^{N\times N}_\text{sym}$ (network frame)
 - Covariate matrix $Z \in \mathbb{R}^{N\times p}$ (node features)
 - Parameter vector $\theta \in \mathbb{R}^{p}$ (feature effect)
 - Parameter scalar $\beta \in \mathbb{R}$ (peer effect)
 - Number of iterations `num_iter`
+- Burn-in length `burn_in`
 
-**STEP 2: Initialize:**  
-Initialize $X^{(0)}$ randomly through a distribution (e.g. Bernoulli(0.5))
+**STEP 2: Initialize:** 
+Randomly Initialize node states, e.g. $\mathbb{P}(X_i^{(0)} = +1)=p$, $\mathbb{P}(X_i^{(0)}=-1)=1-p$
+
+$$
+X^{(0)} = (X_1^{(0)},\dots,X_N^{(0)}) \in \{-1,+1\}^N
+$$
+
 
 **STEP 3: Gibbs Process:**  
 For t = 1 to `num_iter`:  
 For each node i:  
-- Compute Neighbor Influence: $m_i = \sum_j A_{ij} X_j$  
-- Compute Individual Effect: $k_i = f(Z_i)$ e.g. weighted combination of features  
-- Compute Score: $S_i = k_i + \beta m_i$  
-- Convert to Probability: $p_i = \text{sigmoid}(S_i)$  
-- Sample New State: $X_i \sim \text{Ber}(P_i)$  
+- Compute Neighbor Influence: $m_i^{(t)} = \sum_j A_{ij} X_j^{(t-1)}$  
+- Compute Score: $S_i^{(t)} = \theta^\top Z_i + \beta m_i^{(t)}$
+- Convert to Probability: $p_i^{(t)} = \text{sigmoid}(2S_i^{(t)})$ 
+- Sample New State: 
+$$
+X_i^{(t)}=
+\begin{cases}
++1, & \text{with probability } p_i^{(t)},\\
+-1, & \text{with probability } 1-p_i^{(t)}.
+\end{cases}
+$$ 
+- If t > `burn_in`: Record $X^{(t)}$ 
 
-#### Code:
 
 ---
 
@@ -106,6 +118,50 @@ and Maximum A Posteriori (MAP) is given as $\hat{\theta}_{MAP} = \arg\min_{\thet
 
 $$\hat{\theta}_{MAP}=\arg\min_\theta\{-\ell(\theta)+\lambda\|\theta\|_1\}$$
 
+
+---
+
+## Phase 3: Set up Bayesian Logistic Regression Model under Network Dependence
+
+Let $S_i=\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})$ where $\theta \perp\!\!\!\perp \beta$, then the Ising Node-wise Conditional Probablity is 
+
+$$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_iS_i}}{e^{S_i} + e^{-S_i}}$$
+
+Since $X_i \in \{-1,1\}$, this can be equivalently written in logistic form as
+
+$$
+\mathbb{P}(X_i \mid \cdot) = \sigma(2X_iS_i)=
+\begin{cases}
+\displaystyle \frac{1}{1 + e^{-2S_i}}, & \text{if } X_i = +1 \\
+\displaystyle \frac{1}{1 + e^{2S_i}}, & \text{if } X_i = -1
+\end{cases}
+$$
+
+Its negative pseudo log-likelihood is given as
+
+$$-\ell(\theta, \beta)=-\sum_{i=1}^N \log \sigma(2X_iS_i)$$
+
+### PRIOR CHOICE
+
+**beta:**
+- $\beta \sim N(0, \tau^2_\beta)$: Standard Gaussian Prior 
+
+**sigma:**
+- $\theta_i \sim \text{Laplace}(\lambda)$: Turns into L1 penalty in MAP. Induces self-effect sparsity in high dimension
+- $\theta_i \sim (1-\pi)\delta_0+\pi N(0, \tau_\theta^2)$: Encourages exact sparsity through a mixture of a point mass at zero and a Gaussian component.
+- $\theta_i \sim N(0, \lambda_i^2 \tau_\theta^2)$:  Strongly shrinks small coefficients toward zero while allowing large signals to remain less penalized.
+
+### OPTIMIZATION
+
+With $\beta \sim N(0, \tau^2_\beta)$ and $\theta_i \sim \text{Laplace}(\lambda)$, the MAP estimator is given as:
+
+$$(\theta, \beta)_{MAP}=\arg\min_{\theta, \beta} \big\{ \mathcal{L(\theta, \beta)}\big\}$$
+
+where
+
+$$\mathcal{L(\theta, \beta)}=-\ell(\theta, \beta) + \lambda\|\theta\|_1 + \frac{\beta^2}{2\tau_\beta^2}$$
+
+
 **OPTIMIZATION (L1-Regularized MAP Estimator)**
 
 $$\nabla_\theta-\ell(\theta)=-\sum_{i=1}^N \big[X_i\mathbf{Z}_i - \tanh(\theta^T \mathbf{Z}_i)\mathbf{Z}_i\big]=\sum_{i=1}^N \big[(\tanh(\theta^T \mathbf{Z}_i) - X_i)\mathbf{Z}_i\big]$$
@@ -122,37 +178,12 @@ s_j \in [-1,1] & \text{if } \theta_j = 0
 \end{cases}
 \right\}
 $$
+
+
+
+
+
 ---
-
-## Phase 3: Set up Bayesian Logistic Regression Model under Network Dependence
-
-Let $S_i=\mathbf{\theta}^T\mathbf{Z}_i+\beta m_i(\mathbf{X})$, then the Ising Node-wise Conditional Probablity is 
-
-$$\mathbb{P}(X_i \mid (X_j)_{j\neq i}, \mathbf{Z})=\frac{e^{X_iS_i}}{e^{S_i} + e^{-S_i}}$$
-
-Since $X_i \in \{-1,1\}$, this can be equivalently written in logistic form as
-
-$$
-\mathbb{P}(X_i \mid \cdot) = \sigma(2X_iS_i)=
-\begin{cases}
-\displaystyle \frac{1}{1 + e^{-2S_i}}, & \text{if } X_i = 1 \\[8pt]
-\displaystyle \frac{1}{1 + e^{2S_i}}, & \text{if } X_i = -1
-\end{cases}
-$$
-
-Its negative pseudo log-likelihood is given as
-
-$$-\ell(\theta, \beta)=-\sum_{i=1}^N \log \sigma(2X_iS_i)$$
-
-By taking Laplace prior, the MAP estimator is 
-
-$$(\theta, \beta)_{MAP}=\arg\min_{\theta, \beta} \big\{ -\ell(\theta, \beta) + \log p(\theta,\beta) \big\}$$
-
-In high dimensional setting, self-effect sparsity can be induced by choosing  prior $\theta_i \sim \text{Laplace}(\lambda)$. 
-
-$$\textcolor{red}{\text{consider graph sparsity, choosing a prior for } \beta}$$
-
-
 
 ## Informal Reference Section
 
