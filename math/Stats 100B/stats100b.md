@@ -32,11 +32,11 @@ $$\textbf{Continuous Distributions}$$
 
 ## Mean and variance of a random vector
 
-Let $\mathbf{Y}=\begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix}$ be a random vector with $E\mathbf{Y}=\begin{pmatrix} EY_1 \\ EY_2 \\ \vdots \\ EY_n \end{pmatrix}=\begin{pmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_n \end{pmatrix}$. The covariance matrix of $\textbf{Y}$ denoted with $\Sigma = cov(Y)$ is defined as follows:
+Let $\mathbf{Y}=\begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix}$ be a random vector with $E\mathbf{Y}=\begin{pmatrix} EY_1 \\ EY_2 \\ \vdots \\ EY_n \end{pmatrix}=\begin{pmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_n \end{pmatrix}$. The covariance matrix of $\textbf{Y}$ denoted with $\Sigma = cov[Y]$ is defined as follows:
 
 $$
 \begin{aligned}
-cov(\mathbf{Y})&=E(\mathbf{Y} - \boldsymbol{\mu})(\mathbf{Y} - \boldsymbol{\mu})^T \\
+cov[\mathbf{Y}]&=E(\mathbf{Y} - \boldsymbol{\mu})(\mathbf{Y} - \boldsymbol{\mu})^T \\
 &= E\begin{pmatrix} \mathbf{Y}_1 - \boldsymbol{\mu}_1 \\ \mathbf{Y}_2 - \mathbf{\mu}_2 \\ \vdots \\ \mathbf{Y}_n - \boldsymbol{\mu}_n \end{pmatrix} \begin{pmatrix} \mathbf{Y}_1 - \boldsymbol{\mu}_1 & \mathbf{Y}_2 - \boldsymbol{\mu}_2 & \dots & \mathbf{Y}_n - \boldsymbol{\mu}_n \end{pmatrix} \\
 &= \begin{pmatrix}
 (\mathbf{Y}_1-\boldsymbol{\mu}_1)^2 &
@@ -157,9 +157,10 @@ Let $X \sim \Gamma(\alpha, \beta), \alpha > 0, \beta > 0, x > 0$. Then $f(x) = \
 - $\Gamma(\alpha) = (\alpha - 1)\Gamma(\alpha - 1)$
 - $\Gamma(\alpha) = (\alpha - 1)! \quad$ (if $\alpha$ is an integer)
 
-**Example**: Let $X \sim exp(1)$, then $f(x)=e^{-x}$. Find $E[X^3]=\int_0^\infty x^3 e^{-x}dx$
-    To evaluate this integral, we can use the kernel function of gamma distribution. 
-    $$\int_0^\infty \frac{x^{4-1} e^{-\frac{x}{1}}}{\Gamma(4)1^4} dx = 1 \Rightarrow \int_0^\infty x^3 e^{-x}dx = \int_0^\infty x^{4-1} e^{-\frac{x}{1}} = \Gamma(4) = 3! = 6$$
+### Example
+Let $X \sim exp(1)$, then $f(x)=e^{-x}$. Find $E[X^3]=\int_0^\infty x^3 e^{-x}dx$
+To evaluate this integral, we can use the kernel function of gamma distribution. 
+$$\int_0^\infty \frac{x^{4-1} e^{-\frac{x}{1}}}{\Gamma(4)1^4} dx = 1 \Rightarrow \int_0^\infty x^3 e^{-x}dx = \int_0^\infty x^{4-1} e^{-\frac{x}{1}} = \Gamma(4) = 3! = 6$$
 
 ## Note on Independence 
 Let $X$, $Y$ be random variables with joint pdf $f(x,y)$. Then $X$, $Y$ are independent if $f(x,y)=f(x)f(y)$ 
@@ -227,7 +228,8 @@ $$f(x \mid \boldsymbol{\theta}) = h(x)c(\boldsymbol{\theta}) \exp\big(\sum_{i=1}
 Note: let $d$ be $dim(\boldsymbol{\theta})$. If $d=k$, we have full exponential family; 
 if $d < k$, we have curved exponential family.
 
-**Example**: Let $X \sim bin(n,p)$ with $n$ fixed. 
+### Example
+Let $X \sim bin(n,p)$ with $n$ fixed. 
 
 $$
 \begin{aligned}
@@ -294,7 +296,8 @@ To prove statement (b), differentiate a second time and rearrange
 
 </div>
 
-**Example**: Let $X \sim \text{Poission}(\lambda)$. Use the theorem above to show that $E[X] = \lambda$ and $var[X] = \lambda$ 
+### Example 
+Let $X \sim \text{Poission}(\lambda)$. Use the theorem above to show that $E[X] = \lambda$ and $var[X] = \lambda$ 
 
 $$p(x)=\frac{\lambda^xe^{-\lambda}}{x!} = \frac{1}{x!}e^{-\lambda}e^{\log\lambda^x} = \frac{1}{x!}e^{-\lambda}e^{x\log\lambda}$$
 
@@ -477,7 +480,7 @@ M_X(t) = M_{\mu + \sigma Z}(t) &= E[e^{t(\mu + \sigma Z)}] \\
 $$
 
 ### Example 
-Suppose $X$, $Y$ are indepedent random variables. Find the distribution of $X+Y$, where $X \sim N(\mu_1, \sigma_1), Y \sim N(\mu_2, \sigma_2)$
+Suppose $X$, $Y$ are independent random variables. Find the distribution of $X+Y$, where $X \sim N(\mu_1, \sigma_1), Y \sim N(\mu_2, \sigma_2)$
 
 $$M_{X+Y}(t) = M_X(t)M_Y(t) = e^{t\mu_1 + \frac{1}{2}t^2\sigma_1^2} e^{t\mu_2 + \frac{1}{2}t^2\sigma_2^2} = e^{t(\mu_1 + \mu_2) + \frac{1}{2}t^2(\sigma_1^2 + \sigma_2^2)}$$
 
@@ -515,7 +518,7 @@ $$\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$$
 
 # Lec 4: Functions of random variables 
 
-## Method of cdf
+## Method of cdf (Single variable transformation)
 
 ### Example 
 Let $X \sim \Gamma(\alpha, \beta)$. Find the distribution of $Y = cX, c > 0$, with method of cdf.
@@ -553,7 +556,7 @@ $$
 
 Therefore, $Z^2 \sim \Gamma(\frac{1}{2}, 2) = \chi^2_1$
 
-## Method of transformation
+## Method of transformation (Single variable transformation)
 
 Let $X$ be a continuous random variable with pdf $f(x)$. Let $Y=g(X)$ be a monotone function (either increasing or decreasing), then there is an one-to-one transformation. The pdf of Y(X) is given by 
 
@@ -621,3 +624,557 @@ $$y = g(x) = \log(y) \quad \Rightarrow \quad g^{-1}(y)=e^{-y}$$
 $$f_Y(y) = f_X(e^{-y}) \big| \frac{d}{dy}e^{-y}\big| = |-e^{-y}| = e^{-y}$$
 
 Therefore, $Y \sim exp(1)$
+
+### Example
+Let $X \sim exp(\lambda)$, $Y = 1 - e^{-\lambda X}$
+
+$$x = g^{-1}(y) = \frac{\log(1-y)}{-\lambda}$$
+$$f_Y(y) = f_X(g^{-1}(y)) \big| \frac{d}{dy} g^{-1}(y) \big| = \lambda e^{-\lambda \frac{\log(1-y)}{-\lambda}} \big| \frac{1}{(1-y)\lambda} \big| = 1$$
+
+Therefore, $Y \sim unif(0,1)$
+
+### Example 
+Let $X \sim \Gamma(n, \beta)$ (n is an integer). Find the pdf of $Y = \frac{1}{X}$ (inverted gamma distribution)
+
+$$x = g^{-1}(y) = \frac{1}{y}$$
+$$f_Y(y) = f_X(g^{-1}(y)) \big| \frac{d}{dy} g^{-1}(y) \big| = \frac{(\frac{1}{y})^{n-1}e^{-\frac{1}{y\beta}}}{(n-1)!\beta^n} \cdot \big| -\frac{1}{y^2} \big| = \frac{(y)^{-(n+1)}e^{-\frac{1}{y\beta}}}{(n-1)!\beta^n}$$
+
+### Theorem 
+Let $X$ be a continuous random variable with pdf $f(x)$ and suppose $Y = g(X)$ is monotone in the intervals $A_1, A_2, \dots, A_k$. Then 
+
+$$f_Y(y) = \sum_{i=1}^k f_X[g_i^{-1}(y)] \big| \frac{d}{dy} g_i^{-1}(y)\big|$$
+
+### Example
+Let $X \sim N(0,1)$, $Y = X^2$. Find the pdf of $Y$.
+
+$$A_1 = (-\infty, 0), g_1^{-1}(y)=-\sqrt{y}$$
+$$A_2 = (0, \infty), g_2^{-1}(y)=\sqrt{y}$$
+
+$$
+\begin{aligned}
+f_Y(y) &= f_X[g_1^{-1}(y)]\big| \frac{d}{dy}g_1^{-1}(y) \big| + f_Y(y) = f_X[g_2^{-1}(y)]\big| \frac{d}{dy}g_2^{-1}(y) \big| \\
+&= \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}} |-\frac{1}{2}y^{-\frac{1}{2}}| + \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}} |\frac{1}{2}y^{-\frac{1}{2}}| \\
+&= \frac{y^{-\frac{1}{2}}e^{-\frac{y}{2}}}{\sqrt{2\pi}} \\
+&= \frac{y^{\frac{1}{2} - 1}e^{-\frac{y}{2}}}{\Gamma(\frac{1}{2})2^\frac{1}{2}}
+\end{aligned}
+$$
+
+Therefore, $Y \sim \Gamma(\frac{1}{2}, 2) = \chi^2_1$
+
+
+## Joint probability distribution of functions of random variables
+
+Let $X$, $Y$ be continuous random vairables with joint pdf $f_{X,Y}(x,y)$. Suppose $U=g_1(X,Y)$ and $V=g_2(X,Y)$. Assume that the transformation is one-to-one. To find the joint pdf of $U$, $V$, we follow this procedure:
+- We need the joint pdf of $X$ and $Y$.
+- Solvle the equations $U=g_1(X,Y)$ and $V=g_2(X,Y)$ for $x$ and $y$ in terms of $u$ and $v$ to get $x=h_1(u,v)$ and $y=h_2(u,v)$.
+- Compute the Jacobian: 
+$\mathbf{J_1} = \begin{vmatrix} \frac{\partial g_1}{\partial x} & \frac{\partial g_1}{\partial y} \\ \frac{\partial g_2}{\partial x} & \frac{\partial g_2}{\partial y} \end{vmatrix}$ and 
+$\mathbf{J_2} = \begin{vmatrix} \frac{\partial h_1}{\partial u} & \frac{\partial h_1}{\partial v} \\ \frac{\partial h_2}{\partial u} & \frac{\partial h_2}{\partial v} \end{vmatrix}$
+
+Finally, to find the joint pdf of $U$, $V$, use the following result:
+
+$$
+\begin{aligned}
+f_{U,V}(u,v) &= f_{X,Y}(x=h_1,y=h_2)|\mathbf{J_1}|^{-1} \quad &(\text{inverse of absolute value of the Jacobian})\\
+OR \quad f_{U,V}(u,v)  &= f_{X,Y}(x=h_1,y=h_2)|\mathbf{J_2}| \quad &(\text{absolute value of the Jacobian})
+\end{aligned}
+$$
+
+### Example 
+Let $X_1$ and $X_2$ be independent exponential random vairables with parameters $\lambda_1$ and $\lambda_2$ respectively. Find the joint pdf of $U = X_1 + X_2$ and $V = X_1 - X_2$.
+
+Since $X_1$ and $X_2$ are independent, the joint pdf of $X_1$ and $X_2$ is
+
+$$f_{X_1,X_2}(x_1,x_2)=f_{X_1}(x_1)f_{X_2}(x_2)=\lambda_1e^{-\lambda_1x_1}\cdot\lambda_2e^{-\lambda_2x_2}=\lambda_1\lambda_2e^{-\lambda_1x_1-\lambda_2x_2}$$
+
+Solve for $X_1$ and $X_2$ in terms of $U$ and $V$:
+
+$$
+\begin{cases}
+U = X_1 + X_2 \\
+V = X_1 - X_2
+\end{cases} \quad \Rightarrow \quad
+\begin{cases}
+X_1 = \frac{U+V}{2}\\
+X_2 = \frac{U-V}{2}
+\end{cases}
+$$
+
+Compute the Jacobian $\mathbf{J_2}$
+
+$$\mathbf{J_2} = \begin{vmatrix} \frac{\partial x_1}{\partial u} & \frac{\partial x_1}{\partial v} \\ \frac{\partial x_2}{\partial u} & \frac{\partial x_2}{\partial v} \end{vmatrix}
+=\begin{vmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2} \end{vmatrix}$$
+
+Finally, find the joint pdf of $U$ and $V$
+
+$$f_{U,V}(u,v) = \lambda_1\lambda_2e^{\lambda_1\frac{U+V}{2}+\lambda_2\frac{U-V}{2}} \cdot |-\frac{1}{2}|$$
+
+### Example 
+Suppose $X$ and $Y$ are independent random variables with $X \sim \Gamma(\alpha_1, \beta)$ and $Y \sim \Gamma(\alpha_2, \beta)$. Compute the joint pdf of $U=X+Y$ and $V=\frac{X}{X+Y}$ and find the distribution of $U$ and the distribution of $V$. Also show that $U$, $V$ are independent.
+
+Because $X$, $Y$ are independent, the joint pdf of $X$ and $Y$ is the product of the two marginal pdfs:
+
+$$f_{X,Y}(x,y) = f_X(x)f_Y(y) 
+= \frac{x^{\alpha_1-1} e^{-\frac{x}{\beta}}}{\Gamma(\alpha_1)\beta^{\alpha_1}} 
+\frac{y^{\alpha_2-1} e^{-\frac{y}{\beta}}}{\Gamma(\alpha_2)\beta^{\alpha_2}}
+= \frac{x^{\alpha_1-1} y^{\alpha_2-1} e^{-\frac{x+y}{\beta}}}{\Gamma(\alpha_1)\Gamma(\alpha_2)\beta^{\alpha_1+\alpha_2}}
+$$
+
+Then solve the equations to get $x=uv$ and $y=u(1-v)$
+
+Compute Jacobian $\mathbf{J_1} = \begin{vmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{vmatrix} = \begin{vmatrix} 1 & 1 \\ \frac{y}{(x+y)^2} & -\frac{x}{(x+y)^2}  \end{vmatrix} = -\frac{1}{x+y} = -\frac{1}{u}$
+
+Finally to find the joint pdf of $U$, $V$ use $x=uv$ and $y=u(1-v)$ in the joint pdf of $X$,$Y$: 
+
+$f_{U,V}(u,v) = \frac{(uv)^{\alpha_1-1}[u(1-v)]^{\alpha_2-1}e^{-\frac{u}{\beta}}u}{\Gamma(\alpha_1)\Gamma(\alpha_2)\beta^{\alpha_1+\alpha_2}}$, multiply by $\frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1+\alpha_2)}$ and rearrange to get:
+
+$$f_{U,V}(u,v) = \frac{u^{\alpha_1+\alpha_2-1}e^{-\frac{u}{\beta}}}{\Gamma(\alpha_1+\alpha_2)\beta^{\alpha_1+\alpha_2}} \times \frac{v^{\alpha_1-1}(1-v)^{\alpha_2-1}\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)} = \frac{u^{\alpha_1+\alpha_2-1}e^{-\frac{u}{\beta}}}{\Gamma(\alpha_1+\alpha_2)\beta^{\alpha_1+\alpha_2}} \times \frac{v^{\alpha_1-1}(1-v)^{\alpha_2-1}}{B(\alpha_1,\alpha_2)}$$
+
+where $B(\alpha_1,\alpha_2) = \int_0^1 v^{\alpha_1-1}(1-v)^{\alpha_2-1} dv = \frac{\Gamma(\alpha_1)\Gamma(\alpha_2)}{\Gamma(\alpha_1+\alpha_2)}$ is the Beta function.
+
+Therefore, $U \perp\!\!\!\perp V$, $U \sim \Gamma(\alpha_1+\alpha_2, \beta)$, $V \sim \text{Beta}(\alpha_1, \alpha_2)$
+
+### Example - Distribution of the ratio of normal random variables
+Let $X$ and $Y$ be independent standard normal random variables. Find the joint pdf of $U+X+Y$ and $V=X-Y$.
+
+$$f_{X,Y}(x,y) = f_X(x)f_Y(y) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}$$
+
+$\mathbf{J_1} = \begin{vmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{vmatrix} = \begin{vmatrix} 1 & 1 \\ 1 & -1  \end{vmatrix} = -2$
+
+$$
+\begin{aligned}
+f_{U,V}(u,v) &= \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{u+v}{2})^2} \cdot \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{u+v}{2})^2} \cdot |-\frac{1}{2}| \\
+&= \frac{1}{\sqrt{2}\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{u}{\sqrt{2}})^2} \cdot \frac{1}{\sqrt{2}\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{v}{\sqrt{2}})^2}
+\end{aligned}
+$$
+
+Therefore, $U \sim N(0,\sqrt{2})$, $V \sim N(0,\sqrt{2})$
+
+### Note 1
+Suppose we are interested only in finding the pdf of $U = g_1(X,Y)$. We can still use the previous method by defining a function $V = g_2(X,Y)$. We then obtain the joint pdf of $U$ and $V$ and from there we find hte marginal distribution of $U$.
+
+### Note 2
+If the transformation is not one-to-one, we use teh following theorem:
+
+$$f_{U,V}(u,v) = \sum_{i=1}^k f_{X,Y}(h_{1i}(u,v),h_{2i}(u,v)) |J_i|$$
+
+### Example - Distribution of the ratio of normal random variables
+Let $X$ and $Y$ be independent standard normal random variables. Let $U=\frac{X}{Y}$ and $V=|Y|$. Find the joint pdf of $U$, $V$ and then find the marginal distribution of $U$.
+
+$U=\frac{X}{Y}$ is one-to-one but $V=|Y|$ is not.
+
+Let $A_1 = {(x,y) \mid y < 0}$ and $A_2 = {(x,y) \mid y > 0}$, then 
+
+$$
+\begin{aligned}
+&h_{11}(u,v) = -uv \quad &h_{12}(u,v) = uv \\
+&h_{21}(u,v) = -v \quad &h_{22}(u,v) = v 
+\end{aligned}
+$$
+
+$$\mathbf{J_2} = \begin{vmatrix} \frac{\partial h_{11}}{\partial u} & \frac{\partial h_{12}}{\partial v} \\ \frac{\partial h_{21}}{\partial u} & \frac{\partial h_{22}}{\partial v} \end{vmatrix} = \begin{vmatrix} -v & -u \\ 0 & 1 \end{vmatrix}= v$$
+
+$$
+\begin{aligned}
+f_{X,Y}(x,y) &= f_X(x)f_Y(y) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}} = \frac{1}{2\pi}e^{-\frac{x^2 + y^2}{2}} \\
+f_{U,V}(u,v) &= \frac{1}{2\pi}e^{-\frac{(-uv)^2 + (-v)^2}{2}} \cdot v + \frac{1}{2\pi}e^{-\frac{(uv)^2 + (v)^2}{2}} \cdot v \\
+&= \frac{v}{\pi}e^{-\frac{(u^2+1)v^2}{2}} \\
+f_U(u) &= \int_0^\infty \frac{v}{\pi}e^{-\frac{(u^2+1)v^2}{2}} dv \\
+&= \int_0^\infty \frac{2}{\pi}e^{-\frac{(u^2+1)v^2}{2}} dv^2 \\
+\quad \text{let } t &= \frac{(u^2+1)v^2}{2}, dt = (u^2+1)v dv \quad \Rightarrow \quad v dv = \frac{dt}{u^2+1})= \\
+f_U(u) &= \int_0^\infty \frac{1}{\pi}e^{-t}\frac{dt}{u^2+1} \\
+&= \frac{1}{\pi(u^2+1)} \int_0^\infty e^{-t} dt \\
+&= \frac{1}{\pi(u^2+1)} \quad (\text{Cauchy Distribution})
+\end{aligned}
+$$
+
+
+---
+
+
+# Lec 5: Joint moment generating functions
+
+Let $\mathbf{X} = \begin{pmatrix} X_1 \\ X_2 \\ \vdots \\ X_n \end{pmatrix}$ be a random vector and let  $\mathbf{t} = \begin{pmatrix} t_1 \\ t_2 \\ \vdots \\ t_n \end{pmatrix}$ be a  vector of real values. The joint moment generating function of $X$ is defined as $M_\mathbf{X}(\mathbf{t}) = E[e^{\mathbf{t}^T \mathbf{X}}] = E[\exp(\sum_{i=1}^n t_ix_i)]$.
+
+## Multinomial distribution
+A sequence of $n$ independent experiments is performed and each experiment can result in one of $r$ possible outcomes with probability $p_1, p_2, \dots, p_n$ with $\sum_{i=1}^r p_i = 1$. Let X_i be the number of $n$ experiments that result in outcome $i$ for $i = 1,2,\dots,r$ with $x_1+x_2+\dots+x_r=n$. Then, $P(X_1=x_1,X_2=x_2,\dots,X_r=x_r) = \frac{n!}{x_1!x_2!\dots x_r!}p_1^{x_1}p_2^{x_2}\dots p_r^{x_r}$. Denote the multinomial distribution with $\mathbf{X} \sim M(n,\mathbf{p})$.
+
+Joint moment generating function of $\mathbf{X} \sim M(n,\mathbf{p})$.
+
+$$
+\begin{aligned}
+M_\mathbf{X}(\mathbf{t}) = E[e^{\mathbf{t}^T \mathbf{X}}] &= \sum_{x_1}\sum_{x_2}\dots \sum_{x_n} e^{\mathbf{t}^T \mathbf{X}}\frac{n!}{x_1!x_2!\dots x_r!}p_1^{x_1}p_2^{x_2}\dots p_r^{x_r} \\
+&= \sum_{x_1}\sum_{x_2}\dots \sum_{x_n} \frac{n!}{x_1!x_2!\dots x_r!}(p_1e^{t_1})^{x_1}(p_2e^{t_2})^{x_2}\dots (p_re^{t_r})^{x_r} \\
+&= (p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r})^n \quad (\text{multinomial theorem})
+\end{aligned}
+$$
+
+### Example 
+Suppose a fair die is rolled $n=15$ times. the probability that we observed #1 twice, #2 three times, #3 once, #4 twice, #5 three times, #6 four times is 
+
+$$P(X_1=2,X_2=3,X_3=1,X_4=2,X_5=3,X_6=4) = \frac{15!}{2!3!1!2!3!4!}(\frac{1}{6})^2(\frac{1}{6})^3(\frac{1}{6})^1(\frac{1}{6})^2(\frac{1}{6})^3(\frac{1}{6})^4$$
+
+### Theorem
+Let $M_i(\mathbf{t}) = \frac{\partial M_\mathbf{X}(\mathbf{t})}{\partial t_i}$, 
+$M_{ii}(\mathbf{t}) = \frac{\partial^2 M_\mathbf{X}(\mathbf{t})}{\partial t_i^2}$, and
+$M_{ij}(\mathbf{t}) = \frac{\partial^2 M_\mathbf{X}(\mathbf{t})}{\partial t_i \partial t_j}$.
+
+Then, $E[X_i] = M_i(\mathbf{0})$, $E[X_i^2] = M_{ii}(\mathbf{0})$, $E[X_iX_j] = M_{ij}(\mathbf{0})$
+
+### Example 
+Let $n=2$ then let $\mathbf{X}=\begin{pmatrix} X_1 \\ X_2 \end{pmatrix}$ and $\mathbf{t}=\begin{pmatrix} t_1 \\ t_2 \end{pmatrix}$. Then, $M_\mathbf{X}(\mathbf{t}) = E[e^{\mathbf{t}^T \mathbf{X}}] = \int\int e^{\mathbf{t}^T \mathbf{X}} f(x_1,x_2) dx_1 dx_2$
+
+- $M_1(\mathbf{t}) = \int\int x_1 e^{t_1x_1 + t_2x_2} f(x_1,x_2) dx_1 dx_2$
+- $M_1(\mathbf{0}) = \int\int x_1 f(x_1,x_2) dx_1 dx_2 = \int x_1 f(x_1) dx_1 = E[X_1]$
+- $M_2(\mathbf{t}) = \int\int x_2 e^{t_1x_1 + t_2x_2} f(x_1,x_2) dx_1 dx_2$
+- $M_2(\mathbf{0}) = \int\int x_2 f(x_1,x_2) dx_1 dx_2 = \int x_2 f(x_2) dx_2 = E[X_2]$
+- $M_{11}(\mathbf{t}) = \int\int x_1^2 e^{t_1x_1 + t_2x_2} f(x_1,x_2) dx_1 dx_2$
+- $M_{11}(\mathbf{0}) = \int\int x_1^2 f(x_1,x_2) dx_1 dx_2 = \int x_1^2 f(x_1) dx_1 = E[X_1^2]$
+- $M_{22}(\mathbf{t}) = \int\int x_2^2 e^{t_1x_1 + t_2x_2} f(x_1,x_2) dx_1 dx_2$
+- $M_{22}(\mathbf{0}) = \int\int x_2^2 f(x_1,x_2) dx_1 dx_2 = \int x_2^2 f(x_2) dx_2 = E[X_2^2]$
+- $M_{12}(\mathbf{t}) = \int\int x_1x_2 e^{t_1x_1 + t_2x_2} f(x_1,x_2) dx_1 dx_2$
+- $M_{12}(\mathbf{0}) = \int\int x_1x_2 f(x_1,x_2) dx_1 dx_2 = E[X_1X_2]$
+- $var[X_1] = E[X_1^2] - E[X_1]^2 = M_{11}(\mathbf{0}) - M_1(\mathbf{0})^2$
+- $var[X_2] = E[X_2^2] - E[X_2]^2 = M_{22}(\mathbf{0}) - M_2(\mathbf{0})^2$
+- $cov[X_1, X_2] = E[X_1X_2] - E[X_1]E[X_2] = M_{12}(\mathbf{0}) - M_1(\mathbf{0}) M_2(\mathbf{0})$
+
+### Corollary
+Let $\psi(\mathbf{t}) = \log M_X(\mathbf{t})$, 
+$\psi_i(\mathbf{t}) = \frac{\partial \psi_\mathbf{X}(\mathbf{t})}{\partial t_i}$,
+$\psi_{ii}(\mathbf{t}) = \frac{\partial^2 \psi_\mathbf{X}(\mathbf{t})}{\partial t_i^2}$,
+$\psi_{ij}(\mathbf{t}) = \frac{\partial^2 \psi_\mathbf{X}(\mathbf{t})}{\partial t_it_j}$
+
+Then $E[X_i] = \psi_i(\mathbf{0})$, $var[X_i] = \psi_{ii}(\mathbf{0})$, $cov[X_i, X_j] = \psi_{ij}(\mathbf{0})$.
+
+### Example
+COnsider the multinomial probability distribution $\mathbf{X} \sim M(n,\mathbf{p})$ with joint moment generating function $M_\mathbf{X}(\mathbf{t}) = (p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r})^n$
+
+$$
+\begin{aligned}
+\psi(\mathbf{t}) &= n \log(p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r}) \\
+\psi_1(\mathbf{t}) &= \frac{np_1e^{t_1}}{p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r}} \\
+\psi_1(\mathbf{0}) &= np_1 = E[X_1] \quad (\text{binomial}) \\
+\psi_{11}(\mathbf{t}) &= \frac{ np_1e^{t_1} (p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r}) - np_1^2e^{2t_1}}{(p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r})^2} \\
+\psi_{11}(\mathbf{0}) &= np_1(1 - p_1) = var[X_1] \quad (\text{binomial})
+\end{aligned}
+$$
+
+### Theorem
+Let $\mathbf{X} = \begin{pmatrix} \mathbf{Y} \\ \mathbf{Z} \end{pmatrix}$. The marginal moment generating function of $\mathbf{Y}(\mathbf{Z})$ is the moment generating function of $\mathbf{X}$ ignoring the vector $\mathbf{Z}(\mathbf{Y})$. This is expressed as $M_\mathbf{Y}(\mathbf{u}) = M_\mathbf{X}(\mathbf{u}, \mathbf{0})$ and $M_\mathbf{Z}(\mathbf{v}) = M_\mathbf{X}(\mathbf{0}, \mathbf{v})$, where $\mathbf{t} = \begin{pmatrix} \mathbf{u} \\ \mathbf{v} \end{pmatrix}$.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$M_\mathbf{X}(\mathbf{t}) = E[e^{\mathbf{t}^T \mathbf{X}}] = E[e^{\mathbf{u}^T \mathbf{Y} + \mathbf{v}^T \mathbf{Z}}] = E[e^{\sum u_iY_i + \sum v_iZ_i}]$$
+
+Set $v_iZ_i = 0$
+
+$$E[e^{\sum u_iY_i}] = E[e^{\mathbf{u}^T \mathbf{Y}}] = M_\mathbf{Y}(\mathbf{u}) = M_\mathbf{X}(\mathbf{u}, \mathbf{0})$$
+
+Set $u_iY_i = 0$
+
+$$E[e^{\sum v_iZ_i}] = E[e^{\mathbf{v}^T \mathbf{Z}}] = M_\mathbf{Z}(\mathbf{v}) = M_\mathbf{X}(\mathbf{0}, \mathbf{v})$$
+
+</div>
+
+### Example 
+Consider the multinomial probability distributino $\mathbf{X} \sim M(n, \mathbf{p})$ with joint moment generating function 
+
+$$M_\mathbf{X}(\mathbf{t}) = (p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r})^n$$
+
+Find the marginal moment generating function of $X_1$.
+
+$$M_\mathbf{X}(t_1) = M_\mathbf{X}(t_1, 0, \dots, 0) = (p_1e^{t_1} + p_2 + \dots + p_r)^n = (p_1e^{t_1} + 1 - p_1)^n$$
+
+Therefore $X_1 \sim bin(n,p_1)$
+
+### Theorem 
+If $\mathbf{Y}$ and $\mathbf{Z}$ are independent, then 
+$M_\mathbf{X}(\mathbf{t}) = M_\mathbf{Y}(\mathbf{u})M_\mathbf{Z}(\mathbf{v})$
+
+**Proof**: $M_\mathbf{X}(\mathbf{t}) = E[e^{\mathbf{t}^T \mathbf{X}}] = E[e^{\mathbf{u}^T \mathbf{Y} + \mathbf{v}^T \mathbf{Z}}] = E[e^{\mathbf{u}^T \mathbf{Y}}] E[e^{\mathbf{v}^T \mathbf{Z}}] = M_\mathbf{Y}(\mathbf{u})M_\mathbf{Z}(\mathbf{v})$
+
+### Example
+Let $\mathbf{X} = (X_1, X_2, X_3)$ has joint moment generating function 
+
+$$M_\mathbf{X}(t_1,t_2,t_3) = (1-t_1+2t_2)^{-4}(1-t_1+3t_3)^{-3}(1-t_1)^{-2}$$
+
+- Find the moment generating function of $(X_1, X_3)$
+    $$M_{X_1,X_3}(t_1,t_3) = M_\mathbf{X}(t_1,0,t_3) = (1-t_1)^{-6}(1-t_1+3t_3)^{-3}$$
+- Find the moment generating function of $X_1$ and $X_3$, are they independent?
+    $$M_{X_1}(t_1) = M_\mathbf{X}(t_1,0,0) = (1-t_1)^{-9}$$
+    $$M_{X_3}(t_3) = M_\mathbf{X}(t_1,0,0) = (1+3t_3)^{-3}$$
+    Since $M_{X_1,X_3}(t_1,t_3) \neq M_{X_1}(t_1)M_{X_3}(t_3)$, $X_1$ and $X_3$ are not independent
+
+### Example
+Let $X$ and $Y$ be independent normal random variables, each with mean $\mu$ and variance $\sigma^2$ 
+
+- Consider the random quantities $X+Y$ and $X-Y$. Find the moment generating function of $X+Y$ and the moment generating function of $X-Y$.
+    $$
+    \begin{aligned}
+    M_{X+Y}(t) &= M_X(t)M_Y(t) = e^{t\mu + \frac{1}{2}t^2\sigma^2}e^{t\mu + \frac{1}{2}t^2\sigma^2} = e^{t2\mu + \frac{1}{2}t^22\sigma^2} \qquad &X+Y \sim N(2\mu, 2\sigma^2) \\
+    M_{X-Y}(s) &= M_X(s)M_Y(-s) = e^{s\mu + \frac{1}{2}s^2\sigma^2}e^{-s\mu + \frac{1}{2}(-s)^2\sigma^2} = e^{\frac{1}{2}s^22\sigma^2} \qquad &X+Y \sim N(0, 2\sigma^2)
+    \end{aligned}
+    $$
+
+- Find the joint moment generating function of $(X+Y, X-Y)$.
+    $$
+    \begin{aligned}
+    M{X+Y,X-Y}(t,s) &= E[e^{t(X+Y)+s(X-Y)}] \\
+    &= E[e^{(t+s)X+(t-s)Y}] \\
+    &= M_X(t+s)M_Y(t-s) \\
+    &= e^{(t+s)\mu + \frac{1}{2}(t+s)^2\sigma^2} e^{(t-s)\mu + \frac{1}{2}(t-s)^2\sigma^2} \\
+    &= e^{t2\mu + \frac{1}{2}t^22\sigma^2} e^{\frac{1}{2}s^22\sigma^2} \\
+    &= M_{X+Y}(t)M_{X-Y}(s)
+    \end{aligned}
+    $$
+
+    Therefore, $X+Y$ and $X-Y$ are independent.
+
+
+---
+
+
+# Lec 6: Multivariate normal distribution
+
+A random vector $\mathbf{Y} = (Y_1, Y_2, \dots, Y_n)^T$ with mean vector $\boldsymbol{\mu}$ and covairance matrix $\boldsymbol{\Sigma}$ follows multivariate normal distribution denoted $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ has pdf given by
+
+$$f(\mathbf{Y}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{2}}e^{-\frac{1}{2}(\mathbf{Y} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{Y} - \boldsymbol{\mu})}$$
+
+If $\mathbf{Y} = (Y_1, Y_2)$ follows a bivariate normal distribution, then its pdf can be expressed as
+
+$$f(y_1,y_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\big[ -\frac{1}{2(1-\rho^2)} \big[ 
+\big(\frac{y_1-\mu_1}{\sigma_1}\big)^2 + \big(\frac{y_2-\mu_2}{\sigma_2}\big)^2 
+- 2\rho\big(\frac{y_1-\mu_1}{\sigma_1}\big) \big(\frac{y_2-\mu_2}{\sigma_2}\big) \big] \big]$$
+
+where $\boldsymbol{\Sigma} = \begin{pmatrix} \sigma_1^2 & \sigma{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix}$, $\rho = cor[Y_1, Y_2] = \frac{cov[Y_1, Y_2]}{\sigma_1\sigma_2}$, and $\sigma_{12}=\sigma_{21}=\rho\sigma_1\sigma_2$.
+
+## Moment generating function - multivairate normal distribution
+
+### Result 1
+
+Suppose $\mathbf{Z} \sim N_n(\mathbf{0}, \mathbf{I})$. Since $Z_1, Z_2, \dots, Z_n$ are independent. The joint moment generating function of $\mathbf{Z}$ is $M_\mathbf{Z}(\mathbf{t}) = e^{\frac{1}{2}\mathbf{t}^T\mathbf{t}}$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$
+f(z) = \prod_{i=1}^n f(z_i) 
+= \prod_{i=1}^n \frac{1}{\sqrt{2\pi}} e^{-\frac{z_i^2}{2}} 
+= \frac{1}{(2\pi)^{\frac{n}{2}}} e^{-\frac{\sum_{i=1}^n z_i^2}{2}}
+= \frac{1}{(2\pi)^{\frac{n}{2}}} |\mathbf{I}|^{-\frac{1}{2}} e^{-\frac{1}{2} (z-0)^T \mathbf{I}^{-1} (z-0)}
+$$
+
+$$
+\begin{aligned}
+M_\mathbf{Z}(\mathbf{t}) 
+= E[e^{\mathbf{t}^T \mathbf{Z}}]
+= E[e^{t_1Z_1 + \dots + t_nZ_n}]
+= E[e^{t_1Z_1}] \dots E[e^{t_nZ_n}] 
+&= M_{Z_1}(t_1) \dots M_{Z_n}(t_n) \\
+&= e^{\frac{1}{2}t_1^2} \dots e^{\frac{1}{2}t_n^2} \\
+&= e^{\frac{1}{2}\sum_{i=1}^n t_i^2} \\
+&= e^{\frac{1}{2}\mathbf{t}^T\mathbf{t}}
+\end{aligned}
+$$
+
+</div>
+
+### Result 2
+
+Suppose $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$, then $\mathbf{Z} = \boldsymbol{\Sigma}^{-\frac{1}{2}} (\mathbf{Y} - \boldsymbol{\mu}) \sim N_n(\mathbf{0}, \mathbf{I})$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Since $\boldsymbol{\Sigma}$ is symmetric, there exists a spectral decomposition such that $\boldsymbol{\Sigma} = \mathbf{Q}\boldsymbol{\Lambda} \mathbf{Q}^T$, where $\boldsymbol{\Lambda} = diag(\lambda_i)$  $\mathbf{Q} = (e_1, \dots, e_n)$ are orthonormal vectors, and $\mathbf{Q}\mathbf{Q}^T = \mathbf{Q}^T\mathbf{Q} = \mathbf{I}$
+
+**Properties**: (Assume $\boldsymbol{\Sigma}$ is positive definite)
+- $\boldsymbol{\Sigma}^\frac{1}{2} = \mathbf{Q}\boldsymbol{\Lambda}^\frac{1}{2} \mathbf{Q}^T$ is a square matrix and $\boldsymbol{\Sigma}^\frac{1}{2}\boldsymbol{\Sigma}^\frac{1}{2}\boldsymbol{\Sigma}$, $(\boldsymbol{\Sigma}^\frac{1}{2})^T = \boldsymbol{\Sigma}^\frac{1}{2}$
+- $\boldsymbol{\Sigma}^{-\frac{1}{2}} = \mathbf{Q}\boldsymbol{\Lambda}^{-\frac{1}{2}} \mathbf{Q}^T$ is a square matrix and $\boldsymbol{\Sigma}^{-\frac{1}{2}}\boldsymbol{\Sigma}^{-\frac{1}{2}}\boldsymbol{\Sigma}$, $(\boldsymbol{\Sigma}^{-\frac{1}{2}})^T = \boldsymbol{\Sigma}^{-\frac{1}{2}}$
+
+Continue with the proof, $\mathbf{Z} = \boldsymbol{\Sigma}^{-\frac{1}{2}} (\mathbf{Y} - \boldsymbol{\mu}) = \boldsymbol{\Sigma}^{-\frac{1}{2}}\mathbf{Y} - \boldsymbol{\Sigma}^{-\frac{1}{2}}\boldsymbol{\mu}$
+
+$$f(\mathbf{Y}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{2}}e^{-\frac{1}{2}(\mathbf{Y} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{Y} - \boldsymbol{\mu})}$$
+
+$$\mathbf{Z} = \boldsymbol{\Sigma}^{-\frac{1}{2}} (\mathbf{Y} - \boldsymbol{\mu}) \quad \Rightarrow \quad \mathbf{Y} = \boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}  \qquad \text{Jacobian}: \mathbf{J_2} = |\boldsymbol{\Sigma}^{-\frac{1}{2}}|^{-1} = |\boldsymbol{\Sigma}|^\frac{1}{2}$$
+
+$$f(\mathbf{Z}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{2}} \exp\big(-\frac{1}{2}[(\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) - \boldsymbol{\mu}]^T \boldsymbol{\Sigma}^{-1} [(\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) - \boldsymbol{\mu}]\big) \cdot |\boldsymbol{\Sigma}|^{\frac{1}{2}} = \frac{1}{(2\pi)^\frac{n}{2}} e^{-\frac{1}{2}\mathbf{Z}^T\mathbf{Z}}$$
+
+Therefore, $\mathbf{Z} \sim N_n(\mathbf{0}, \mathbf{I})$.
+
+</div>
+
+### Result 3
+
+Suppose $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$, then $M_\mathbf{Y}(\mathbf{t}) = e^{\mathbf{t}^T \boldsymbol{\mu} + \frac{1}{2}\mathbf{t}^T \boldsymbol{\Sigma} \mathbf{t}}$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Let $\mathbf{Z} = \boldsymbol{\Sigma}^{-\frac{1}{2}} (\mathbf{Y} - \boldsymbol{\mu}) \quad \Rightarrow \quad \mathbf{Y} = \boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}$
+
+$$
+\begin{aligned}
+M_\mathbf{Y}(\mathbf{t}) 
+&= M_{\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}}(\mathbf{t}) \\
+&= E[e^{\mathbf{t}^T (\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) }] \\
+&= e^{\mathbf{t}^T \boldsymbol{\mu}} E[e^{(\boldsymbol{\Sigma}^\frac{1}{2} \mathbf{t})^T \mathbf{Z}}] \\
+&= e^{\mathbf{t}^T \boldsymbol{\mu}} E[e^{\mathbf{t}^{*T} \mathbf{Z}}] 
+\qquad \text{where } \mathbf{t}^* = \boldsymbol{\Sigma}^\frac{1}{2} \mathbf{t} \\
+&= e^{\mathbf{t}^T \boldsymbol{\mu}} M_\mathbf{Z}(\mathbf{t}^*) \\
+&= e^{\mathbf{t}^T \boldsymbol{\mu}} e^{\frac{1}{2}\mathbf{t}^{*T}\mathbf{t}^*} \\
+&= e^{\mathbf{t}^T \boldsymbol{\mu}} e^{\frac{1}{2}\mathbf{t}^{T}\boldsymbol{\Sigma}^\frac{1}{2}\boldsymbol{\Sigma}^\frac{1}{2} \mathbf{t}} \\
+&= e^{\mathbf{t}^T \boldsymbol{\mu}} e^{\frac{1}{2}\mathbf{t}^{T}\boldsymbol{\Sigma} \mathbf{t}}
+\end{aligned}
+$$
+
+</div>
+
+### Theorem 1
+
+Let $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$, and let $\mathbf{A}$ be an $m \times n$ matrix of rank $m$ and $\mathbf{c}$ be an $m \times 1$ vector. Then $\mathbf{A}\mathbf{Y} + \mathbf{c} \sim N_m(\mathbf{A}\boldsymbol{\mu} + \mathbf{c}, \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T)$.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$
+\begin{aligned}
+M_{\mathbf{A}\mathbf{Y} + \mathbf{c}}(\mathbf{t})
+&= E[e^{\mathbf{t}^T (\mathbf{A}\mathbf{Y} + \mathbf{c})}] \\
+&= e^{\mathbf{t}^T \mathbf{c}} E[e^{(\mathbf{A}^T\mathbf{t})^T \mathbf{Y}}] \\
+&= e^{\mathbf{t}^T \mathbf{c}} E[e^{\mathbf{t}^{*T} \mathbf{Y}}] \qquad \text{where } \mathbf{t}^* = \mathbf{A}^T\mathbf{t} \\
+&= e^{\mathbf{t}^T \mathbf{c}} M_\mathbf{Y}(\mathbf{t}^*) \\
+&= e^{\mathbf{t}^T \mathbf{c}} e^{\mathbf{t}^{*T}\boldsymbol{\mu} + \frac{1}{2}\mathbf{t}^{*T} \boldsymbol{\Sigma} \mathbf{t}^*} \\
+&= e^{\mathbf{t}^T \mathbf{c}} e^{\mathbf{t}^T\mathbf{A}\boldsymbol{\mu} + \frac{1}{2}\mathbf{t}^T\mathbf{A} \boldsymbol{\Sigma} \mathbf{A}^T\mathbf{t}} \\
+&= e^{\mathbf{t}^T (\mathbf{A}\boldsymbol{\mu} + \mathbf{c}) + \frac{1}{2}\mathbf{t}^T\mathbf{A} \boldsymbol{\Sigma} \mathbf{A}^T\mathbf{t}} 
+\end{aligned}
+$$
+
+Therefore, $\mathbf{A}\mathbf{Y} + \mathbf{c} \sim N_m(\mathbf{A}\boldsymbol{\mu} + \mathbf{c}, \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T)$
+
+</div>
+
+### Theorem 2
+
+Let $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$. Sub-vectors of $\mathbf{Y}$ follow the multivariate normal distribution and linear combinations of $Y_1, Y_2, \dots, Y_n$ follow the univariate normal distribution
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Suppose $\mathbf{Y}$, $\boldsymbol{\mu}$, and $\boldsymbol{\Sigma}$ are partitioned as $\mathbf{Y} = \begin{pmatrix} \mathbf{Q_1} \\ \mathbf{Q_2} \end{pmatrix}$, $\boldsymbol{\mu} = \begin{pmatrix} \boldsymbol{\mu}_1 \\ \boldsymbol{\mu}_2 \end{pmatrix}$, $\boldsymbol{\Sigma} = \begin{pmatrix} \boldsymbol{\Sigma}_{11} & \boldsymbol{\Sigma}_{12} \\ \boldsymbol{\Sigma}_{21} & \boldsymbol{\Sigma}_{22} \end{pmatrix}$. where $\mathbf{Y}_1$ is $p \times 1$. The result follows directly by using the previous theorem with $\mathbf{A} = (\mathbf{I}_p, \mathbf{0})$. For a linear combination $\mathbf{a}^T\mathbf{Y} = a_1Y_1 + a_2Y_2 + \dots + a_nY_n$, $\mathbf{A}$ of theorem 1 is a vector and therefore $\mathbf{a}^T\mathbf{Y} \sim N(\mathbf{a}^T\boldsymbol{\mu}, \mathbf{a}^T\boldsymbol{\Sigma}\mathbf{a})$.
+
+</div>
+
+#### Example
+
+Let $$
+\mathbf{Y} = \begin{pmatrix} Y_1 \\ Y_2 \\ \hline Y_3 \\ Y_4 \\ Y_5 \end{pmatrix}, \quad
+\boldsymbol{\mu} = \begin{pmatrix} \mu_1 \\ \mu_2 \\ \hline \mu_3 \\ \mu_4 \\ \mu_5 \end{pmatrix}, \quad
+\boldsymbol{\Sigma} =
+\left(
+\begin{array}{cc|ccc}
+\sigma_1^2   & \sigma_{12} & \sigma_{13} & \sigma_{14} & \sigma_{15} \\
+\sigma_{21}  & \sigma_2^2  & \sigma_{23} & \sigma_{24} & \sigma_{25} \\
+\hline
+\sigma_{31}  & \sigma_{32} & \sigma_3^2  & \sigma_{34} & \sigma_{35} \\
+\sigma_{41}  & \sigma_{42} & \sigma_{43} & \sigma_4^2  & \sigma_{45} \\
+\sigma_{51}  & \sigma_{52} & \sigma_{53} & \sigma_{54} & \sigma_5^2
+\end{array}
+\right)
+$$
+
+then if $\mathbf{Q_1} = \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix}$, it follows that $\mathbf{Q_1} \sim N\big[ \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}, \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix}\big]$
+
+Alternatively, let $\mathbf{A} = \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix}$ then 
+
+$$\mathbf{A}\mathbf{Y} = \mathbf{Q_1} \sim N_p(\mathbf{A}\boldsymbol{\mu}, \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T) = N_p\big[ \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix} \begin{pmatrix} \boldsymbol{\mu_1} \\ \boldsymbol{\mu_2} \end{pmatrix}, \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix} \begin{pmatrix} \boldsymbol{\Sigma}_{11} & \boldsymbol{\Sigma}_{12} \\ \boldsymbol{\Sigma}_{21} & \boldsymbol{\Sigma}_{22} \end{pmatrix} \begin{pmatrix} \mathbf{I}_2 \\ \mathbf{0} \end{pmatrix} \big] = \begin{pmatrix} \boldsymbol{\mu_1} & \boldsymbol{\Sigma}_{11} \end{pmatrix}$$
+
+## Statistical independence
+
+Suppose $\mathbf{Y}$, $\boldsymbol{\mu}$, $\boldsymbol{\Sigma}$ are partitioned as in Theorem 2. We say $\boldsymbol{Q_1}$ and $\boldsymbol{Q_2}$ are statistically independent if and only if $\boldsymbol{\Sigma}_{12} = \mathbf{0}$. We can show this using the joint moment generating function of $\mathbf{Y}$. Recall that the exponent of the joint moment generating function of the multivariate normal distribution is $\mathbf{t}^T\boldsymbol{\mu} + \frac{1}{2}\mathbf{t}^T\boldsymbol{\Sigma}\mathbf{t}$ which after partitioning $\mathbf{t}$ conformably can be expressed as $\mathbf{t_1}^T\boldsymbol{\mu}_1 + \mathbf{t_2}^T\boldsymbol{\mu}_2 + \frac{1}{2}\mathbf{t_1}^T\boldsymbol{\Sigma}_{11}\mathbf{t_1} + \frac{1}{2}\mathbf{t_2}^T\boldsymbol{\Sigma}_{22}\mathbf{t_2} + \mathbf{t_1}^T\boldsymbol{\Sigma}_{12}\mathbf{t_2}$. When $\boldsymbol{\Sigma}_{12} = \mathbf{0}$, the joint moment generating function can be expressed as the product of the two marginal moment generating functions of $\mathbf{Q_1}$ and $\mathbf{Q_2}$, i.e. $M_\mathbf{Y}(\mathbf{t}) = M_\mathbf{Q_1}(\mathbf{t_1})M_\mathbf{Q_2}(\mathbf{t_2})$. Therefore, $\mathbf{Q_1}$ and $\mathbf{Q_2}$ are independent.
+
+### Theorem 3
+
+Suppose $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ and define the following two vectors: $\mathbf{W_1} = \mathbf{A}\mathbf{Y}$ and $\mathbf{W_2} = \mathbf{B}\mathbf{Y}$. Then, $\mathbf{W_1}$ and $\mathbf{W_2}$ are independent if $cov[\mathbf{W_1},\mathbf{W_2}] = \mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T = 0$.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+We stack the two vectors as follows: $\mathbf{W} = \begin{pmatrix} \mathbf{W_1} \\ \mathbf{W_2} \end{pmatrix} = \begin{pmatrix} \mathbf{A} \\ \mathbf{B} \end{pmatrix} \mathbf{Y} = \mathbf{L}\mathbf{Y}$. Therefore using Theorem 1, we find that $\mathbf{W} \sim N(\mathbf{L}\boldsymbol{\mu}, \mathbf{L}\boldsymbol{\Sigma}\mathbf{L}^T)$ or $\mathbf{W} \sim N\big[ \begin{pmatrix} \mathbf{A} \\ \mathbf{B} \end{pmatrix} \boldsymbol{\mu}, \begin{pmatrix} \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T & \mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T \\ \mathbf{B}\boldsymbol{\Sigma}\mathbf{A}^T & \mathbf{B}\boldsymbol{\Sigma}\mathbf{B}^T \end{pmatrix}\big]$, and we conclude that $\mathbf{W_1}$ and $\mathbf{W_2}$ are independent if and only if $\mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T = \mathbf{0}$
+
+</div>
+
+## Conditional probability density functions for multivariate normal distribution
+
+Consider the bivariate normal distribution. From Theorem 1, it follows that $Y_1 \sim N(\mu_1, \sigma_1)$. This is called the marginal probability distribution of $Y_1$. From the conditional probability law, $f_{Y_2 \mid Y_1}(y_2 \mid y_1) = \frac{f_{Y_1,Y_2}(y_1,y_2)}{f_{Y_1}(y_1)}$, and after substituting the bivariate density and the marginal density, it can be shown that the conditional probability density function of $Y_2$ given $Y_1$ is
+
+$$f_{Y_2 \mid Y_1}(y_2 \mid y_1) = \frac{1}{\sqrt{2\pi} \sqrt{\sigma_2^2(1-\rho^2)}} \exp\big[ -\frac{1}{2} \frac{\big( Y_2 - \mu_2 - \rho\frac{\sigma_2}{\sigma_1}(Y_1 - \mu_1) \big)^2}{\sigma_2^2(1-\rho^2)} \big]$$
+
+We can recognize that this is a normal probability density function with mean $\mu_{Y_2 \mid Y_1} = \mu_2 + \rho\frac{\sigma_2}{\sigma_1}(Y_1 - \mu_1)$ and variance $\sigma^2_{Y_2 \mid Y_1} = \sigma^2_2(1-\rho^2)$.
+
+### Theorem 4
+
+Suppose Suppose $\mathbf{Y}$, $\boldsymbol{\mu}$, and $\boldsymbol{\Sigma}$ are partitioned as $\mathbf{Y} = \begin{pmatrix} \mathbf{Q_1} \\ \mathbf{Q_2} \end{pmatrix}$, $\boldsymbol{\mu} = \begin{pmatrix} \boldsymbol{\mu}_1 \\ \boldsymbol{\mu}_2 \end{pmatrix}$, $\boldsymbol{\Sigma} = \begin{pmatrix} \boldsymbol{\Sigma}_{11} & \boldsymbol{\Sigma}_{12} \\ \boldsymbol{\Sigma}_{21} & \boldsymbol{\Sigma}_{22} \end{pmatrix}$, and $\mathbf{Y} \sim N(\boldsymbol{\mu}, \boldsymbol{\Sigma})$, then $\mathbf{Q_1} \mid \mathbf{Q_2} \sim N(\boldsymbol{\mu}_{1 \mid 2}, \boldsymbol{\Sigma}_{1 \mid 2})$, where $\boldsymbol{\mu}_{1 \mid 2} = \boldsymbol{\mu}_1 + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}(\mathbf{Q_2} - \boldsymbol{\mu}_2)$, and $\boldsymbol{\Sigma}_{1 \mid 2} = \boldsymbol{\Sigma}_{11} - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\Sigma}_{21}$.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Let $\mathbf{U} = \mathbf{Q_1} - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\mathbf{Q_2}$ and $\mathbf{V} = \mathbf{Q_2}$, then
+
+$$\begin{pmatrix} \mathbf{U} \\ \mathbf{V} \end{pmatrix} = \begin{pmatrix} \mathbf{I} & - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1} \\ \mathbf{0} & \mathbf{I} \end{pmatrix} \begin{pmatrix} \mathbf{Q_1} \\ \mathbf{Q_2} \end{pmatrix} = \mathbf{A}\mathbf{Y}$$
+
+$$E\begin{pmatrix} \mathbf{U} \\ \mathbf{V} \end{pmatrix} = \begin{pmatrix} \mathbf{I} & - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1} \\ \mathbf{0} & \mathbf{I} \end{pmatrix} \begin{pmatrix} \mathbf{\mu}_1 \\ \mathbf{\mu}_2 \end{pmatrix} = \begin{pmatrix} \mathbf{\mu}_1 - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\mathbf{\mu}_2 \\ \mathbf{\mu}_2 \end{pmatrix}$$
+
+$$
+\begin{aligned}
+var\begin{pmatrix} \mathbf{U} \\ \mathbf{V} \end{pmatrix} = \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^{-1} 
+&= \begin{pmatrix} \mathbf{I} & - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1} \\ \mathbf{0} & \mathbf{I} \end{pmatrix} \begin{pmatrix} \boldsymbol{\Sigma}_{11} & \boldsymbol{\Sigma}_{12} \\ \boldsymbol{\Sigma}_{21} & \boldsymbol{\Sigma}_{22} \end{pmatrix} \begin{pmatrix} \mathbf{I} & \mathbf{0} \\ - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1} & \mathbf{I} \end{pmatrix}
+\\
+&= \begin{pmatrix} \boldsymbol{\Sigma}_{11} - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\Sigma}_{21} & \mathbf{0} \\ \mathbf{0} & \boldsymbol{\Sigma}_{22} \end{pmatrix}
+\end{aligned}
+$$
+
+Thus $\mathbf{U}$ and $\mathbf{V}$ are independent since $cov[\mathbf{U}, \mathbf{V}] = 0$
+
+$$\mathbf{Q_1} \mid \mathbf{Q_2} = \mathbf{U} \mid \mathbf{Q_2} + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\mathbf{Q_2}$$
+
+$$
+\begin{aligned}
+E[\mathbf{Q_1} \mid \mathbf{Q_2}] 
+&= E[\mathbf{U} \mid \mathbf{Q_2} + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\mathbf{Q_2}] \\
+&= \boldsymbol{\mu}_1 - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\mu}_2 + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\mathbf{Q_2} \\
+&= \boldsymbol{\mu}_1 + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}(\mathbf{Q_2} - \boldsymbol{\mu}_2) \\
+\end{aligned}
+$$
+
+$$var[\mathbf{Q_1} \mid \mathbf{Q_2}] = var[\mathbf{U}] = \boldsymbol{\Sigma}_{11} - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\Sigma}_{21}$$
+
+</div>
+
+
+--- 
+
+
+# Lec 7: Distributions related to the normal distribution
+
+## Gamma distribution
+
+A random variable $X$ is said to have a gamma distribution with parameters $\alpha$, $\beta$ if its probability density function is given by
+
+$$f(x)=\frac{x^{\alpha-1}e^{-x/\beta}}{\beta^\alpha\Gamma(\alpha)}, \quad \alpha,\beta > 0, x \geq 0$$
+
+with $E[X] = \alpha\beta$, $var[X] = \alpha\beta^2$, and $\Gamma(\alpha) = \int_0^\infty x^{\alpha-1}e^{-x} dx$. If set $\alpha = 1$ and $\beta = \frac{1}{\lambda}$, we have $f(x) = \lambda e^{-\lambda x}$. We see that exponential distribution is a special case of gamma distribution.
+
+
+## Moment generating function - gamma distribution
+
+Let $X \sim \Gamma(\alpha, \beta)$, then $M_X(t) = (1-\beta t)^{-alpha}$
