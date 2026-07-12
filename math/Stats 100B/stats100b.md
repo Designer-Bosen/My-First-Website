@@ -28,7 +28,7 @@ $$\textbf{Continuous Distributions}$$
 
 ---
 
-# Lec 1: Random vectirs and properties
+# Lec 1: Random vectors and properties
 
 ## Mean and variance of a random vector
 
@@ -167,7 +167,7 @@ Let $X$, $Y$ be random variables with joint pdf $f(x,y)$. Then $X$, $Y$ are inde
 
 Note: To find the marginal pdf, use $f(x) = \int_y f(x,y)dy$ and $f(y) = \int_x f(x,y)dx$
 
-### Theorem: 
+### Theorem
 Let $X$, $Y$ be independent random variables. Then $E[XY]=E[X]E[Y]$
 
 <div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
@@ -191,7 +191,7 @@ and $cov[X,Y]=E[XY] - E[X]E[Y] = 0$
 ### Corollary: 
 Let $X$, $Y$ be independent random variables, and let $g(x)$ and $h(y)$ be functions of $x$ and $y$ alone respectively. Then $E[g(X)h(Y)] = E[g(X)]E[h(Y)]$
 
-### Theorem: 
+### Theorem
 Let $g(x)$ be a function of $X$ alone and $h(y)$ be a function of $Y$ alone. Then $X$, $Y$ are independent iff $f(x,y)=g(x)h(y)$.
 
 <div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
@@ -244,7 +244,7 @@ Therefore, this pmf is an exponential family with
 
 $h(x) = \binom{n}{x}, c(p) = (1-p)^n, t_1(x) = x, w_1(p) = \log{\big(\frac{p}{1-p}\big)}$
 
-### Theorem: 
+### Theorem
 Suppose a random variable $X$ has a pdf or pmf that can be expressed in the form of exponential family. Then, 
 - (a) $E\big[\sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\big] = -\frac{\partial}{\partial \theta_j}\log c(\boldsymbol{\theta})$
 - (b) $var\big[\sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\big] = -\frac{\partial^2}{\partial \theta_j^2}\log c(\boldsymbol{\theta}) - E\big[\sum_{i=1}^k \frac{\partial^2 w_i(\boldsymbol{\theta})}{\partial \theta_j^2}t_i(x)\big]$
@@ -297,7 +297,7 @@ To prove statement (b), differentiate a second time and rearrange
 </div>
 
 ### Example 
-Let $X \sim \text{Poission}(\lambda)$. Use the theorem above to show that $E[X] = \lambda$ and $var[X] = \lambda$ 
+Let $X \sim \text{Poisson}(\lambda)$. Use the theorem above to show that $E[X] = \lambda$ and $var[X] = \lambda$ 
 
 $$p(x)=\frac{\lambda^xe^{-\lambda}}{x!} = \frac{1}{x!}e^{-\lambda}e^{\log\lambda^x} = \frac{1}{x!}e^{-\lambda}e^{x\log\lambda}$$
 
@@ -388,7 +388,7 @@ M_X(t) &= E[e^{tX}] \\
 \end{aligned}
 $$
 
-### MGF of Poission random variable
+### MGF of Poisson random variable
 
 Let $X \sim Poisson(\lambda)$
 
@@ -434,8 +434,8 @@ M_Z(t) &= E[e^{tZ}] \\
 \end{aligned}
 $$
 
-## Theorem 
-Let $X$, $Y$ be independent random vairables with moment generating functions $M_X(t)$, $M_Y(t)$ respectively. Then, the moment generating function of the sum of these two random variables is equal to the product of the individual moment generating functions:
+### Theorem 
+Let $X$, $Y$ be independent random variables with moment generating functions $M_X(t)$, $M_Y(t)$ respectively. Then, the moment generating function of the sum of these two random variables is equal to the product of the individual moment generating functions:
 
 $$M_{X+Y}(t) = M_X(t)M_Y(t)$$
 
@@ -664,7 +664,7 @@ Therefore, $Y \sim \Gamma(\frac{1}{2}, 2) = \chi^2_1$
 
 ## Joint probability distribution of functions of random variables
 
-Let $X$, $Y$ be continuous random vairables with joint pdf $f_{X,Y}(x,y)$. Suppose $U=g_1(X,Y)$ and $V=g_2(X,Y)$. Assume that the transformation is one-to-one. To find the joint pdf of $U$, $V$, we follow this procedure:
+Let $X$, $Y$ be continuous random variables with joint pdf $f_{X,Y}(x,y)$. Suppose $U=g_1(X,Y)$ and $V=g_2(X,Y)$. Assume that the transformation is one-to-one. To find the joint pdf of $U$, $V$, we follow this procedure:
 - We need the joint pdf of $X$ and $Y$.
 - Solvle the equations $U=g_1(X,Y)$ and $V=g_2(X,Y)$ for $x$ and $y$ in terms of $u$ and $v$ to get $x=h_1(u,v)$ and $y=h_2(u,v)$.
 - Compute the Jacobian: 
@@ -681,7 +681,7 @@ OR \quad f_{U,V}(u,v)  &= f_{X,Y}(x=h_1,y=h_2)|\mathbf{J_2}| \quad &(\text{absol
 $$
 
 ### Example 
-Let $X_1$ and $X_2$ be independent exponential random vairables with parameters $\lambda_1$ and $\lambda_2$ respectively. Find the joint pdf of $U = X_1 + X_2$ and $V = X_1 - X_2$.
+Let $X_1$ and $X_2$ be independent exponential random variables with parameters $\lambda_1$ and $\lambda_2$ respectively. Find the joint pdf of $U = X_1 + X_2$ and $V = X_1 - X_2$.
 
 Since $X_1$ and $X_2$ are independent, the joint pdf of $X_1$ and $X_2$ is
 
@@ -938,7 +938,7 @@ Let $X$ and $Y$ be independent normal random variables, each with mean $\mu$ and
 
 # Lec 6: Multivariate normal distribution
 
-A random vector $\mathbf{Y} = (Y_1, Y_2, \dots, Y_n)^T$ with mean vector $\boldsymbol{\mu}$ and covairance matrix $\boldsymbol{\Sigma}$ follows multivariate normal distribution denoted $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ has pdf given by
+A random vector $\mathbf{Y} = (Y_1, Y_2, \dots, Y_n)^T$ with mean vector $\boldsymbol{\mu}$ and covariance matrix $\boldsymbol{\Sigma}$ follows multivariate normal distribution denoted $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ has pdf given by
 
 $$f(\mathbf{Y}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{2}}e^{-\frac{1}{2}(\mathbf{Y} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{Y} - \boldsymbol{\mu})}$$
 
@@ -950,7 +950,7 @@ $$f(y_1,y_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\big[ -\frac{1}
 
 where $\boldsymbol{\Sigma} = \begin{pmatrix} \sigma_1^2 & \sigma{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix}$, $\rho = cor[Y_1, Y_2] = \frac{cov[Y_1, Y_2]}{\sigma_1\sigma_2}$, and $\sigma_{12}=\sigma_{21}=\rho\sigma_1\sigma_2$.
 
-## Moment generating function - multivairate normal distribution
+## Moment generating function - multivariate normal distribution
 
 ### Result 1
 
@@ -1170,11 +1170,235 @@ $$var[\mathbf{Q_1} \mid \mathbf{Q_2}] = var[\mathbf{U}] = \boldsymbol{\Sigma}_{1
 
 A random variable $X$ is said to have a gamma distribution with parameters $\alpha$, $\beta$ if its probability density function is given by
 
-$$f(x)=\frac{x^{\alpha-1}e^{-x/\beta}}{\beta^\alpha\Gamma(\alpha)}, \quad \alpha,\beta > 0, x \geq 0$$
+$$f(x)=\frac{x^{\alpha-1}e^{-\frac{x}{\beta}}}{\beta^\alpha\Gamma(\alpha)}, \quad \alpha,\beta > 0, x \geq 0$$
 
 with $E[X] = \alpha\beta$, $var[X] = \alpha\beta^2$, and $\Gamma(\alpha) = \int_0^\infty x^{\alpha-1}e^{-x} dx$. If set $\alpha = 1$ and $\beta = \frac{1}{\lambda}$, we have $f(x) = \lambda e^{-\lambda x}$. We see that exponential distribution is a special case of gamma distribution.
 
 
-## Moment generating function - gamma distribution
+### Moment generating function - gamma distribution
 
-Let $X \sim \Gamma(\alpha, \beta)$, then $M_X(t) = (1-\beta t)^{-alpha}$
+Let $X \sim \Gamma(\alpha, \beta)$, then $M_X(t) = (1-\beta t)^{-\alpha}$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$
+\begin{aligned}
+M_{X}(t) 
+&= E[e^{tX}] \\
+&= \int_0^\infty e^{tx} \frac{x^{\alpha-1}e^{-\frac{x}{\beta}}}{\beta^\alpha\Gamma(\alpha)} dx \\
+&= \frac{1}{\beta^\alpha\Gamma(\alpha)} \int_0^\infty x^{\alpha-1}e^{-x(\frac{1-\beta t}{\beta})}dx \\
+&= \frac{1}{\beta^\alpha\Gamma(\alpha)} \int_0^\infty \big(\frac{\beta}{1-\beta t}\big)^{\alpha-1} y^{\alpha-1}e^{-y} \frac{\beta}{1-\beta t} dy \\
+\text{where } y &= x(\frac{1-\beta t}{\beta}) \Rightarrow x = (\frac{\beta}{1-\beta t})y, dx = (\frac{\beta}{1-\beta t}) dy \\
+M_{X}(t) &= \big(\frac{\beta}{1-\beta t}\big)^{\alpha} \int_0^\infty \frac{y^{\alpha-1}e^{-y}}{\beta^\alpha\Gamma(\alpha)} dy \\ 
+&= (1 - \beta t)^{-\alpha}
+\end{aligned}
+$$
+
+</div>
+
+## $\chi^2$ distribution
+
+### Definition
+
+Let $Z \sim N(0,1)$, then $X = Z^2$ where $f(z) = \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}}$. We say that $X$ follows the Chi-square distribution with 1 degree of freedom denoted $X \sim \chi^2_1$. Find the pdf of $X$ beginning with the cdf of $X$:
+
+$$
+\begin{aligned}
+F_X(x) &= P(X \leq x) = P(Z^2 \leq x) = P(-\sqrt{x} \leq Z \leq \sqrt{x}) = F_Z(\sqrt{x}) - F_Z(-\sqrt{x}) \\
+f_X(x) &= 
+\frac{1}{2}x^{-\frac{1}{2}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x}{2}} + 
+\frac{1}{2}x^{-\frac{1}{2}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x}{2}} = 
+\frac{x^{-\frac{1}{2}}e^{-\frac{x}{2}}}{2^{\frac{1}{2}}\sqrt{\pi}} =
+\frac{x^{-\frac{1}{2}}e^{-\frac{x}{2}}}{2^{\frac{1}{2}}\Gamma(\frac{1}{2})}
+\end{aligned}
+$$
+
+This is the pdf of $\Gamma(\frac{1}{2}, 2)$ or $\chi^2_1$, and the moment generating function is $M_X(t) = (1 - 2t)^{-\frac{1}{2}}$. Since the mean of $\Gamma(\alpha, \beta)$ is $E[X] = \alpha\beta$ and its variance $var[X] = \alpha\beta^2$. Therefore, if $Y \sim \chi^2_n$, it follows that:
+
+$$E[Y] = n \qquad var[Y] = 2n$$
+
+In general, the shape of distribution is skewed to the right, but as the degree of freedom increase, it becomes close to $N(n, 2n)$ (central limit theorem).
+
+### Theorem 
+
+Let $Z_1, Z_2, \dots, Z_n$ be independent random variables with $Z_i \sim N(0,1)$, then $Z_1^2 + Z_2^2 + \dots + Z_n^2 \sim \chi^2_n$ (Chi-square distribution with $n$ degrees of freedom).
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Since $Z_1, Z_2, \dots, Z_n$ are independent, therefore:
+
+$$M_{\sum_{i=1}^nZ_i^2}(t) = \prod_{i=1}^n M_{Z_i^2}(t) = \prod_{i=1}^n (1 - 2t)^{-\frac{1}{2}} = (1 - 2t)^{-\frac{n}{2}}$$
+
+This is the mgf of $\Gamma(\frac{n}{2}, 2)$ and is called the Chi-square distribution with $n$ degrees of freedom.
+
+</div>
+
+### Theorem
+
+Let $X_1, X_2, \dots, X_n$ be independent random variables with $X_i \sim N(\mu,\sigma)$. It follows from the previous theorem that 
+
+$$\sum_{i=1}^n \big( \frac{X_i - \mu}{\sigma} \big)^2 \sim \chi^2_n$$
+
+### Theorem 
+
+Let $X \sim \chi^2_n$ and $Y \sim \chi^2_m$, $X \perp\!\!\!\perp Y$, then it can be shown using moment generating function that
+
+$$X + Y \sim \chi^2_{n+m}$$
+
+### Theorem
+
+Let $X_1, X_2, \dots, X_n$ be independent random variables with $X_i \sim N(\mu, \sigma^2)$, so $\mathbf{X} = \sum_{i=1}^n X_i \sim N_n(\mu\mathbf{1}, \sigma^2\mathbf{I})$. Define the sample variance as 
+
+$$s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2 \qquad \text{Then } \frac{(n-1)s^2}{\sigma^2} \sim \chi^2_{n-1}$$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Begin with $\sum_{i=1}^n (\frac{X_i - \mu}{\sigma})^2 \sim \chi^2_n$.
+
+$$
+\begin{aligned}
+\frac{\sum_{i=1}^n (X_i - \mu)^2}{\sigma^2} 
+&= \frac{\sum_{i=1}^n (X_i - \bar{X} + \bar{X} - \mu)^2}{\sigma^2} \\
+&= \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{\sigma^2} + \frac{n(\bar{X} - \mu)^2}{\sigma^2} + \frac{2(\bar{X} - \mu) \overbrace{\sum_{i=1}^n (X_i - \bar{X})}^{\text{equal to } 0} }{\sigma^2} \\
+&= \frac{(n-1)s^2}{\sigma^2} + \big( \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \big)^2 \\
+&= \mathbf{Q_1} + \mathbf{Q_2}
+\end{aligned}
+$$
+
+Note: $(\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T)\mathbf{X} = \begin{pmatrix} (X_1 - \bar{X}) \\ \vdots \\ (X_n - \bar{X}) \end{pmatrix}$ is the mean-centered version of $\mathbf{X}$.
+
+$$
+\begin{aligned}
+cov[\bar{X}, (\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T)\mathbf{X}]
+&= cov[\frac{1}{n}\mathbf{1}^T\mathbf{X}, (\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T)\mathbf{X}] \qquad &\text{Note: } cov[\mathbf{A}\mathbf{X}, \mathbf{B}\mathbf{X}] = \mathbf{A}\boldsymbol{\Sigma}\mathbf{B} \\
+&= \frac{1}{n}\mathbf{1}^T \sigma^2\mathbf{I} (\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T)^T \qquad &\text{Note: } (\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T) \text{ is symmetric} \\ 
+&= \frac{\sigma^2}{n} \mathbf{1}^T (\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T) \\
+&= \frac{\sigma^2}{n} (\mathbf{1}^T - \frac{1}{n}\mathbf{1}^T\mathbf{1}\mathbf{1}^T) \\
+&= \frac{\sigma^2}{n} (\mathbf{1}^T - \mathbf{1}^T) \\
+&= \mathbf{0}
+\end{aligned}
+$$
+
+By normality, $\bar{X} \perp\!\!\!\perp (\mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T)\mathbf{X} = \mathbf{A}\mathbf{X}$. Since $s^2 = g(\mathbf{A}\mathbf{X}) = \frac{1}{n-1}(\mathbf{A}\mathbf{X})^T(\mathbf{A}\mathbf{X})$, so $s^2$ is a deterministic function of $\mathbf{A}\mathbf{X}$ and therefore $\bar{X}$ and $s^2$ are independent.
+
+$$
+M_\mathbf{Q}(t) = M_\mathbf{Q_1}(t) M_\mathbf{Q_2}(t) \quad \Rightarrow \quad 
+M_\mathbf{Q_1}(t) = \frac{M_\mathbf{Q}(t)}{M_\mathbf{Q_2}(t)}
+$$
+
+$$
+\text{Note: } \bar{X} \sim N(\mu, \frac{\sigma^2}{n}) \qquad
+\text{so } (\frac{\bar{X} - \mu}{\sigma/\sqrt{n}})^2 \sim \chi^2_1
+$$
+
+$$
+\text{Thus } M_\mathbf{Q_1}(t) = \frac{(1 - 2t)^{-\frac{n}{2}}}{(1 - 2t)^{-\frac{1}{2}}} = (1 - 2t)^{-\frac{n-1}{2}} \qquad \mathbf{Q_1} = \frac{(n-1)s^2}{\sigma^2} \sim \chi^2_{n-1}
+$$
+
+</div>
+
+## $t$ distribution
+
+### Definition
+
+Let $Z \sim N(0,1)$ and $U \sim \chi^2_{df}$. If $Z$ and $U$ are independent, then the ratio $X = \frac{Z}{\sqrt{\frac{U}{df}}}$ follows the $t$ (or Student's $t$) distribution with degrees of freedom equal to $df$. We write $X \sim t_{df}$. The pdf of the $t$ distribution with $df = n$ degrees of freedom is 
+
+$$f(x) = \frac{\Gamma(\frac{n+1}{2})}{\sqrt{\pi n}\Gamma(\frac{n}{2})} \big( 1 + \frac{x^2}{n} \big)^{-\frac{n+1}{2}}, \qquad -\infty < x < \infty$$
+
+Let $X \sim t_n$. Then, $E[X] = 0$ and $var[X] = \frac{n}{n-2}$. The $t$ distribution is similar to the standard normal distribution $N(0,1)$, but it has heavier tails. However as $n \rightarrow \infty$ the $t$ distribution coverges to $N(0,1)$.
+
+### Application
+
+Let $X_1, X_2, \dots, X_n$ be independent and indentically distributed random variables each one having $N(\mu, \sigma)$. Construct a $t$ distribution using the definition of the $t$ distribution.
+
+$$\frac{\bar{X}-\mu}{s/\sqrt{n}} = \frac{(\bar{X}-\mu) / (\sigma/\sqrt{n})}{\sqrt{\frac{(n-1)s^2}{\sigma^2} / (n-1)}} \sim t_{n-1}$$
+
+### Example 
+
+Let $\bar{X}$ and $s_X^2$ denote the sample mean and sample variance of an independent random sample of size 10 from a normal distribution with mean $\mu=0$ and variance $\sigma^2$. Find $c$ so that 
+
+$$P\big( \frac{\bar{X}}{\sqrt{9s_X^2}} < c \big) = 0.95$$
+
+Solution: 
+
+$$
+\begin{aligned}
+&P\big( \frac{\bar{X}}{\sqrt{9s_X^2}} < c \big) = 0.95 \\
+\quad \Rightarrow \quad &P\big( \frac{(\bar{X}-0) / (\sigma/\sqrt{10})}{\sqrt{\frac{(10-1)s_X^2}{\sigma^2} / (10-1)}} < \sqrt{90} c \big) = 0.95 \\
+\quad \Rightarrow \quad &P\big( t_{9} < \sqrt{90} c \big) = 0.95 \\
+\quad \Rightarrow \quad &\sqrt{90} c = t_{0.95,9} = 1.833 \\
+\quad \Rightarrow \quad &c = 0.193
+\end{aligned}
+$$
+
+## $F$ distribution
+
+### Definition
+
+Let $U \sim \chi^2_{n_1}$ and $V \sim \chi^2_{n_2}$. If $U$ and $V$ are independent, the ratio $X = \frac{U/n_1}{V/n_2}$ follows the $F$ distribution with numerator $df = n_1$ and denominator $df = n_2$. We write $X \sim F_{n_1,n_2}$. The pdf of $X$ is
+
+$$f(x) = \frac{\Gamma(\frac{n_1+n_2}{2})}{\Gamma(\frac{n_1}{2})\Gamma(\frac{n_2}{2})} \big( \frac{n_1}{n_2} \big)^{\frac{n_1}{2}} x^{\frac{n_1}{2}-1} \big( 1+\frac{n_1}{n_2}x \big)^{-\frac{1}{2}(n_1+n_2)}, \quad 0 < x < \infty$$
+
+Let $X \sim F_{n_1,n_2}$. Then $E[X] = \frac{n_2}{n_2-2}$ and $var[X] = \frac{2n_2^2(n_1+n_2-2)}{n_1(n_2-2)^2(n_2-4)}$. In general, the $F$ distribution is skewed to the right.
+
+**Properties**:
+- If $X \sim F_{n,m}$, then $\frac{1}{X} \sim F_{m,n}$
+- $F_{\alpha; m,n} = \frac{1}{1-\alpha; n,m}$
+- $F_{1,n} = t_n^2$
+
+### Application
+
+Let $X_1, X_2, \dots, X_n \sim \overset{\text{i.i.d.}}{~} N(\mu_X, \sigma_X^2)$.
+
+Let $Y_1, Y_2, \dots, Y_m \sim \overset{\text{i.i.d.}}{~} N(\mu_Y, \sigma_Y^2)$.
+
+The two samples are independent. Use $s_X^2$, $s_Y^2$ and $\sigma_X^2$, $\sigma_Y^2$ to form a ratio that follows $F_{n-1,m-1}$
+
+$$
+\frac{(n-1)s_X^2}{\sigma_X^2} \sim \chi^2_{n-1} \qquad
+\frac{(m-1)s_Y^2}{\sigma_Y^2} \sim \chi^2_{m-1}
+$$
+
+$$\frac{\frac{(n-1)s_X^2}{\sigma_X^2} / (n-1)}{\frac{(m-1)s_Y^2}{\sigma_Y^2} / (m-1)} = \frac{s_X^2 / \sigma_X^2}{s_Y^2 / \sigma_Y^2} \sim F_{n-1,m-1}$$
+
+### Example 
+
+Two independent samples of size $n_1 = 6$, $n_2 = 10$ are taken from two normal populations with equal variances. Find $b$ such that $P(\frac{s_1^2}{s_2^2} < b) = 0.95$
+
+$$
+\frac{(6-1)s_1^2}{\sigma^2} \sim \chi^2_{6-1} \qquad
+\frac{(10-1)s_2^2}{\sigma^2} \sim \chi^2_{10-1}
+$$
+
+$$\frac{\frac{(6-1)s_1^2}{\sigma^2} / (6-1)}{\frac{(10-1)s_2^2}{\sigma^2} / (10-1)} = \frac{s_1^2}{s_2^2} \sim F_{5,9}$$
+
+$$P\big( \frac{s_1^2}{s_2^2} < b \big) = 0.95 \quad \Rightarrow \quad b = F_{0.95;5,9} = 3.482$$
+
+## Non-central distribution
+
+### Non-central $\chi^2$ distribution
+
+Let $Y \sim N(\mu, 1)$, then $Y^2 \sim \chi^2_1(ncp=\mu^2)$ (ncp: non-centrality parameter). If $Y \sim N(\mu, \sigma^2)$, then $(\frac{Y}{\sigma})^2 \sim \chi^2_1(ncp=\frac{\mu^2}{\sigma^2})$.
+
+**Moment generating function**: Let $Y \sim \chi^2_1(ncp=\theta)$, then $M_Y(t) = (1 - 2t)^{-\frac{1}{2}} e^{\theta \frac{t}{1-2t}}$
+
+**Example**: Let $Y_1,\dots,Y_n \overset{\text{i.i.d.}}{~} N(\mu, \sigma^2)$, find the distribution of $\sum_{i=1}^n \frac{Y_i^2}{\sigma^2}$ using MGF: 
+
+$$M_{\sum_{i=1}^n \frac{Y_i^2}{\sigma^2}}(t) = \prod_{i=1}^n M_{\frac{Y_i^2}{\sigma^2}}(t) = \prod_{i=1}^n (1 - 2t)^{-\frac{1}{2}} e^{\frac{\mu^2}{\sigma^2} \frac{t}{1-2t}} = (1 - 2t)^{-\frac{n}{2}} e^{\frac{n \mu^2}{\sigma^2} \frac{t}{1-2t}}$$
+
+Therefore, $\sum_{i=1}^n \frac{Y_i^2}{\sigma^2} \sim \chi^2_n(ncp = \frac{n \mu^2}{\sigma^2})$
+
+### Non-central $t$ distribution
+
+Let $Z \sim N(\delta, 1)$, $U \sim \chi^2_{df}$, and $Z \perp\!\!\!\perp U$, then $\frac{Z}{\sqrt{U/df}} \sim t_{df}(ncp=\delta)$
+
+### Non-central $F$ distribution
+
+Let $U \sim \chi^2_{n_1}(ncp=\theta)$, $V \sim \chi^2_{n_2}(ncp=\theta)$, and $U \perp\!\!\!\perp V$, then $\frac{U/n_1}{V/n_2} \sim F_{n_1,n_2}(ncp=\theta)$
+
