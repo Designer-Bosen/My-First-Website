@@ -223,7 +223,7 @@ $$f(x,y) = c \cdot d \cdot g(x)h(y) = f(x)f(y) \Rightarrow \text{X and Y are ind
 
 A probability density function or probability mass function is called an exponential family if it can be expressed as 
 
-$$f(x \mid \boldsymbol{\theta}) = h(x)c(\boldsymbol{\theta}) \exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big)$$
+$$f(x \mid \boldsymbol{\theta}) = h(x)c(\boldsymbol{\theta}) \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big)$$
 
 Note: let $d$ be $dim(\boldsymbol{\theta})$. If $d=k$, we have full exponential family; 
 if $d < k$, we have curved exponential family.
@@ -234,20 +234,20 @@ Let $X \sim bin(n,p)$ with $n$ fixed.
 $$
 \begin{aligned}
 p(x) &= \binom{n}{x} p^x(1-p)^{n-x} \\
-&= \binom{n}{x} \big(\frac{p}{1-p}\big)^x(1-p)^n \\
-&= \binom{n}{x} (1-p)^n \exp{\big(\log{\big(\frac{p}{1-p}\big)^x}\big)} \\
-&= \binom{n}{x} (1-p)^n \exp{\big(x\log{\big(\frac{p}{1-p}\big)}\big)} 
+&= \binom{n}{x} \Big(\frac{p}{1-p}\Big)^x(1-p)^n \\
+&= \binom{n}{x} (1-p)^n \exp{\Big(\log{\Big(\frac{p}{1-p}\Big)^x}\Big)} \\
+&= \binom{n}{x} (1-p)^n \exp{\Big(x\log{\Big(\frac{p}{1-p}\Big)}\Big)} 
 \end{aligned}
 $$
 
 Therefore, this pmf is an exponential family with
 
-$h(x) = \binom{n}{x}, c(p) = (1-p)^n, t_1(x) = x, w_1(p) = \log{\big(\frac{p}{1-p}\big)}$
+$h(x) = \binom{n}{x}, c(p) = (1-p)^n, t_1(x) = x, w_1(p) = \log{\Big(\frac{p}{1-p}\Big)}$
 
 ### Theorem
 Suppose a random variable $X$ has a pdf or pmf that can be expressed in the form of exponential family. Then, 
-- (a) $E\big[\sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\big] = -\frac{\partial}{\partial \theta_j}\log c(\boldsymbol{\theta})$
-- (b) $var\big[\sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\big] = -\frac{\partial^2}{\partial \theta_j^2}\log c(\boldsymbol{\theta}) - E\big[\sum_{i=1}^k \frac{\partial^2 w_i(\boldsymbol{\theta})}{\partial \theta_j^2}t_i(x)\big]$
+- (a) $E\Big[\sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\Big] = -\frac{\partial}{\partial \theta_j}\log c(\boldsymbol{\theta})$
+- (b) $var\Big[\sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\Big] = -\frac{\partial^2}{\partial \theta_j^2}\log c(\boldsymbol{\theta}) - E\Big[\sum_{i=1}^k \frac{\partial^2 w_i(\boldsymbol{\theta})}{\partial \theta_j^2}t_i(x)\Big]$
 
 
 <div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
@@ -257,7 +257,7 @@ Suppose a random variable $X$ has a pdf or pmf that can be expressed in the form
 $$
 \begin{aligned}
 \int_x f(x \mid \boldsymbol{\theta})dx &= 1 \\
-\int_x h(x)c(\boldsymbol{\theta}) \exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) dx &= 1
+\int_x h(x)c(\boldsymbol{\theta}) \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) dx &= 1
 \end{aligned}
 $$
 
@@ -265,8 +265,8 @@ Differentiate both sides w.r.t. $\theta_j$:
 
 $$
 \begin{aligned}
-&\int_x h(x) \frac{\partial c(\boldsymbol{\theta})}{\partial \theta_j} \exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) dx \\
-+ &\int_x h(x)c(\boldsymbol{\theta}) \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) dx = 0
+&\int_x h(x) \frac{\partial c(\boldsymbol{\theta})}{\partial \theta_j} \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) dx \\
++ &\int_x h(x)c(\boldsymbol{\theta}) \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) dx = 0
 \end{aligned}
 $$
 
@@ -274,8 +274,8 @@ Multiply the first integral by $\frac{c(\boldsymbol{\theta})}{c(\boldsymbol{\the
 
 $$
 \begin{aligned}
-&\int_x h(x) \frac{\partial c(\boldsymbol{\theta})}{\partial \theta_j} \exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) \frac{c(\boldsymbol{\theta})}{c(\boldsymbol{\theta})} dx \\
-+ &\int_x h(x)c(\boldsymbol{\theta}) \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) dx = 0
+&\int_x h(x) \frac{\partial c(\boldsymbol{\theta})}{\partial \theta_j} \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) \frac{c(\boldsymbol{\theta})}{c(\boldsymbol{\theta})} dx \\
++ &\int_x h(x)c(\boldsymbol{\theta}) \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j}t_i(x)\exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) dx = 0
 \end{aligned}
 $$
 
@@ -283,14 +283,14 @@ After rearranging we get
 
 $$
 \begin{aligned}
-\int_x \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j} t_i(x) h(x)c(\boldsymbol{\theta}) \exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) &dx = \\
-- \frac{\partial \log c(\boldsymbol{\theta})}{\partial \theta_j} \int_x h(x)c(\boldsymbol{\theta}) \exp\big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\big) &dx
+\int_x \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j} t_i(x) h(x)c(\boldsymbol{\theta}) \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) &dx = \\
+- \frac{\partial \log c(\boldsymbol{\theta})}{\partial \theta_j} \int_x h(x)c(\boldsymbol{\theta}) \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big) &dx
 \end{aligned}
 $$
 
 Or
 
-$$E\big[ \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j} t_i(x) \big] = - \frac{\partial}{\partial \theta_j} \log c(\boldsymbol{\theta})$$
+$$E\Big[ \sum_{i=1}^k \frac{\partial w_i(\boldsymbol{\theta})}{\partial \theta_j} t_i(x) \Big] = - \frac{\partial}{\partial \theta_j} \log c(\boldsymbol{\theta})$$
 
 To prove statement (b), differentiate a second time and rearrange
 
@@ -339,7 +339,7 @@ Let $X$ be a discrete random variable.
 
 $$
 \begin{aligned}
-M_t = \sum_x e^{tX}p(x) &= \sum_x \big[ 1 + \frac{tx}{1!} + \frac{(tx)^2}{2!} + \frac{(tx)^3}{3!} + \dots \big] p(x) \\
+M_t = \sum_x e^{tX}p(x) &= \sum_x \Big[ 1 + \frac{tx}{1!} + \frac{(tx)^2}{2!} + \frac{(tx)^3}{3!} + \dots \Big] p(x) \\
 &= \sum_x p(x) + \sum_x \frac{tx}{1!} p(x) + \sum_x \frac{(tx)^2}{2!} p(x) + \sum_x \frac{(tx)^3}{3!} p(x) + \dots
 \end{aligned}
 $$
@@ -390,7 +390,7 @@ $$
 
 ### MGF of Poisson random variable
 
-Let $X \sim Poisson(\lambda)$
+Let $X \sim \text{Poisson}(\lambda)$
 
 $$
 \begin{aligned}
@@ -451,11 +451,11 @@ $$X + Y \sim bin(n_1 + n_2, p)$$
 
 ### Example 
 
-$$X \sim \text{Poission}(\lambda_1), Y \sim \text{Poission}(\lambda_2), X \perp\!\!\!\perp Y$$
+$$X \sim \text{Poisson}(\lambda_1), Y \sim \text{Poisson}(\lambda_2), X \perp\!\!\!\perp Y$$
 
 $$M_{X+Y}(t) = M_X(t)M_Y(t) = e^{(\lambda_1 + \lambda_2)(e^t - 1)}$$
 
-$$X + Y \sim \text{Poission}(\lambda_1 + \lambda_2)$$
+$$X + Y \sim \text{Poisson}(\lambda_1 + \lambda_2)$$
 
 ## Properties of moment generating functions
 Let $X$ be a random variable with moment genearting function $M_X(t) = E[e^{tX}]$, and $a$, $b$ are constants
@@ -489,7 +489,7 @@ $$E[X+Y] = \mu_1 + \mu_2 \qquad var[X+Y] = \sigma_1^2 + \sigma_2^2$$
 $$X+Y \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$$
 
 ### Example
-Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{~} N(\mu, \sigma)$. Use moment generating functions to find the distribution.
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma)$. Use moment generating functions to find the distribution.
 
 #### (a). $T = X_1 + X_2 + \dots + X_n$
 
@@ -497,8 +497,8 @@ $$
 \begin{aligned}
 M_T(t) = M_{X_1 + X_2 + \dots + X_n}(t) 
 &= M_{X_1}(t)M_{X_2}(t) \dots M_{X_n}(t) \\
-&= \big( M_{X_i}(t) \big)^n \\
-&= \big( e^{t\mu + \frac{1}{2}t^2\sigma^2} \big)^n \\
+&= \Big( M_{X_i}(t) \Big)^n \\
+&= \Big( e^{t\mu + \frac{1}{2}t^2\sigma^2} \Big)^n \\
 &= e^{tn\mu + \frac{1}{2}t^2n\sigma^2} \\
 \end{aligned}
 $$
@@ -560,7 +560,7 @@ Therefore, $Z^2 \sim \Gamma(\frac{1}{2}, 2) = \chi^2_1$
 
 Let $X$ be a continuous random variable with pdf $f(x)$. Let $Y=g(X)$ be a monotone function (either increasing or decreasing), then there is an one-to-one transformation. The pdf of Y(X) is given by 
 
-$$f_Y(y) = f_X[g^{-1}(y)]\big| \frac{d}{dy}g^{-1}(y) \big|$$
+$$f_Y(y) = f_X[g^{-1}(y)]\Big| \frac{d}{dy}g^{-1}(y) \Big|$$
 
 <div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
 
@@ -594,7 +594,7 @@ f_Y(y) &= \frac{\partial}{\partial y}F_Y(y) \\
 \end{aligned}
 $$
 
-Therefore $f_Y(y) = f_X[g^{-1}(y)]\big| \frac{d}{dy}g^{-1}(y) \big|$
+Therefore $f_Y(y) = f_X[g^{-1}(y)]\Big| \frac{d}{dy}g^{-1}(y) \Big|$
 
 **Results**
 
@@ -610,7 +610,7 @@ Let $X \sim \Gamma(\alpha, \beta)$. Find the distribution of $Y = cX, c > 0$, wi
 $$
 \begin{aligned}
 g(x) &= cX \quad \Rightarrow \quad g^{-1}(y)=\frac{y}{c} \\
-f_Y(y) &= f_X[g^{-1}(y)]\big| \frac{d}{dy}g^{-1}(y) \big| \\
+f_Y(y) &= f_X[g^{-1}(y)]\Big| \frac{d}{dy}g^{-1}(y) \Big| \\
 &= f_x(\frac{y}{c})\cdot \frac{1}{c} \\
 &= \frac{y^{\alpha-1} e^{-\frac{y}{c\beta}}}{\Gamma(\alpha)(c\beta)^\alpha}
 \end{aligned}
@@ -621,7 +621,7 @@ Let $X \sim unif(0,1)$, $Y = ln(X)$
 
 $$f(x)=1, \quad F(x)=x$$
 $$y = g(x) = \log(y) \quad \Rightarrow \quad g^{-1}(y)=e^{-y}$$
-$$f_Y(y) = f_X(e^{-y}) \big| \frac{d}{dy}e^{-y}\big| = |-e^{-y}| = e^{-y}$$
+$$f_Y(y) = f_X(e^{-y}) \Big| \frac{d}{dy}e^{-y}\Big| = |-e^{-y}| = e^{-y}$$
 
 Therefore, $Y \sim exp(1)$
 
@@ -629,7 +629,7 @@ Therefore, $Y \sim exp(1)$
 Let $X \sim exp(\lambda)$, $Y = 1 - e^{-\lambda X}$
 
 $$x = g^{-1}(y) = \frac{\log(1-y)}{-\lambda}$$
-$$f_Y(y) = f_X(g^{-1}(y)) \big| \frac{d}{dy} g^{-1}(y) \big| = \lambda e^{-\lambda \frac{\log(1-y)}{-\lambda}} \big| \frac{1}{(1-y)\lambda} \big| = 1$$
+$$f_Y(y) = f_X(g^{-1}(y)) \Big| \frac{d}{dy} g^{-1}(y) \Big| = \lambda e^{-\lambda \frac{\log(1-y)}{-\lambda}} \Big| \frac{1}{(1-y)\lambda} \Big| = 1$$
 
 Therefore, $Y \sim unif(0,1)$
 
@@ -637,12 +637,12 @@ Therefore, $Y \sim unif(0,1)$
 Let $X \sim \Gamma(n, \beta)$ (n is an integer). Find the pdf of $Y = \frac{1}{X}$ (inverted gamma distribution)
 
 $$x = g^{-1}(y) = \frac{1}{y}$$
-$$f_Y(y) = f_X(g^{-1}(y)) \big| \frac{d}{dy} g^{-1}(y) \big| = \frac{(\frac{1}{y})^{n-1}e^{-\frac{1}{y\beta}}}{(n-1)!\beta^n} \cdot \big| -\frac{1}{y^2} \big| = \frac{(y)^{-(n+1)}e^{-\frac{1}{y\beta}}}{(n-1)!\beta^n}$$
+$$f_Y(y) = f_X(g^{-1}(y)) \Big| \frac{d}{dy} g^{-1}(y) \Big| = \frac{(\frac{1}{y})^{n-1}e^{-\frac{1}{y\beta}}}{(n-1)!\beta^n} \cdot \Big| -\frac{1}{y^2} \Big| = \frac{(y)^{-(n+1)}e^{-\frac{1}{y\beta}}}{(n-1)!\beta^n}$$
 
 ### Theorem 
 Let $X$ be a continuous random variable with pdf $f(x)$ and suppose $Y = g(X)$ is monotone in the intervals $A_1, A_2, \dots, A_k$. Then 
 
-$$f_Y(y) = \sum_{i=1}^k f_X[g_i^{-1}(y)] \big| \frac{d}{dy} g_i^{-1}(y)\big|$$
+$$f_Y(y) = \sum_{i=1}^k f_X[g_i^{-1}(y)] \Big| \frac{d}{dy} g_i^{-1}(y)\Big|$$
 
 ### Example
 Let $X \sim N(0,1)$, $Y = X^2$. Find the pdf of $Y$.
@@ -652,7 +652,7 @@ $$A_2 = (0, \infty), g_2^{-1}(y)=\sqrt{y}$$
 
 $$
 \begin{aligned}
-f_Y(y) &= f_X[g_1^{-1}(y)]\big| \frac{d}{dy}g_1^{-1}(y) \big| + f_Y(y) = f_X[g_2^{-1}(y)]\big| \frac{d}{dy}g_2^{-1}(y) \big| \\
+f_Y(y) &= f_X[g_1^{-1}(y)]\Big| \frac{d}{dy}g_1^{-1}(y) \Big| + f_Y(y) = f_X[g_2^{-1}(y)]\Big| \frac{d}{dy}g_2^{-1}(y) \Big| \\
 &= \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}} |-\frac{1}{2}y^{-\frac{1}{2}}| + \frac{1}{\sqrt{2\pi}}e^{-\frac{y}{2}} |\frac{1}{2}y^{-\frac{1}{2}}| \\
 &= \frac{y^{-\frac{1}{2}}e^{-\frac{y}{2}}}{\sqrt{2\pi}} \\
 &= \frac{y^{\frac{1}{2} - 1}e^{-\frac{y}{2}}}{\Gamma(\frac{1}{2})2^\frac{1}{2}}
@@ -944,9 +944,9 @@ $$f(\mathbf{Y}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{
 
 If $\mathbf{Y} = (Y_1, Y_2)$ follows a bivariate normal distribution, then its pdf can be expressed as
 
-$$f(y_1,y_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\big[ -\frac{1}{2(1-\rho^2)} \big[ 
-\big(\frac{y_1-\mu_1}{\sigma_1}\big)^2 + \big(\frac{y_2-\mu_2}{\sigma_2}\big)^2 
-- 2\rho\big(\frac{y_1-\mu_1}{\sigma_1}\big) \big(\frac{y_2-\mu_2}{\sigma_2}\big) \big] \big]$$
+$$f(y_1,y_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\Big[ -\frac{1}{2(1-\rho^2)} \Big[ 
+\Big(\frac{y_1-\mu_1}{\sigma_1}\Big)^2 + \Big(\frac{y_2-\mu_2}{\sigma_2}\Big)^2 
+- 2\rho\Big(\frac{y_1-\mu_1}{\sigma_1}\Big) \Big(\frac{y_2-\mu_2}{\sigma_2}\Big) \Big] \Big]$$
 
 where $\boldsymbol{\Sigma} = \begin{pmatrix} \sigma_1^2 & \sigma{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix}$, $\rho = cor[Y_1, Y_2] = \frac{cov[Y_1, Y_2]}{\sigma_1\sigma_2}$, and $\sigma_{12}=\sigma_{21}=\rho\sigma_1\sigma_2$.
 
@@ -1002,7 +1002,7 @@ $$f(\mathbf{Y}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{
 
 $$\mathbf{Z} = \boldsymbol{\Sigma}^{-\frac{1}{2}} (\mathbf{Y} - \boldsymbol{\mu}) \quad \Rightarrow \quad \mathbf{Y} = \boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}  \qquad \text{Jacobian}: \mathbf{J_2} = |\boldsymbol{\Sigma}^{-\frac{1}{2}}|^{-1} = |\boldsymbol{\Sigma}|^\frac{1}{2}$$
 
-$$f(\mathbf{Z}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{2}} \exp\big(-\frac{1}{2}[(\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) - \boldsymbol{\mu}]^T \boldsymbol{\Sigma}^{-1} [(\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) - \boldsymbol{\mu}]\big) \cdot |\boldsymbol{\Sigma}|^{\frac{1}{2}} = \frac{1}{(2\pi)^\frac{n}{2}} e^{-\frac{1}{2}\mathbf{Z}^T\mathbf{Z}}$$
+$$f(\mathbf{Z}) = \frac{1}{(2\pi)^\frac{n}{2}} |\boldsymbol{\Sigma}|^{-\frac{1}{2}} \exp\Big(-\frac{1}{2}[(\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) - \boldsymbol{\mu}]^T \boldsymbol{\Sigma}^{-1} [(\boldsymbol{\Sigma}^\frac{1}{2}\mathbf{Z} + \boldsymbol{\mu}) - \boldsymbol{\mu}]\Big) \cdot |\boldsymbol{\Sigma}|^{\frac{1}{2}} = \frac{1}{(2\pi)^\frac{n}{2}} e^{-\frac{1}{2}\mathbf{Z}^T\mathbf{Z}}$$
 
 Therefore, $\mathbf{Z} \sim N_n(\mathbf{0}, \mathbf{I})$.
 
@@ -1090,11 +1090,11 @@ Let $$
 \right)
 $$
 
-then if $\mathbf{Q_1} = \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix}$, it follows that $\mathbf{Q_1} \sim N\big[ \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}, \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix}\big]$
+then if $\mathbf{Q_1} = \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix}$, it follows that $\mathbf{Q_1} \sim N\Big[ \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}, \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix}\Big]$
 
 Alternatively, let $\mathbf{A} = \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix}$ then 
 
-$$\mathbf{A}\mathbf{Y} = \mathbf{Q_1} \sim N_p(\mathbf{A}\boldsymbol{\mu}, \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T) = N_p\big[ \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix} \begin{pmatrix} \boldsymbol{\mu_1} \\ \boldsymbol{\mu_2} \end{pmatrix}, \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix} \begin{pmatrix} \boldsymbol{\Sigma}_{11} & \boldsymbol{\Sigma}_{12} \\ \boldsymbol{\Sigma}_{21} & \boldsymbol{\Sigma}_{22} \end{pmatrix} \begin{pmatrix} \mathbf{I}_2 \\ \mathbf{0} \end{pmatrix} \big] = \begin{pmatrix} \boldsymbol{\mu_1} & \boldsymbol{\Sigma}_{11} \end{pmatrix}$$
+$$\mathbf{A}\mathbf{Y} = \mathbf{Q_1} \sim N_p(\mathbf{A}\boldsymbol{\mu}, \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T) = N_p\Big[ \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix} \begin{pmatrix} \boldsymbol{\mu_1} \\ \boldsymbol{\mu_2} \end{pmatrix}, \begin{pmatrix} \mathbf{I}_2 & \mathbf{0} \end{pmatrix} \begin{pmatrix} \boldsymbol{\Sigma}_{11} & \boldsymbol{\Sigma}_{12} \\ \boldsymbol{\Sigma}_{21} & \boldsymbol{\Sigma}_{22} \end{pmatrix} \begin{pmatrix} \mathbf{I}_2 \\ \mathbf{0} \end{pmatrix} \Big] = \begin{pmatrix} \boldsymbol{\mu_1} & \boldsymbol{\Sigma}_{11} \end{pmatrix}$$
 
 ## Statistical independence
 
@@ -1108,7 +1108,7 @@ Suppose $\mathbf{Y} \sim N_n(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ and define 
     
 **Proof**:
 
-We stack the two vectors as follows: $\mathbf{W} = \begin{pmatrix} \mathbf{W_1} \\ \mathbf{W_2} \end{pmatrix} = \begin{pmatrix} \mathbf{A} \\ \mathbf{B} \end{pmatrix} \mathbf{Y} = \mathbf{L}\mathbf{Y}$. Therefore using Theorem 1, we find that $\mathbf{W} \sim N(\mathbf{L}\boldsymbol{\mu}, \mathbf{L}\boldsymbol{\Sigma}\mathbf{L}^T)$ or $\mathbf{W} \sim N\big[ \begin{pmatrix} \mathbf{A} \\ \mathbf{B} \end{pmatrix} \boldsymbol{\mu}, \begin{pmatrix} \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T & \mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T \\ \mathbf{B}\boldsymbol{\Sigma}\mathbf{A}^T & \mathbf{B}\boldsymbol{\Sigma}\mathbf{B}^T \end{pmatrix}\big]$, and we conclude that $\mathbf{W_1}$ and $\mathbf{W_2}$ are independent if and only if $\mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T = \mathbf{0}$
+We stack the two vectors as follows: $\mathbf{W} = \begin{pmatrix} \mathbf{W_1} \\ \mathbf{W_2} \end{pmatrix} = \begin{pmatrix} \mathbf{A} \\ \mathbf{B} \end{pmatrix} \mathbf{Y} = \mathbf{L}\mathbf{Y}$. Therefore using Theorem 1, we find that $\mathbf{W} \sim N(\mathbf{L}\boldsymbol{\mu}, \mathbf{L}\boldsymbol{\Sigma}\mathbf{L}^T)$ or $\mathbf{W} \sim N\Big[ \begin{pmatrix} \mathbf{A} \\ \mathbf{B} \end{pmatrix} \boldsymbol{\mu}, \begin{pmatrix} \mathbf{A}\boldsymbol{\Sigma}\mathbf{A}^T & \mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T \\ \mathbf{B}\boldsymbol{\Sigma}\mathbf{A}^T & \mathbf{B}\boldsymbol{\Sigma}\mathbf{B}^T \end{pmatrix}\Big]$, and we conclude that $\mathbf{W_1}$ and $\mathbf{W_2}$ are independent if and only if $\mathbf{A}\boldsymbol{\Sigma}\mathbf{B}^T = \mathbf{0}$
 
 </div>
 
@@ -1116,7 +1116,7 @@ We stack the two vectors as follows: $\mathbf{W} = \begin{pmatrix} \mathbf{W_1} 
 
 Consider the bivariate normal distribution. From Theorem 1, it follows that $Y_1 \sim N(\mu_1, \sigma_1)$. This is called the marginal probability distribution of $Y_1$. From the conditional probability law, $f_{Y_2 \mid Y_1}(y_2 \mid y_1) = \frac{f_{Y_1,Y_2}(y_1,y_2)}{f_{Y_1}(y_1)}$, and after substituting the bivariate density and the marginal density, it can be shown that the conditional probability density function of $Y_2$ given $Y_1$ is
 
-$$f_{Y_2 \mid Y_1}(y_2 \mid y_1) = \frac{1}{\sqrt{2\pi} \sqrt{\sigma_2^2(1-\rho^2)}} \exp\big[ -\frac{1}{2} \frac{\big( Y_2 - \mu_2 - \rho\frac{\sigma_2}{\sigma_1}(Y_1 - \mu_1) \big)^2}{\sigma_2^2(1-\rho^2)} \big]$$
+$$f_{Y_2 \mid Y_1}(y_2 \mid y_1) = \frac{1}{\sqrt{2\pi} \sqrt{\sigma_2^2(1-\rho^2)}} \exp\Big[ -\frac{1}{2} \frac{\Big( Y_2 - \mu_2 - \rho\frac{\sigma_2}{\sigma_1}(Y_1 - \mu_1) \Big)^2}{\sigma_2^2(1-\rho^2)} \Big]$$
 
 We can recognize that this is a normal probability density function with mean $\mu_{Y_2 \mid Y_1} = \mu_2 + \rho\frac{\sigma_2}{\sigma_1}(Y_1 - \mu_1)$ and variance $\sigma^2_{Y_2 \mid Y_1} = \sigma^2_2(1-\rho^2)$.
 
@@ -1189,9 +1189,9 @@ M_{X}(t)
 &= E[e^{tX}] \\
 &= \int_0^\infty e^{tx} \frac{x^{\alpha-1}e^{-\frac{x}{\beta}}}{\beta^\alpha\Gamma(\alpha)} dx \\
 &= \frac{1}{\beta^\alpha\Gamma(\alpha)} \int_0^\infty x^{\alpha-1}e^{-x(\frac{1-\beta t}{\beta})}dx \\
-&= \frac{1}{\beta^\alpha\Gamma(\alpha)} \int_0^\infty \big(\frac{\beta}{1-\beta t}\big)^{\alpha-1} y^{\alpha-1}e^{-y} \frac{\beta}{1-\beta t} dy \\
+&= \frac{1}{\beta^\alpha\Gamma(\alpha)} \int_0^\infty \Big(\frac{\beta}{1-\beta t}\Big)^{\alpha-1} y^{\alpha-1}e^{-y} \frac{\beta}{1-\beta t} dy \\
 \text{where } y &= x(\frac{1-\beta t}{\beta}) \Rightarrow x = (\frac{\beta}{1-\beta t})y, dx = (\frac{\beta}{1-\beta t}) dy \\
-M_{X}(t) &= \big(\frac{\beta}{1-\beta t}\big)^{\alpha} \int_0^\infty \frac{y^{\alpha-1}e^{-y}}{\beta^\alpha\Gamma(\alpha)} dy \\ 
+M_{X}(t) &= \Big(\frac{\beta}{1-\beta t}\Big)^{\alpha} \int_0^\infty \frac{y^{\alpha-1}e^{-y}}{\beta^\alpha\Gamma(\alpha)} dy \\ 
 &= (1 - \beta t)^{-\alpha}
 \end{aligned}
 $$
@@ -1241,7 +1241,7 @@ This is the mgf of $\Gamma(\frac{n}{2}, 2)$ and is called the Chi-square distrib
 
 Let $X_1, X_2, \dots, X_n$ be independent random variables with $X_i \sim N(\mu,\sigma)$. It follows from the previous theorem that 
 
-$$\sum_{i=1}^n \big( \frac{X_i - \mu}{\sigma} \big)^2 \sim \chi^2_n$$
+$$\sum_{i=1}^n \Big( \frac{X_i - \mu}{\sigma} \Big)^2 \sim \chi^2_n$$
 
 ### Theorem 
 
@@ -1266,7 +1266,7 @@ $$
 \frac{\sum_{i=1}^n (X_i - \mu)^2}{\sigma^2} 
 &= \frac{\sum_{i=1}^n (X_i - \bar{X} + \bar{X} - \mu)^2}{\sigma^2} \\
 &= \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{\sigma^2} + \frac{n(\bar{X} - \mu)^2}{\sigma^2} + \frac{2(\bar{X} - \mu) \overbrace{\sum_{i=1}^n (X_i - \bar{X})}^{\text{equal to } 0} }{\sigma^2} \\
-&= \frac{(n-1)s^2}{\sigma^2} + \big( \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \big)^2 \\
+&= \frac{(n-1)s^2}{\sigma^2} + \Big( \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \Big)^2 \\
 &= \mathbf{Q_1} + \mathbf{Q_2}
 \end{aligned}
 $$
@@ -1309,7 +1309,7 @@ $$
 
 Let $Z \sim N(0,1)$ and $U \sim \chi^2_{df}$. If $Z$ and $U$ are independent, then the ratio $X = \frac{Z}{\sqrt{\frac{U}{df}}}$ follows the $t$ (or Student's $t$) distribution with degrees of freedom equal to $df$. We write $X \sim t_{df}$. The pdf of the $t$ distribution with $df = n$ degrees of freedom is 
 
-$$f(x) = \frac{\Gamma(\frac{n+1}{2})}{\sqrt{\pi n}\Gamma(\frac{n}{2})} \big( 1 + \frac{x^2}{n} \big)^{-\frac{n+1}{2}}, \qquad -\infty < x < \infty$$
+$$f(x) = \frac{\Gamma(\frac{n+1}{2})}{\sqrt{\pi n}\Gamma(\frac{n}{2})} \Big( 1 + \frac{x^2}{n} \Big)^{-\frac{n+1}{2}}, \qquad -\infty < x < \infty$$
 
 Let $X \sim t_n$. Then, $E[X] = 0$ and $var[X] = \frac{n}{n-2}$. The $t$ distribution is similar to the standard normal distribution $N(0,1)$, but it has heavier tails. However as $n \rightarrow \infty$ the $t$ distribution coverges to $N(0,1)$.
 
@@ -1323,15 +1323,15 @@ $$\frac{\bar{X}-\mu}{s/\sqrt{n}} = \frac{(\bar{X}-\mu) / (\sigma/\sqrt{n})}{\sqr
 
 Let $\bar{X}$ and $s_X^2$ denote the sample mean and sample variance of an independent random sample of size 10 from a normal distribution with mean $\mu=0$ and variance $\sigma^2$. Find $c$ so that 
 
-$$P\big( \frac{\bar{X}}{\sqrt{9s_X^2}} < c \big) = 0.95$$
+$$P\Big( \frac{\bar{X}}{\sqrt{9s_X^2}} < c \Big) = 0.95$$
 
 Solution: 
 
 $$
 \begin{aligned}
-&P\big( \frac{\bar{X}}{\sqrt{9s_X^2}} < c \big) = 0.95 \\
-\quad \Rightarrow \quad &P\big( \frac{(\bar{X}-0) / (\sigma/\sqrt{10})}{\sqrt{\frac{(10-1)s_X^2}{\sigma^2} / (10-1)}} < \sqrt{90} c \big) = 0.95 \\
-\quad \Rightarrow \quad &P\big( t_{9} < \sqrt{90} c \big) = 0.95 \\
+&P\Big( \frac{\bar{X}}{\sqrt{9s_X^2}} < c \Big) = 0.95 \\
+\quad \Rightarrow \quad &P\Big( \frac{(\bar{X}-0) / (\sigma/\sqrt{10})}{\sqrt{\frac{(10-1)s_X^2}{\sigma^2} / (10-1)}} < \sqrt{90} c \Big) = 0.95 \\
+\quad \Rightarrow \quad &P\Big( t_{9} < \sqrt{90} c \Big) = 0.95 \\
 \quad \Rightarrow \quad &\sqrt{90} c = t_{0.95,9} = 1.833 \\
 \quad \Rightarrow \quad &c = 0.193
 \end{aligned}
@@ -1343,7 +1343,7 @@ $$
 
 Let $U \sim \chi^2_{n_1}$ and $V \sim \chi^2_{n_2}$. If $U$ and $V$ are independent, the ratio $X = \frac{U/n_1}{V/n_2}$ follows the $F$ distribution with numerator $df = n_1$ and denominator $df = n_2$. We write $X \sim F_{n_1,n_2}$. The pdf of $X$ is
 
-$$f(x) = \frac{\Gamma(\frac{n_1+n_2}{2})}{\Gamma(\frac{n_1}{2})\Gamma(\frac{n_2}{2})} \big( \frac{n_1}{n_2} \big)^{\frac{n_1}{2}} x^{\frac{n_1}{2}-1} \big( 1+\frac{n_1}{n_2}x \big)^{-\frac{1}{2}(n_1+n_2)}, \quad 0 < x < \infty$$
+$$f(x) = \frac{\Gamma(\frac{n_1+n_2}{2})}{\Gamma(\frac{n_1}{2})\Gamma(\frac{n_2}{2})} \Big( \frac{n_1}{n_2} \Big)^{\frac{n_1}{2}} x^{\frac{n_1}{2}-1} \Big( 1+\frac{n_1}{n_2}x \Big)^{-\frac{1}{2}(n_1+n_2)}, \quad 0 < x < \infty$$
 
 Let $X \sim F_{n_1,n_2}$. Then $E[X] = \frac{n_2}{n_2-2}$ and $var[X] = \frac{2n_2^2(n_1+n_2-2)}{n_1(n_2-2)^2(n_2-4)}$. In general, the $F$ distribution is skewed to the right.
 
@@ -1354,9 +1354,9 @@ Let $X \sim F_{n_1,n_2}$. Then $E[X] = \frac{n_2}{n_2-2}$ and $var[X] = \frac{2n
 
 ### Application
 
-Let $X_1, X_2, \dots, X_n \sim \overset{\text{i.i.d.}}{~} N(\mu_X, \sigma_X^2)$.
+Let $X_1, X_2, \dots, X_n \sim \overset{\text{i.i.d.}}{\sim} N(\mu_X, \sigma_X^2)$.
 
-Let $Y_1, Y_2, \dots, Y_m \sim \overset{\text{i.i.d.}}{~} N(\mu_Y, \sigma_Y^2)$.
+Let $Y_1, Y_2, \dots, Y_m \sim \overset{\text{i.i.d.}}{\sim} N(\mu_Y, \sigma_Y^2)$.
 
 The two samples are independent. Use $s_X^2$, $s_Y^2$ and $\sigma_X^2$, $\sigma_Y^2$ to form a ratio that follows $F_{n-1,m-1}$
 
@@ -1378,7 +1378,7 @@ $$
 
 $$\frac{\frac{(6-1)s_1^2}{\sigma^2} / (6-1)}{\frac{(10-1)s_2^2}{\sigma^2} / (10-1)} = \frac{s_1^2}{s_2^2} \sim F_{5,9}$$
 
-$$P\big( \frac{s_1^2}{s_2^2} < b \big) = 0.95 \quad \Rightarrow \quad b = F_{0.95;5,9} = 3.482$$
+$$P\Big( \frac{s_1^2}{s_2^2} < b \Big) = 0.95 \quad \Rightarrow \quad b = F_{0.95;5,9} = 3.482$$
 
 ## Non-central distribution
 
@@ -1388,7 +1388,7 @@ Let $Y \sim N(\mu, 1)$, then $Y^2 \sim \chi^2_1(ncp=\mu^2)$ (ncp: non-centrality
 
 **Moment generating function**: Let $Y \sim \chi^2_1(ncp=\theta)$, then $M_Y(t) = (1 - 2t)^{-\frac{1}{2}} e^{\theta \frac{t}{1-2t}}$
 
-**Example**: Let $Y_1,\dots,Y_n \overset{\text{i.i.d.}}{~} N(\mu, \sigma^2)$, find the distribution of $\sum_{i=1}^n \frac{Y_i^2}{\sigma^2}$ using MGF: 
+**Example**: Let $Y_1,\dots,Y_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$, find the distribution of $\sum_{i=1}^n \frac{Y_i^2}{\sigma^2}$ using MGF: 
 
 $$M_{\sum_{i=1}^n \frac{Y_i^2}{\sigma^2}}(t) = \prod_{i=1}^n M_{\frac{Y_i^2}{\sigma^2}}(t) = \prod_{i=1}^n (1 - 2t)^{-\frac{1}{2}} e^{\frac{\mu^2}{\sigma^2} \frac{t}{1-2t}} = (1 - 2t)^{-\frac{n}{2}} e^{\frac{n \mu^2}{\sigma^2} \frac{t}{1-2t}}$$
 
@@ -1402,3 +1402,508 @@ Let $Z \sim N(\delta, 1)$, $U \sim \chi^2_{df}$, and $Z \perp\!\!\!\perp U$, the
 
 Let $U \sim \chi^2_{n_1}(ncp=\theta)$, $V \sim \chi^2_{n_2}(ncp=\theta)$, and $U \perp\!\!\!\perp V$, then $\frac{U/n_1}{V/n_2} \sim F_{n_1,n_2}(ncp=\theta)$
 
+
+---
+
+
+# Lec 8: Properties of estimators
+
+## Unbiased estimators
+
+### Definition
+
+Let $\hat{\theta}$ be an estimator of a parameter $\theta$. We say that $\hat{\theta}$ is an unbiased estimator of $\theta$ if $E[\hat{\theta}] = \theta$.
+
+### Example
+
+Let $X_1, X_2, \dots, X_n$ be an i.i.d. sample from a population with mean $\mu$ and variance $\sigma^2$. Show that $\bar{X}$ and $s^2$ are unbiased estimators of $\mu$ and $\sigma^2$ respectively.
+
+$$E[\bar{X}] = E\Big[ \frac{1}{n} \sum_{i=1}^n X_i \Big] = \frac{1}{n} \sum_{i=1}^n E[X_i] = \frac{1}{n} n\mu = \mu$$
+
+$$
+\begin{aligned}
+E[s^2] = E\Big[ \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2 \Big] 
+&= \frac{1}{n-1} E\Big[ \sum_{i=1}^n ((X_i - \mu) - (\bar{X} - \mu))^2 \Big] \\
+&= \frac{1}{n-1} E\Big[ (\sum_{i=1}^n (X_i - \mu)^2) + n(\bar{X} - \mu)^2 - 2(\bar{X} - \mu)\sum_{i=1}^n(X_i - \mu) \Big] \\
+&= \frac{1}{n-1} E\Big[ (\sum_{i=1}^n (X_i - \mu)^2) + n(\bar{X} - \mu)^2 - 2(\bar{X} - \mu) \cdot n(\bar{X} - \mu) \Big] \\
+&= \frac{1}{n-1} E\Big[ (\sum_{i=1}^n (X_i - \mu)^2) - n(\bar{X} - \mu)^2 \Big] \\
+&= \frac{1}{n-1} ((\sum_{i=1}^n var[X]) - n(var[\bar{X}])) \\
+&= \frac{1}{n-1} E\Big[ n\sigma^2 - \sigma^2 \Big] \\
+&= \sigma^2
+\end{aligned}
+$$
+
+### Example 
+
+Let $X \sim bin(n,p)$. Show that $\hat{p} = \frac{X}{n}$ is an unbiased estimator of $p$
+
+$$E[\hat{p}] = E[\frac{X}{n}] = \frac{1}{n}E[X] = \frac{1}{n} \cdot np = p$$
+
+## Information and Cramér-Rao inequality
+
+### Information 
+
+Let $X$ be a random variable with pdf $f(x;\theta)$, then 
+
+$$
+\begin{aligned}
+&\int_{-\infty}^\infty f(x;\theta) dx = 1 \qquad \text{take derivative w.r.t. } \theta \text{ on both sides} \\
+\Rightarrow \quad &\int_{-\infty}^\infty \frac{\partial f(x;\theta)}{\partial \theta} dx = 0 \\
+\Rightarrow \quad &\int_{-\infty}^\infty \frac{1}{f(x;\theta)} \frac{\partial f(x;\theta)}{\partial \theta} f(x;\theta) dx = 0 \\
+\Rightarrow \quad &\int_{-\infty}^\infty \frac{\partial \log f(x;\theta)}{\partial \theta} f(x;\theta) dx = 0 \qquad \text{differentiate again w.r.t. } \theta \text{ on both sides} \\
+\Rightarrow \quad &\int_{-\infty}^\infty \Big[ \frac{\partial^2 \log f(x;\theta)}{\partial \theta^2} f(x;\theta) + \frac{\partial \log f(x;\theta)}{\partial \theta} \frac{\partial f(x;\theta)}{\partial \theta} \Big] dx = 0 \\
+\Rightarrow \quad &\int_{-\infty}^\infty \Big[ \frac{\partial^2 \log f(x;\theta)}{\partial \theta^2} f(x;\theta) + \frac{\partial \log f(x;\theta)}{\partial \theta} \frac{1}{f(x;\theta)} \frac{\partial f(x;\theta)}{\partial \theta} f(x;\theta) \Big] dx = 0 \\
+\Rightarrow \quad &\int_{-\infty}^\infty \Big[ \frac{\partial^2 \log f(x;\theta)}{\partial \theta^2} f(x;\theta) + \Big( \frac{\partial \log f(x;\theta)}{\partial \theta} \Big)^2  f(x;\theta) \Big] dx = 0 \\
+\Rightarrow \quad &\int_{-\infty}^\infty \frac{\partial^2 \log f(x;\theta)}{\partial \theta^2} f(x;\theta) dx + \int_{-\infty}^\infty \Big( \frac{\partial \log f(x;\theta)}{\partial \theta} \Big)^2  f(x;\theta) dx = 0 \\
+\Rightarrow \quad &E\Big[ \frac{\partial^2 \log f(X;\theta)}{\partial \theta^2} \Big] + E\Big[ \Big( \frac{\partial \log f(X;\theta)}{\partial \theta} \Big)^2 \Big] = 0\\
+\Rightarrow \quad &E\Big[ \Big( \frac{\partial \log f(X;\theta)}{\partial \theta} \Big)^2 \Big] = -E\Big[ \frac{\partial^2 \log f(X;\theta)}{\partial \theta^2} \Big]
+\end{aligned}
+$$
+
+The expression
+
+$$I(\theta) = E\Big[ \Big( \frac{\partial \log f(X;\theta)}{\partial \theta} \Big)^2 \Big] = -E\Big[ \frac{\partial^2 \log f(X;\theta)}{\partial \theta^2} \Big]$$
+
+is the information for one observation. The information can also be computed using the variance of the score function $S = \frac{\partial \log f(x;\theta)}{\partial \theta}$:
+
+$$var[S] = E[S^2] - E[S]^2 = E[S^2] = E\Big[ \Big( \frac{\partial \log f(X;\theta)}{\partial \theta} \Big)^2 \Big]$$
+
+### Information in a sample
+
+Let $X_1, X_2, \dots, X_n$ be an i.i.d. random sample from a distribution with pdf $f(x;\theta)$. The joint pdf of $X_1, X_2, \dots, X_n$ is
+
+$$L(\theta) = f(x_1;\theta)f(x_2;\theta) \dots f(x_n;\theta)$$
+
+Take logarithm on both sides
+
+$$\log L(\theta) = \log f(x_1;\theta) + \log f(x_2;\theta) + \dots + \log f(x_n;\theta)$$
+
+Take derivative w.r.t. $\theta$ on both sides
+
+$$\frac{\partial \log L(\theta)}{\partial \theta} = \frac{\partial \log f(x_1;\theta)}{\partial \theta} + \frac{\partial \log f(x_2;\theta)}{\partial \theta} + \dots + \frac{\partial \log f(x_n;\theta)}{\partial \theta}$$
+
+When one observation was involved the information was $E[(\frac{\partial \log f(X;\theta)}{\partial \theta})^2]$. Now, a random sample $X_1, X_2, \dots, X_n$ has $f(x;\theta)$ being replaced by $L(\theta)$. Therefore, the information in the sample will be $E[(\frac{\partial \log L(\theta)}{\partial \theta})^2]$.
+
+$$
+\begin{aligned}
+\Big( \frac{\partial \log L(\theta)}{\partial \theta} \Big)^2
+&= \Big( \frac{\partial \log f(x_1;\theta)}{\partial \theta} + \frac{\partial \log f(x_2;\theta)}{\partial \theta} + \dots + \frac{\partial \log f(x_n;\theta)}{\partial \theta} \Big)^2 \\
+&= \Big( \frac{\partial \log f(x_1;\theta)}{\partial \theta} \Big)^2 + \Big( \frac{\partial \log f(x_2;\theta)}{\partial \theta} \Big)^2 + \dots + \Big( \frac{\partial \log f(x_n;\theta)}{\partial \theta} \Big)^2 \\
+&+ 2 \frac{\partial \log f(x_1;\theta)}{\partial \theta}\frac{\partial \log f(x_2;\theta)}{\partial \theta} + \dots \\
+E\Big[ \Big( \frac{\partial \log L(\theta)}{\partial \theta} \Big)^2 \Big] 
+&= E\Big[ \Big( \frac{\partial \log f(X_1;\theta)}{\partial \theta} \Big)^2 \Big] + E\Big[ \Big( \frac{\partial \log f(X_2;\theta)}{\partial \theta} \Big)^2 \Big] + \dots + E\Big[ \Big( \frac{\partial \log f(X_n;\theta)}{\partial \theta} \Big)^2 \Big] 
+\end{aligned}
+$$
+
+Expectation of cross-product terms equal to zero because 
+
+$$E[\frac{\partial \log f(X_i;\theta)}{\partial \theta}\frac{\partial \log f(X_j;\theta)}{\partial \theta}] = E[\frac{\partial \log f(X_i;\theta)}{\partial \theta}] \cdot E[\frac{\partial \log f(X_j;\theta)}{\partial \theta}] = 0 \cdot 0 = 0$$
+
+We conclude that the information in the sample is equal to $n$ times the information for one observation
+
+$$I_n(\theta) = E\Big[ \Big( \frac{\partial \log L(\theta)}{\partial \theta} \Big)^2 \Big] = I(\theta) + I(\theta) + \dots + I(\theta) = nI(\theta)$$
+
+### Cramér-Rao inequality
+
+Let $X_1, X_2, \dots, X_n$ be an i.i.d. sample from a distribution that has pdf $f(x)$. Let $\hat{\theta}$ be an unbiased estimator of a parameter $\theta$ of this distribution, then the variance of $\theta$ is at least
+
+$$
+var[\hat{\theta}] \geq \frac{1}{nE[(\frac{\partial \log f(X;\theta)}{\partial \theta})^2]} = \frac{1}{nI(\theta)} 
+\qquad \text{OR} \qquad 
+var[\hat{\theta}] \geq \frac{1}{-nE[\frac{\partial^2 \log f(X;\theta)}{\partial \theta^2}]} = \frac{1}{nI(\theta)} 
+$$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Let $X_1, X_2, \dots, X_n$ be an i.i.d. random sample from a distribution with pdf $f(x;\theta)$, and let $\hat{\theta} = g(X_1, X_2, \dots, X_n)$ be an unbiased estimator of the unknown parameter $\theta$. Since $\hat{\theta}$ is unbiased, then
+
+$$E[\hat{\theta}] = \int_{-\infty}^\infty \dots\dots \int_{-\infty}^\infty g(x_1, x_2, \dots, x_n) f(x_1;\theta) f(x_2;\theta) \dots f(x_n;\theta) dx_1 dx_2 \dots dx_n = \theta$$
+
+Take derivatives w.r.t. $\theta$ on both sides
+
+$$
+\begin{aligned}
+&\int_{-\infty}^\infty \dots\dots \int_{-\infty}^\infty g(x_1, x_2, \dots, x_n) \Big[ \sum_{i=1}^n \frac{1}{f(x_i;\theta)} \frac{\partial f(x_i;\theta)}{\partial \theta} \Big] f(x_1;\theta) f(x_2;\theta) \dots f(x_n;\theta) dx_1 dx_2 \dots dx_n = 1 \\
+\Rightarrow &\int_{-\infty}^\infty \dots\dots \int_{-\infty}^\infty g(x_1, x_2, \dots, x_n) \Big[ \sum_{i=1}^n \frac{\partial \log f(x_i;\theta)}{\partial \theta} \Big] f(x_1;\theta) f(x_2;\theta) \dots f(x_n;\theta) dx_1 dx_2 \dots dx_n = 1 \\
+\Rightarrow &\int_{-\infty}^\infty \dots\dots \int_{-\infty}^\infty g(x_1, x_2, \dots, x_n) Q f(x_1;\theta) f(x_2;\theta) \dots f(x_n;\theta) dx_1 dx_2 \dots dx_n = 1 \qquad \text{where } Q = \sum_{i=1}^n \frac{\partial \log f(x_i;\theta)}{\partial \theta} \\
+\Rightarrow &E[\hat{\theta}Q] = 1
+\end{aligned}
+$$
+
+Now find the correlation between $\hat{\theta}$ and $Q$
+
+$$
+\begin{aligned}
+\rho_{\hat{\theta}, Q} \in [-1, 1] \quad &\Rightarrow \quad \rho_{\hat{\theta}, Q}^2 \leq 1 \\
+&\Rightarrow \quad \frac{cov[\hat{\theta}, Q]^2}{var[\hat{\theta}] var[Q]} \leq 1 \\
+&\Rightarrow \quad \frac{(E[\hat{\theta}Q] - E[\hat{\theta}]E[Q])^2}{var[\hat{\theta}] (E[Q^2] - E[Q]^2)} \leq 1 \\
+&\Rightarrow \quad \frac{1 - 0}{var[\hat{\theta}] (nI(\theta) - 0)} \leq 1 \qquad \text{Square function}: E[Q] = 0; E[Q^2] = nI(\theta) \\
+&\Rightarrow \quad var[\hat{\theta}] \geq \frac{1}{nI(\theta)}
+\end{aligned}
+$$
+
+</div>
+
+## Efficient estimators
+
+### Definition
+
+We say that $\hat{\theta}$ is an efficient estimator of $\theta$ if $\hat{\theta}$ is an unbiased estimator and 
+
+$$var[\hat{\theta}] = \frac{1}{nI(\theta)}$$
+
+In other words, if the $\hat{\theta}$ attains the minimum variance of the Cramér-Rao inequality.
+
+### Example 
+
+Let $X_1, X_2, \dots, X_n$ be i.i.d. sample from a normal population with mean $\mu$ and variance $\sigma^2$. Show that the information in one observation can be obtained using $I(\theta) = E[(\frac{\partial \log f(x)}{\partial \theta})^2] = -E[\frac{\partial^2 \log f(x)}{\partial \theta^2}] = var[S]$, where $S = \frac{\partial \log f(x)}{\partial \theta}$ is the score function.
+
+$$
+\begin{aligned}
+f(x) &= (2\pi\sigma^2)^{-\frac{1}{2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \\
+\log f(x) &= -\frac{1}{2} \log(2\pi\sigma^2) -\frac{(x-\mu)^2}{2\sigma^2} \\
+S_\mu &= \frac{\partial \log f(x)}{\partial \mu} = \frac{2}{2\sigma^2}(X-\mu) = \frac{X-\mu}{\sigma^2}\\
+I(\mu) &= var[S^2] = var\Big[ \frac{X-\mu}{\sigma^2} \Big] = \frac{1}{\sigma^4}var[X-\mu] = \frac{var[X]}{\sigma^4} = \frac{1}{\sigma^2} \\
+I(\mu) &= -E\Big[ \frac{\partial^2 \log f(x)}{\partial \theta^2} \Big] = -E\Big[ -\frac{1}{\sigma^2} \Big] = \frac{1}{\sigma^2} \\
+I(\mu) &= E\Big[ \Big( \frac{\partial \log f(x)}{\partial \theta} \Big)^2 \Big] = E\Big[ \Big( \frac{X-\mu}{\sigma^2} \Big)^2 \Big] = \frac{E[(x-\mu)^2]}{\sigma^4} = \frac{1}{\sigma^2}
+\end{aligned}
+$$
+
+### Example 
+
+Show that $\bar{X}$ is an efficient estimator of $\mu$
+
+$$E[\bar{X}] = \mu \qquad var[\bar{X}] = \frac{\sigma^2}{n}$$
+
+$$var[\hat{\mu}] \geq \frac{1}{nI(\mu)} = \frac{\sigma^2}{n}$$
+
+Therefore, $\bar{X}$ is an efficient estimator of $\mu$
+
+### Example 
+
+Show that $s^2$ is an efficient estimator of $\sigma^2$
+
+$$E[s^2] = \sigma^2 \qquad var[s^2] = \frac{2\sigma^4}{n-1}$$
+
+$$\frac{\partial \log f(x)}{\partial \sigma^2} = -\frac{1}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}(x-\mu)^2 \qquad \frac{\partial^2 \log f(x)}{\partial (\sigma^2)^2} = \frac{1}{2(\sigma^2)^2} - \frac{1}{(\sigma^2)^3}(x-\mu)^2$$
+
+$$I(\sigma^2) = -E\Big[ \frac{\partial^2 \log f(x)}{\partial (\sigma^2)^2} \Big] = -E\Big[ \frac{1}{2(\sigma^2)^2} - \frac{1}{(\sigma^2)^3}(x-\mu)^2 \Big] = -\frac{1}{2(\sigma^2)^2} + \frac{1}{(\sigma^2)^2} = \frac{1}{2\sigma^4}$$
+
+$$var[\hat{\sigma^2}] = \geq \frac{1}{nI(\sigma^2)} = \frac{1}{n\frac{1}{2\sigma^4}} = \frac{2\sigma^4}{n}$$
+
+Even if $s^2$ does not achieve Cramér-Rao lower bound, it is still called an efficient estimator because it has the minimum variance among all unbiased estimators.
+
+## Relatively efficiency
+
+### Definition 
+
+If $\hat{\sigma_1}$ and $\hat{\sigma_2}$ are both unbiased estimators of a parameter $\theta$. We say that $\hat{\sigma_1}$ is relatively more efficient if $var[\hat{\sigma_1}] < var[\hat{\sigma_2}]$. The ratio $\frac{var[\hat{\sigma_1}]}{var[\hat{\sigma_2}]}$ is a measure of the relative efficiency of $\hat{\sigma_2}$ w.r.t. $\hat{\sigma_1}$.
+
+### Example
+
+Suppose $X_1, X_2, \dots, X_n$ is an i.i.d. random sample from a Poisson distribution with parameter $\lambda$. Let $\hat{\lambda}_1 = \bar{X}$ and $\hat{\lambda}_2 = \frac{X_1 + X_2}{2}$ be two unbiased estimators of $\lambda$. Find the relative efficiency of $\hat{\lambda}_2$ w.r.t. $\hat{\lambda}_1$. 
+
+$$
+\begin{aligned}
+&var[\hat{\lambda}_1] = var[\bar{X}] = \frac{\sigma^2}{n} = \frac{\lambda}{n} \\
+&var[\hat{\lambda}_2] = \frac{1}{4}(var[X_1] + var[X_2]) = \frac{\lambda}{2} \\
+&\frac{var[\hat{\lambda}_1]}{var[\hat{\lambda}_2]} = \frac{\lambda/n}{\lambda/2} = \frac{2}{n}
+\end{aligned}
+$$
+
+## Consistent estimators
+
+### Definition
+
+The estimator $\hat{\theta}$ of a parameter $\theta$ is said to be a consistent estimator if for any $\epsilon$
+
+$$\lim_{n\rightarrow \infty} P(|\hat{\theta} - \theta| \leq \epsilon) = 1 \qquad \text{OR} \qquad \lim_{n\rightarrow \infty} P(|\hat{\theta} - \theta| > \epsilon) = 0$$
+
+We say that $\hat{\theta}$ converges in probability to $\theta$ (also known as the weak law of large numbers). In other words, the average of many independent random variables should be very close to the true mean $\mu$ with high probability.
+
+### Theorem
+
+An unbiased estimator $\hat{\theta}$ of a parameter $\theta$ is consistent if $var[\hat{\theta}] = 0$ as $n \rightarrow \infty$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Use Chebyshev's Inequality: If a random variable $X$ has mean $\mu$ and variance $\sigma^2$, then for any $k > 1$:
+
+$$P(|X-\mu| \geq k\sigma) \leq \frac{1}{k^2} \qquad \text{OR} \qquad P(|X-\mu| < k\sigma) \geq 1 - \frac{1}{k^2}$$
+
+Let $\epsilon = k\sqrt{var[\hat{\theta}]}$, so $k = \frac{\epsilon}{\sqrt{var[\hat{\theta}]}}$, then
+
+$$P(|\hat{\theta} - \theta| > k\sqrt{var[\hat{\theta}]}) < \frac{1}{k^2} = \frac{var[\hat{\theta}]}{\epsilon^2}$$
+
+$var[\hat{\theta}] \rightarrow 0$ as $n \rightarrow \infty$, then $\frac{var[\hat{\theta}]}{\epsilon^2} \rightarrow 0$. Thus $\hat{\theta}$ is a consistent estimator of $\theta$
+
+</div>
+
+### Example 
+
+Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables with mean $\mu$ and variance $\sigma^2$, is $\bar{X}$ a consistent estimator of $\mu$?
+
+$var[\bar{X}] = \frac{\sigma^2}{n} \rightarrow 0$ as $n \rightarrow \infty$, so $\bar{X}$ is a consistent estimator of $\mu$.
+
+### Example 
+
+Let $X_1, X_2, \dots, X_n$ be random variables with mean $\mu$, variance $\sigma^2$, and $cov[X_i, X_j] = \rho\sigma^2$, is $\bar{X}$ a consistent estimator of $\mu$?
+
+$$var[\bar{X}] = var\Big[ \frac{\sum_{i=1}^n X_i}{n} \Big] = var\Big[ \frac{\mathbf{1}^T\mathbf{X}}{n} \Big] = \frac{1}{n^2} \mathbf{1}^T \boldsymbol{\Sigma} \mathbf{1} =  \frac{\sigma^2}{n^2} \mathbf{1}^T ((1-\rho)\mathbf{I} + \rho \mathbf{1} \mathbf{1}^T) \mathbf{1} = \frac{\sigma^2}{n}((n-1)\rho + 1)$$
+
+$var[\bar{X}] \rightarrow \rho \sigma^2$ as $n \rightarrow \infty$, so $\bar{X}$ is a consistent estimator of $\mu$ iff $\rho = 0$.
+
+## MSE and bias:
+
+Bias of an estimator $\hat{\theta}$ is given by $bias = E[\hat{\theta}] - \theta$
+
+In general, given two unbiased estimators, we would choose the estimator with the smaller variance. However, this is not always possible (there may exist biased estimators with smaller variance). We use the mean square error (MSE):
+
+$$MSE = E[(\hat{\theta} - \theta)^2]$$
+
+as a measure of the goodness of an estimator. MSE can be decomposed as the following form
+
+$$
+\begin{aligned}
+MSE &= E[(\hat{\theta} - \theta)^2] \\
+&= E[(\hat{\theta} - E[\hat{\theta}] + E[\hat{\theta}] - \theta)^2] \\
+&= E[(\hat{\theta} - E[\hat{\theta}])^2] + (E[\hat{\theta}] - \theta)^2 + 2(E[\hat{\theta}] - \theta) \overbrace{E[(\hat{\theta} - E[\hat{\theta}])]}^{\text{equal to } 0} \\
+&= var[\hat{\theta}] + bias^2
+\end{aligned}
+$$
+
+### Example - from *Mathematical Statistics with Application* by Wackerly, Mendenhall, Scheaffer
+
+The reading on a voltage meter connected to a test circuit is uniformly distributed over the interval $(\theta, \theta + 1)$, where $\theta$ is the true but unknown voltage of the circuit. Suppose $X_1, X_2, \dots, X_n$ denotes a random sample of such reading:
+
+#### (a) Show that $\bar{X}$ is a biased estimator of $\theta$, and compute the bias.
+
+$$E[\bar{X}] = \mu = \frac{\theta + \theta + 1}{2} = \theta + \frac{1}{2} \qquad bias = \frac{1}{2}$$
+
+#### (b) Find a function of $\bar{X}$ that is an unbiased estimator of $\theta$.
+
+$$\hat{\theta} = \bar{X} - \frac{1}{2} \qquad E[\hat{\theta}] = \theta + \frac{1}{2} - \frac{1}{2} = \theta$$
+
+#### (c) Find the MSE when $\bar{X}$ is used as an estimator of $\theta$.
+
+$$MSE(\bar{X}) = var[\bar{X}] + bias^2 = \frac{\sigma^2}{n} + (\frac{1}{2})^2 = \frac{1}{12n} + \frac{1}{4}$$
+
+#### (d) Find the MSE when the bias corected estimator is used.
+
+$$MSE(\hat{\theta}) = var[\hat{\theta}] = var[\bar{X} - \frac{1}{2}] = var[\bar{X}] = \frac{\sigma^2}{n} = \frac{1}{12n}$$
+
+### Example - from *Theoretical Statistics* by Robert W. Keener
+
+Let $X \sim bin(100, p)$. Consider the three estimator, $\hat{p}_1 = \frac{X}{100}, \hat{p}_2 = \frac{X+3}{100}, \hat{p}_3 = \frac{X+3}{106}$. Find the MSE for each estimator
+
+$$
+\begin{aligned}
+E[\hat{p}_1] &= E\Big[ \frac{X}{100} \Big] = \frac{100p}{100} = p \\
+MSE[\hat{p}_1] &= var\Big[ \frac{X}{100} \Big] = \frac{1}{100^2} var[X] = \frac{100p(1-p)}{100^2} = \frac{p(1-p)}{100} \\
+E[\hat{p}_2] &= E\Big[ \frac{X+3}{100} \Big] = \frac{100p+3}{100} = p + \frac{3}{100} \\
+var[\hat{p}_2] &= var\Big[ \frac{X+3}{100} \Big] = \frac{1}{100^2} var[X+3] = \frac{100p(1-p)}{100^2} = \frac{p(1-p)}{100} \\
+MSE[\hat{p}_2] &= \frac{p(1-p)}{100} + \Big( \frac{3}{100} \Big)^2 \\
+E[\hat{p}_3] &= E\Big[ \frac{X+3}{106} \Big] = \frac{100p+3}{106} = \frac{50}{53}p + \frac{3}{106} \\
+var[\hat{p}_3] &= var\Big[ \frac{X+3}{106} \Big] = \frac{1}{106^2} var[X+3] = \frac{100p(1-p)}{106^2} \\
+MSE[\hat{p}_3] &= \frac{100p(1-p)}{106^2} + \Big(\frac{50}{53}p + \frac{3}{106} - p \Big)^2 = \frac{100p(1-p)}{106^2} + \frac{9}{11236}(1-2p)^2
+\end{aligned}
+$$
+
+
+---
+
+
+# Lec 9: Method of maximum likelihood
+
+### Definition (likelihood function)
+
+Suppose $x_1, x_2, \dots, x_n$ is a random sample of size $n$ from a distribution that has parameter $\theta$. The joint probability density (also known as likelihood function) of these $n$ random variables is
+
+$$L(\theta) = f(x_1, x_2, \dots, x_n; \theta) = f(x_1;\theta) \times f(x_2;\theta) \times \dots \times f(x_n;\theta)$$
+
+Since $x_1, x_2, \dots, x_n$ are independent, the likelihood function can be expressed as the product of the marginal densities. In this function, the parameter $\theta$ is unknown and it will be estimated with the method of maximum likelihood. In principle, the method of maximum likelihood consists of selecting the value of $\theta$ that maximizes the likelihood function (the value of $\theta$ that makes the observed data more likely). To maximize the likelihood function w.r.t. $\theta$, it is often easier to maximize the log likelihood function w.r.t. $\theta$. Therefore, we will take the derivative of the log likelihood function w.r.t. $\theta$, set it equal to zero and solve for $\theta$. The result will be denoted with $\hat{\theta}$ and we refer to it as the $MLE$ of the parameter $\theta$.
+
+### Example
+
+#### (a) Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \text{Poisson}(\lambda)$. Find the MLE of $\lambda$
+
+$$
+\begin{aligned}
+L(\lambda) &= p(x_1, x_2, \dots, x_n) = \prod_{i=1}^n p(x_i) = \prod_{i=1}^n \frac{\lambda^{x_i}e^{-\lambda}}{x_i!} &= \frac{\lambda^{\sum_{i=1}^n x_i}e^{-n\lambda}}{\prod_{i=1}^n x_i!} \\
+\log L(\lambda) &= (\sum_{i=1}^n x_i) \log \lambda - n\lambda - \log \prod_{i=1}^n x_i! \\
+\frac{d \log L(\lambda)}{d\lambda} &= \frac{\sum_{i=1}^n x_i}{\lambda} - n = 0
+\quad \Rightarrow \quad \hat{\lambda} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}
+\end{aligned}
+$$
+
+#### (b) Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} exp(\lambda)$. Find the MLE of $\lambda$
+
+$$
+\begin{aligned}
+L(\lambda) &= p(x_1, x_2, \dots, x_n) = \prod_{i=1}^n p(x_i) = \prod_{i=1}^n \lambda e^{-\lambda x_i} = \lambda^n e^{-\lambda \sum_{i=1}^n x_i} \\
+\log L(\lambda) &= n\log \lambda - \lambda \sum_{i=1}^n x_i \\
+\frac{d \log L(\lambda)}{d\lambda} &= \frac{n}{\lambda} - \sum_{i=1}^n x_i = 0
+\quad \Rightarrow \quad \hat{\lambda} = \frac{n}{\sum_{i=1}^n X_i} = \frac{1}{\bar{X}}
+\end{aligned}
+$$
+
+Note: $\hat{\lambda} = \frac{1}{\bar{X}}$ is biased
+
+exponential distribution is a special case of gamma distribution: $\sum_{i=1}^n X_i \sim \Gamma(n, \frac{1}{\lambda})$ 
+
+$$E[\hat{\lambda}] = E\Big[ \frac{n}{\sum_{i=1}^n x_i} \Big] = nE[ (\sum_{i=1}^n x_i)^{-1} ] = n\frac{\Gamma(n-1)(\frac{1}{\lambda})^{-1}}{\Gamma(n)} = n\lambda \frac{\Gamma(n-1)}{(n-1)\Gamma(n-1)} = \frac{n}{n-1}\lambda$$
+
+Thus, $\hat{\theta} = \frac{1}{\bar{X}} \cdot \frac{n-1}{n} = \frac{n-1}{\sum_{i=1}^n X_i}$ is an unbiased estimator of $\lambda$
+
+#### (c) Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} unif(0, \theta)$. Find the MLE of $\theta$
+
+$$
+\begin{aligned}
+L(\theta) &= f(x_1, x_2, \dots, x_n) = \prod_{i=1}^n f(x_i)
+= \prod_{i=1}^n \frac{1}{\theta - 0} = \frac{1}{\theta^n} \\
+\log L(\theta) &= -n\log \theta \\
+\frac{d \log L(\theta)}{d\theta} &= -\frac{n}{\theta} = 0
+\end{aligned}
+$$
+
+We say the MLE of $\theta$ is $\hat{\theta} = \max(X_1, \dots, X_n)$ or $\hat{\theta} = X_{(n)}$.
+
+Find the pdf of $X_{(n)}$
+
+$$
+\begin{aligned}
+F_{X_{(n)}} &= P(X_{(n)} \leq x) = P(X_1 \leq x; \dots; X_n \leq x) \overset{\text{indep}}{=} P(X_1 \leq x) \dots P(X_n \leq x) = (F(x))^n \\
+g_{X_{(n)}} &= n(F(x))^{n-1}f(x) = n(\frac{x}{\theta - 0})^{n-1}\frac{1}{\theta - 0} = \frac{n}{\theta^n} x^{n-1} \\
+E[\hat{\theta}] &= E[X_{(n)}] = \int_0^\theta x\frac{n}{\theta^n} x^{n-1} = \frac{n}{n+1}\theta
+\end{aligned}
+$$
+
+Thus, $\frac{n+1}{n}X_{(n)}$ is an unbiased estimator.
+
+#### (d) Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$. Find the MLE of $\mu$ and $\sigma^2$
+
+$$
+\begin{aligned}
+&L(\mu, \sigma^2) = f(x_1, x_2, \dots, x_n) = \prod_{i=1}^n f(x_i) 
+= \prod_{i=1}^n (2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{(x_i-\mu)^2}{2\sigma^2}} 
+= (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{\sum_{i=1}^n (x_i-\mu)^2}{2\sigma^2}} \\
+&\log L(\mu, \sigma^2) = -\frac{n}{2} \log(2\pi\sigma^2) - \frac{\sum_{i=1}^n (x_i-\mu)^2}{2\sigma^2} \\
+&\frac{\partial \log L(\mu)}{\partial \mu} = \frac{2}{2\sigma^2} \sum_{i=1}^n (x_i-\mu) = 0
+\quad \Rightarrow \quad \sum_{i=1}^n x_i - n\mu = 0
+\quad \Rightarrow \quad \hat{\mu} = \bar{X} \\
+&\frac{\partial \log L(\sigma^2)}{\partial \sigma^2} = -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{i=1}^n (x_i-\mu)^2 = 0 
+\quad \Rightarrow \quad \hat{\sigma^2} = \frac{\sum_{i=1}^n (x_i-\mu)^2}{n} = \frac{\sum_{i=1}^n (x_i-\bar{X})^2}{n} \\
+E[\hat{\sigma^2}] &= \frac{1}{n}E[\sum_{i=1}^n (x_i-\bar{X})^2] = \frac{(n-1)\sigma^2}{n} \qquad \text{(biased)} \\
+s^2 &= \frac{n}{n-1}\hat{\sigma^2} \qquad \text{(unbiased)}
+\end{aligned}
+$$
+
+#### (e) Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu_1, \sigma^2)$ and $Y_1, Y_2, \dots, Y_m \overset{\text{i.i.d.}}{\sim} N(\mu_2, \sigma^2)$. Find the MLE of $\mu$ and $\sigma^2$
+
+$$
+\begin{aligned}
+L(\mu_1, \mu_2, \sigma^2) &= f(x_1, x_2, \dots, x_n) \cdot g(y_1, y_2, \dots, y_m) \\
+&= \prod_{i=1}^n f(x_i) \prod_{j=1}^m g(y_j) \\
+&= \prod_{i=1}^n (2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{(x_i-\mu_1)^2}{2\sigma^2}} 
+\prod_{j=1}^m (2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{(y_j-\mu_2)^2}{2\sigma^2}} \\
+&= (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{\sum_{i=1}^n (x_i-\mu_1)^2}{2\sigma^2}} 
+(2\pi\sigma^2)^{-\frac{m}{2}}e^{-\frac{\sum_{j=1}^m (y_j-\mu_2)^2}{2\sigma^2}} \\
+\log L(\mu_1, \mu_2, \sigma^2) &= 
+-\frac{n}{2}\log(2\pi\sigma^2) -\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu_1)^2
+-\frac{m}{2}\log(2\pi\sigma^2) -\frac{1}{2\sigma^2}\sum_{j=1}^m (y_j-\mu_2)^2 \\
+\frac{\partial \log L(\mu_1)}{\partial \mu_1} &= \frac{2}{2\sigma^2}\sum_{i=1}^n (x_i-\mu_1) = 0 
+\quad \Rightarrow \quad \hat{\mu_1} = \bar{X} \\
+\frac{\partial \log L(\mu_2)}{\partial \mu_2} &= \frac{2}{2\sigma^2}\sum_{j=1}^m (y_j-\mu_2) = 0 
+\quad \Rightarrow \quad \hat{\mu_2} = \bar{Y} \\
+\frac{\partial \log L(\mu_2)}{\partial \sigma^2} &= 
+-\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{i=1}^n (x_i-\mu_1)^2 
+-\frac{m}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{j=1}^m (y_j-\mu_2)^2 = 0 \\
+\Rightarrow \quad \hat{\sigma^2} 
+&= \frac{\sum_{i=1}^n (X_i-\mu_1)^2 + \sum_{j=1}^m (Y_j-\mu_2)^2}{n + m} 
+= \frac{\sum_{i=1}^n (X_i-\bar{X})^2 + \sum_{j=1}^m (Y_j-\bar{Y})^2}{n + m}
+= \frac{(n-1)s^2_X + (m-1)s^2_Y}{n + m} \\
+E[\hat{\sigma^2}] &= \frac{(n-1)\sigma^2 + (m-1)\sigma^2}{n + m} = \frac{(n+m-2)\sigma^2}{n+m} \qquad \text{(biased)} \\
+s^2_{pool} &= \frac{n+m}{n+m-2}\hat{\sigma^2} \qquad \text{(unbiased)}
+\end{aligned}
+$$
+
+two sample difference t-test:
+
+$$\bar{X} - \bar{Y} \sim N(\mu_1 - \mu_2, \sigma^2(\frac{1}{n} + \frac{1}{m}))$$
+
+$$\frac{Z}{\sqrt{U/df}} = \frac{ \frac{(\bar{X} - \bar{Y}) - (\mu_1 - \mu_2)}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}} }{ \sqrt{\frac{(n+m-2)s^2_{pool}}{\sigma^2} / (n+m-2)} } = \frac{(\bar{X} - \bar{Y}) - (\mu_1 - \mu_2)}{\sqrt{s^2_{pool}(\frac{1}{n} + \frac{1}{m})}} \sim t_{n+m-2}$$
+
+### Theorem
+
+**Asymptotic efficiency of maximum likelihood estimates**: Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables from a probability density function $f(x \mid \theta)$. Then if $\hat{\theta}$ is the MLE of $\theta$, then $\hat{\theta} \sim N(\theta, \frac{1}{nI(\theta)})$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Start with the likelihood function
+
+$$
+\begin{aligned}
+L(\theta) &= \prod_{i=1}^n f(x_i \mid \theta) \\
+\log L(\theta) &= \sum_{i=1}^n \log f(x_i \mid \theta) \\
+\frac{\partial}{\partial \theta} \log L(\theta) &= \sum_{i=1}^n \frac{\partial}{\partial \theta} \log f(x_i \mid \theta) 
+\end{aligned}
+$$
+
+Let $\hat{\theta}$ be the MLE of $\theta$, the first order Taylor expansion at $\hat{\theta}$ is:
+
+$$
+\begin{aligned}
+\sum_{i=1}^n \frac{\partial}{\partial \theta} \log f(x_i \mid \theta) &\approx \sum_{i=1}^n \frac{\partial}{\partial \theta} \log f(x_i \mid \hat{\theta}) + \Big[ \sum_{i=1}^n \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \hat{\theta}) \Big] (\theta - \hat{\theta}) \\
+\frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{\partial}{\partial \theta} \log f(x_i \mid \theta) &\approx \frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{\partial}{\partial \theta} \log f(x_i \mid \hat{\theta}) + \Big[ \frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \hat{\theta}) \Big] (\theta - \hat{\theta}) 
+\end{aligned}
+$$
+
+The first term on the right hand side is zero (because this is what we do to find $\hat{\theta}$). Therefore, the relationship is reduced to the following:
+
+$$
+\frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{\partial}{\partial \theta} \log f(x_i \mid \theta) \approx  \Big[ \frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \hat{\theta}) \Big] (\theta - \hat{\theta})
+$$
+
+Examine the left hand side: This involves the sum of $n$ i.i.d. forms (central limit theorem). Each one of these has mean zero and variance $I(\theta)$. Therefore, the left hand side follows approximately $N(0, I(\theta))$. Therefore
+
+$$
+\begin{aligned}
+&\Big[ \frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \hat{\theta}) \Big] (\theta - \hat{\theta}) \sim N(0, I(\theta)) \\
+&\Big[ -\frac{1}{n} \sum_{i=1}^n \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \hat{\theta}) \Big] \sqrt{n}(\theta - \hat{\theta}) \sim N(0, I(\theta)) 
+\end{aligned}
+$$
+
+The expression in the bracket converges to $I(\theta)$ (law of large numbers) and therefore
+
+$$I(\theta)\sqrt{n}(\theta - \hat{\theta}) \sim N(0, I(\theta))$$
+
+$$\hat{\theta} \sim N(\theta, \frac{1}{nI(\theta)})$$
+
+</div>
+
+## Application of MLE in Linear Model
+
+**Linear Model**:
+
+$$Y_i = \mu + \epsilon_i$$
+
+with $\epsilon_1, \epsilon_2, \dots, \epsilon_n \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$ and assumption (Gauss-Markov Conditions): 
+- $E[\epsilon_i] = 0$
+- $var[\epsilon_i] = \sigma^2$
+
+Take
+
+$$
+\begin{aligned}
+&\min S = \min \sum_{i=1}^n \epsilon^2 = \min \sum_{i=1}^n (Y_i - \mu)^2 \\
+\quad \Rightarrow \quad &\frac{dS}{d\mu} = -2\sum_{i=1}^n (Y_i - \mu) = 0 \\
+\quad \Rightarrow \quad &\sum_{i=1}^n Y_i - n\mu = 0 \\
+\quad \Rightarrow \quad &\hat{\mu} = \bar{Y}
+\end{aligned}
+$$

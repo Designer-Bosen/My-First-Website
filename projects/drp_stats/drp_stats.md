@@ -136,7 +136,7 @@ where $u_i=\begin{pmatrix} \mathbf{Z}_i & m_i(X)\end{pmatrix}^T$ and $w_i=\sigma
 
 ### Gaussian and Elastic Net Prior
 
-With Prior choices $\beta \sim N(0, \tau^2)$ and $\theta^T_i \propto \lambda\big[\alpha\|\theta^T\|_1+\frac{1-\alpha}{2}\|\theta^T\|_2^2\big]$, \cite{elastic_net} the MAP estimator is given as:
+With Prior choices $\beta \sim N(0, \tau^2)$ and $\theta^T_i \propto \lambda\big[\alpha\|\theta^T\|_1+\frac{1-\alpha}{2}\|\theta^T\|_2^2\big]$, the MAP estimator is given as:
 
 $$
 \begin{aligned}
