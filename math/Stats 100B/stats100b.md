@@ -1546,6 +1546,87 @@ $$
 
 </div>
 
+### Information inequality (generalized Cramér-Rao inequality)
+
+Let $\tau(\boldsymbol{\theta})$ be a function of $\boldsymbol{\theta} = \begin{pmatrix} \theta_1 & \dots & \theta_p \end{pmatrix}^T$. Let $T(x)$ be an unbiased estimator of $\tau(\boldsymbol{\theta})$. if
+
+$$var[T(x)] \geq \nabla \tau^T(\boldsymbol{\theta}) I^{-1}(\boldsymbol{\theta}) \tau(\boldsymbol{\theta}) \qquad \text{where } \nabla \tau(\boldsymbol{\theta}) = \begin{pmatrix} \frac{\partial \tau(\boldsymbol{\theta})}{\partial \theta_1} & \dots & \frac{\partial \tau(\boldsymbol{\theta})}{\partial \theta_p} \end{pmatrix}^T$$
+
+if equal, $T(x)$ is an efficient estimator of $\tau(\boldsymbol{\theta})$
+
+### Example 
+
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$. Let $\tau(\mu, \sigma^2) = \mu\sigma^2$, then $T(x) = \bar{X}s^2$
+
+$$
+\begin{aligned}
+var[T(x)] &\geq 
+\begin{pmatrix} \sigma^2 & \mu \end{pmatrix}
+\begin{pmatrix} \frac{n}{\sigma^2} & 0 \\ 0 & \frac{n}{2\sigma^4} \end{pmatrix}
+\begin{pmatrix} \sigma^2 \\ \mu \end{pmatrix}
+= \frac{\sigma^6}{n} + \frac{2\mu^2\sigma^4}{n} \\
+var[T(x)] &= E[\bar{X}^2S^4] - E[\bar{X}s^2]^2 \qquad \text{Note: } s^2 \sim \Gamma(\frac{n-1}{n}, \frac{2\sigma^2}{n-1}) \\
+&= E[\bar{X}^2] E[S^4] - (\mu\sigma^2)^2 \\
+&= \Big( var[\bar{X}] + E[\bar{X}]^2 \Big)  \Big( \frac{\Gamma(\frac{n-1}{2} + 2)(\frac{2\sigma^2}{n-1})^2}{\Gamma(\frac{n-1}{2})} \Big) - \mu^2\sigma^4 \\
+&= \Big( \frac{\sigma^2}{n} + \mu^2 \Big)  \Big( \frac{\Gamma(\frac{n-1}{2} + 2)(\frac{2\sigma^2}{n-1})^2}{\Gamma(\frac{n-1}{2})} \Big) - \mu^2\sigma^4
+\end{aligned}
+$$
+
+### Information matrix
+
+For a p-dimensional parameter vector $\theta$, the Fisher information matrix is given as:
+
+$$
+I(\boldsymbol{\theta}) = -E
+\begin{pmatrix}
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_1^2} &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_1 \partial \theta_2} &
+\cdots &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_1 \partial \theta_p} \\
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_2 \partial \theta_1} &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_2^2} &
+\cdots &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_2 \partial \theta_p} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_p \partial \theta_1} &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_p \partial \theta_2} &
+\cdots &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \theta_p^2}
+\end{pmatrix}
+$$
+
+### Example 
+
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$.
+
+$$
+I(\boldsymbol{\theta}) = -E
+\begin{pmatrix}
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \mu^2} &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \mu \partial \sigma^2} \\
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \sigma^2 \partial \mu} &
+\frac{\partial^2 \log L(\boldsymbol{\theta})}{\partial \sigma^4}
+\end{pmatrix} = -
+\begin{pmatrix}
+-\frac{n}{\sigma^2} & 0 \\ 0 & -\frac{n}{2\sigma^4}
+\end{pmatrix} \quad \Rightarrow \quad
+I^{-1}(\boldsymbol{\theta}) = 
+\begin{pmatrix}
+\frac{\sigma^2}{n} & 0 \\ 0 & \frac{2\sigma^4}{n}
+\end{pmatrix}
+$$
+
+On the other hand,
+
+$$
+var\Big[ \bar{X} \\ s^2 \Big] = 
+\begin{pmatrix}
+\frac{\sigma^2}{n} & 0 \\ 0 & \frac{2\sigma^4}{n-1}
+\end{pmatrix}
+$$
+
+Since $\frac{\sigma^2}{n} \rightarrow \frac{\sigma^2}{n}$ and $\frac{2\sigma^4}{n} \rightarrow \frac{2\sigma^4}{n-1}$ as $n \rightarrow \infty$, then $\bar{X}$ is an efficient estimator and $s^2$ is an asymptotically efficient estimator.
+
 ## Efficient estimators
 
 ### Definition
@@ -1587,9 +1668,9 @@ Show that $s^2$ is an efficient estimator of $\sigma^2$
 
 $$E[s^2] = \sigma^2 \qquad var[s^2] = \frac{2\sigma^4}{n-1}$$
 
-$$\frac{\partial \log f(x)}{\partial \sigma^2} = -\frac{1}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}(x-\mu)^2 \qquad \frac{\partial^2 \log f(x)}{\partial (\sigma^2)^2} = \frac{1}{2(\sigma^2)^2} - \frac{1}{(\sigma^2)^3}(x-\mu)^2$$
+$$\frac{\partial \log f(x)}{\partial \sigma^2} = -\frac{1}{2\sigma^2} + \frac{1}{2\sigma^4}(x-\mu)^2 \qquad \frac{\partial^2 \log f(x)}{\partial \sigma^4} = \frac{1}{2\sigma^4} - \frac{1}{(\sigma^2)^3}(x-\mu)^2$$
 
-$$I(\sigma^2) = -E\Big[ \frac{\partial^2 \log f(x)}{\partial (\sigma^2)^2} \Big] = -E\Big[ \frac{1}{2(\sigma^2)^2} - \frac{1}{(\sigma^2)^3}(x-\mu)^2 \Big] = -\frac{1}{2(\sigma^2)^2} + \frac{1}{(\sigma^2)^2} = \frac{1}{2\sigma^4}$$
+$$I(\sigma^2) = -E\Big[ \frac{\partial^2 \log f(x)}{\partial \sigma^4} \Big] = -E\Big[ \frac{1}{2\sigma^4} - \frac{1}{(\sigma^2)^3}(x-\mu)^2 \Big] = -\frac{1}{2\sigma^4} + \frac{1}{\sigma^4} = \frac{1}{2\sigma^4}$$
 
 $$var[\hat{\sigma^2}] = \geq \frac{1}{nI(\sigma^2)} = \frac{1}{n\frac{1}{2\sigma^4}} = \frac{2\sigma^4}{n}$$
 
@@ -1796,7 +1877,7 @@ $$
 \quad \Rightarrow \quad \sum_{i=1}^n x_i - n\mu = 0
 \quad \Rightarrow \quad \hat{\mu} = \bar{X} \\
 &\frac{\partial \log L(\sigma^2)}{\partial \sigma^2} = -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{i=1}^n (x_i-\mu)^2 = 0 
-\quad \Rightarrow \quad \hat{\sigma^2} = \frac{\sum_{i=1}^n (x_i-\mu)^2}{n} = \frac{\sum_{i=1}^n (x_i-\bar{X})^2}{n} \\
+\quad \Rightarrow \quad \hat{\sigma^2} = \frac{\sum_{i=1}^n (x_i-\hat{\mu})^2}{n} = \frac{\sum_{i=1}^n (x_i-\bar{X})^2}{n} \\
 E[\hat{\sigma^2}] &= \frac{1}{n}E[\sum_{i=1}^n (x_i-\bar{X})^2] = \frac{(n-1)\sigma^2}{n} \qquad \text{(biased)} \\
 s^2 &= \frac{n}{n-1}\hat{\sigma^2} \qquad \text{(unbiased)}
 \end{aligned}
@@ -1819,11 +1900,11 @@ L(\mu_1, \mu_2, \sigma^2) &= f(x_1, x_2, \dots, x_n) \cdot g(y_1, y_2, \dots, y_
 \quad \Rightarrow \quad \hat{\mu_1} = \bar{X} \\
 \frac{\partial \log L(\mu_2)}{\partial \mu_2} &= \frac{2}{2\sigma^2}\sum_{j=1}^m (y_j-\mu_2) = 0 
 \quad \Rightarrow \quad \hat{\mu_2} = \bar{Y} \\
-\frac{\partial \log L(\mu_2)}{\partial \sigma^2} &= 
+\frac{\partial \log L(\sigma^2)}{\partial \sigma^2} &= 
 -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{i=1}^n (x_i-\mu_1)^2 
 -\frac{m}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{j=1}^m (y_j-\mu_2)^2 = 0 \\
 \Rightarrow \quad \hat{\sigma^2} 
-&= \frac{\sum_{i=1}^n (X_i-\mu_1)^2 + \sum_{j=1}^m (Y_j-\mu_2)^2}{n + m} 
+&= \frac{\sum_{i=1}^n (X_i-\hat{\mu_1})^2 + \sum_{j=1}^m (Y_j-\hat{\mu_2})^2}{n + m} 
 = \frac{\sum_{i=1}^n (X_i-\bar{X})^2 + \sum_{j=1}^m (Y_j-\bar{Y})^2}{n + m}
 = \frac{(n-1)s^2_X + (m-1)s^2_Y}{n + m} \\
 E[\hat{\sigma^2}] &= \frac{(n-1)\sigma^2 + (m-1)\sigma^2}{n + m} = \frac{(n+m-2)\sigma^2}{n+m} \qquad \text{(biased)} \\
@@ -1887,23 +1968,171 @@ $$\hat{\theta} \sim N(\theta, \frac{1}{nI(\theta)})$$
 
 </div>
 
-## Application of MLE in Linear Model
+## Application of MLE in linear model
 
-**Linear Model**:
+### Intercept model
 
 $$Y_i = \mu + \epsilon_i$$
 
-with $\epsilon_1, \epsilon_2, \dots, \epsilon_n \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$ and assumption (Gauss-Markov Conditions): 
-- $E[\epsilon_i] = 0$
-- $var[\epsilon_i] = \sigma^2$
-
-Take
+with $\epsilon_1, \epsilon_2, \dots, \epsilon_n \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$
 
 $$
 \begin{aligned}
 &\min S = \min \sum_{i=1}^n \epsilon^2 = \min \sum_{i=1}^n (Y_i - \mu)^2 \\
-\quad \Rightarrow \quad &\frac{dS}{d\mu} = -2\sum_{i=1}^n (Y_i - \mu) = 0 \\
-\quad \Rightarrow \quad &\sum_{i=1}^n Y_i - n\mu = 0 \\
-\quad \Rightarrow \quad &\hat{\mu} = \bar{Y}
+\Rightarrow \quad &\frac{dS}{d\mu} = -2\sum_{i=1}^n (Y_i - \mu) = 0 \\
+\Rightarrow \quad &\sum_{i=1}^n Y_i - n\mu = 0 \\
+\Rightarrow \quad &\hat{\mu} = \bar{Y}
 \end{aligned}
 $$
+
+If $Y_1, Y_2, \dots, Y_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$, then MLE of $\mu$ is $\hat{\mu} = \bar{Y}$
+
+### Simple linear model
+
+$$Y_i = \beta_0 + \beta_1 X_i + \epsilon_i$$
+
+with $\epsilon_1, \epsilon_2, \dots, \epsilon_n \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$. $Y_i$ are not identically distributed because mean changes. $f(y_i) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(y_i - \beta_0 - \beta_1 x_i)^2}{2\sigma^2}}$.
+
+$$
+\begin{aligned}
+L(\sigma^2, \beta_1, \beta_2) &= \prod_{i=1}^n f(y_i) = (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2}{2\sigma^2}} \\
+\log L(\sigma^2, \beta_1, \beta_2) &= -\frac{n}{2} \log(2\pi\sigma^2) -\frac{\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2}{2\sigma^2} \\
+\frac{\partial L(\sigma^2, \beta_1, \beta_2)}{\partial \beta_0} &= \frac{2}{2\sigma^2} \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i) = 0 \quad \Rightarrow \quad n\beta_0 + \beta_1 \sum_{i=1}^n x_i = \sum_{i=1}^n y_i \\
+\frac{\partial L(\sigma^2, \beta_1, \beta_2)}{\partial \beta_1} &= \frac{2}{2\sigma^2} \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)x_i = 0 \quad \Rightarrow \quad \beta_0 \sum_{i=1}^n x_i + \beta_1 \sum_{i=1}^n x_i^2 = \sum_{i=1}^n x_i y_i \\
+\hat{\beta_0} &= \bar{Y} - \hat{\beta_1} \bar{X} \\
+\hat{\beta_1} &= \frac{\sum_{i=1}^n X_i Y_i -\frac{1}{n}(\sum_{i=1}^n X_i)(\sum_{i=1}^n Y_i)}{\sum_{i=1}^n X_i^2 - \frac{(\sum_{i=1}^n X_i)^2}{n}} \\
+&= \frac{\sum_{i=1}^n (X_i - \bar{X}) \sum_{i=1}^n (Y_i - \bar{Y})}{\sum_{i=1}^n (X_i - \bar{X})^2} \\
+&= \frac{\sum_{i=1}^n (X_i - \bar{X}) Y_i}{\sum_{i=1}^n (X_i - \bar{X})^2} \qquad \text{since } \bar{Y}\sum_{i=1}^n (X_i - \bar{X}) \\
+&= \frac{(X_1 - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2}Y_1 + \dots + \frac{(X_n - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2}Y_n \\
+&\text{Any linear combination of jointly normal random variables is normally distributed} \\
+\frac{\partial L(\sigma^2, \beta_1, \beta_2)}{\partial \sigma^2} &= -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2 = 0 \\
+\hat{\sigma^2} &= \frac{1}{n} \sum_{i=1}^n (y_i - \hat{\beta_0} - \hat{\beta_1} x_i)^2 = \frac{1}{n} \sum_{i=1}^n e_i 
+\end{aligned}
+$$
+
+**Line of fitted value**: $\hat{Y_i} = \hat{\beta_0} + \hat{\beta_1} X_i = \bar{Y} - \hat{\beta_1} \bar{X} + \hat{\beta_1} = \bar{Y} + \hat{\beta_1}(X_i - \bar{X})$
+
+**Residuals**: $e_i = Y_i - \hat{Y_i} = Y_i - \bar{Y} + \hat{\beta_1}(X_i - \bar{X}) \quad \Rightarrow \quad \sum e_i = 0; \quad \sum e_iX_i = 0; \quad \sum e_iY_i = 0$
+
+$$
+\begin{aligned}
+E[\hat{\beta_1}] &= E\Big[ \frac{\sum_{i=1}^n (X_i - \bar{X}) Y_i}{\sum_{i=1}^n (X_i - \bar{X})^2} \Big] \\
+&= \frac{\sum_{i=1}^n (X_i - \bar{X}) E[Y_i]}{\sum_{i=1}^n (X_i - \bar{X})^2} \\
+&= \frac{\sum_{i=1}^n (X_i - \bar{X}) (\beta_0 + \beta_1 X_i)}{\sum_{i=1}^n (X_i - \bar{X})^2} \\
+&= \frac{\beta_0 \overbrace{\sum_{i=1}^n (X_i - \bar{X})}^{\text{equal to } 0} + \beta_1 \overbrace{\sum_{i=1}^n (X_i - \bar{X})\bar{X}}^{=\sum_{i=1}^n (X_i - \bar{X})^2}}{\sum_{i=1}^n (X_i - \bar{X})^2} = \beta_1 \qquad \text{(unbiased)} \\
+var[\hat{\beta_1}] &= var\Big[ \frac{\sum_{i=1}^n (X_i - \bar{X}) Y_i}{\sum_{i=1}^n (X_i - \bar{X})^2} \Big] 
+= \frac{\sum_{i=1}^n (X_i - \bar{X})^2 var[Y_i]}{(\sum_{i=1}^n (X_i - \bar{X})^2)^2} 
+= \frac{\sigma^2}{\sum_{i=1}^n (X_i - \bar{X})^2} \\
+E[\hat{\beta_0}] &= E[\bar{Y} - \hat{\beta_1} \bar{X}] 
+= E[\bar{Y}] - \bar{X} E[\hat{\beta_1}] 
+= \beta_0 + \beta_1 \bar{X} - \beta_1 \bar{X}
+= \beta_0 \qquad \text{(unbiased)} \\
+var[\hat{\beta_0}] &= var[\bar{Y} - \hat{\beta_1} \bar{X}] 
+= var[\bar{Y}] + \bar{X}^2 var[\hat{\beta_1}] - 2\bar{X} cov[\bar{Y}, \hat{\beta_1}]
+= \sigma^2(\frac{1}{n} + \frac{\bar{X}^2}{\sum_{i=1}^n (X_i - \bar{X})^2}) \\
+\text{Note: } cov[\bar{Y}, \hat{\beta_1}] &= cov\Big[ \frac{\sum_{i=1}^n Y_i}{n}, \frac{\sum_{i=1}^n (X_i - \bar{X}) Y_i}{\sum_{i=1}^n (X_i - \bar{X})^2} \Big] \\
+&= cov\Big[ \frac{\sum_{i=1}^n Y_i}{n}, \frac{(X_1 - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2}Y_1 + \dots + \frac{(X_n - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2}Y_n \Big] \qquad \text{use bilinearity property} \\
+&= \frac{\sum_{i=1}^n Y_i}{n}, \frac{\sigma^2(X_1 - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2} + \dots + \frac{\sigma^2(X_n - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2} \\
+&= \frac{\sigma^2\sum_{i=1}^n (X_i - \bar{X})}{\sum_{i=1}^n (X_i - \bar{X})^2} = 0
+\end{aligned}
+$$
+
+Therefore,
+
+$$E[\hat{\sigma^2}] = E\Big[ \frac{\sum_{i=1}^n e_i^2}{n} \Big] = \frac{n-2}{n}\sigma^2 \qquad \text{(biased)}$$
+$$s^2 = \frac{\sum_{i=1}^n e_i^2}{n-2}; \qquad E[s^2] = \sigma^2 \qquad \text{(unbiased)}$$
+
+$$\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{\sum_{i=1}^n (X_i - \bar{X})^2}); \qquad 
+\frac{(n-2)s^2}{\sigma^2} \sim \chi^2_{n-2}; \qquad \beta_1 \perp\!\!\!\perp s^2$$
+
+
+---
+
+
+# Lec 10: Order statistics
+
+Let $X_1, X_2, \dots, X_n$ denote independent continuous random variables with cdf $F(x)$ and pdf $f(x)$. Denote the ordered random variables with $X_{(1)}, X_{(2)}, \dots, X_{(n)}$ where $X_{(1)} \leq X_{(2)} \leq \dots \leq X_{(n)}$ or $X_{(1)} = \min(X_1, X_2, \dots, X_n)$ and $X_{(n)} = \max(X_1, X_2, \dots, X_n)$. Similarly, $X_{(j)}$ is the $j_{th}$ ordedr statistic. 
+
+## Probability density function of the $j_{th}$ order statistic
+
+$$g_{X_{(j)}}(x) = \frac{n!}{(n-j)! (j-1)!} [F_X(x)]^{j-1} [1 - F_X(x)]^{n-1} f_X(x)$$
+
+- Probability density function of the $1_{st}$ order statistic: $g_{X_{(1)}}(x) = n[1 - F_X(x)]^{n-1} f_X(x)$
+- Probability density function of the $n_{th}$ order statistic: $g_{X_{(n)}}(x) = n[F_X(x)]^{n-1} f_X(x)$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+
+**Proof**:
+
+We will find the cdf of the $j_{th}$ order statistics and then the pdf by taking the derivative of the cdf. The cdf is denoted by $F_{X_{(j)}}(x) = P(X_{(j)} \leq x)$. Introduce a discrete random variable $Y$ that counts the number of variables less than or equal to $x$. The statement $P(X_{(j)} \leq x) = P(Y \geq j)$. If we call "success" the event $X_i < x$, then $Y \sim bin(n,p) = bin(n,F_X(x))$
+
+$$
+\begin{aligned}
+F_{X_{(j)}}(x) &= P(X_{(j)} \leq x) = P(Y \geq j) \\
+&= \sum_{k=j}^n \binom{n}{k} p^k (1-p)^{n-k} \\
+&= \sum_{k=j}^n \binom{n}{k} F_X(x)^k (1-F_X(x))^{n-k} \\
+g_{X_{(j)}}(x) &= \frac{dF_{X_{(j)}}(x)}{dx} \\
+&= \sum_{k=j}^n \binom{n}{k} kF_X(x)^{k-1} f_X(x) (1-F_X(x))^{n-k} \\
+&- \sum_{k=j}^n \binom{n}{k} (n-k)F_X(x)^k (1-F_X(x))^{n-k-1} f_X(x) \\
+&= \binom{n}{j} jf_X(x) F_X(x)^{j-1} (1-F_X(x))^{n-j} \qquad \text{(when } k=j \text{ )} \\
+&+ \sum_{k=j+1}^n \binom{n}{k} kF_X(x)^{k-1} f_X(x) (1-F_X(x))^{n-k} \\ 
+&- \sum_{k=j}^{n-1} \binom{n}{k} (n-k)F_X(x)^k (1-F_X(x))^{n-k-1} f_X(x) \qquad \text{(last term is zero when when } k=n \text{ )} \\
+&= \frac{n!}{(n-j)!j!}jf_X(x) F_X(x)^{j-1} (1-F_X(x))^{n-j} \\
+&+ \sum_{k=j}^{n-1} \binom{n}{k+1} (k+1)F_X(x)^{k} f_X(x) (1-F_X(x))^{n-k-1} \\ 
+&- \sum_{k=j}^{n-1} \binom{n}{k} (n-k)F_X(x)^k (1-F_X(x))^{n-k-1} f_X(x) \\
+&= \frac{n!}{(n-j)!(j-1)!} F_X(x)^{j-1} (1-F_X(x))^{n-j} f_X(x)
+\end{aligned}
+$$
+
+Note: $\binom{n}{k+1}(K+1) = \binom{n}{k}(n-k)$, so the last 2 terms before the last line cancel.
+
+</div>
+
+## Joint probability density function of $X_{(1)}, X_{(2)}, \dots, X_{(n)}$
+
+$$g_{X_{(1)}, X_{(2)}, \dots, X_{(n)}}(x_1, x_2, \dots, x_n) = n!f_X(x_1)f_X(x_2)\dots f_X(x_n)$$
+
+## Joint probability density function of $X_{(i)}$ and $X_{(j)}$, with $1 \leq i < j \leq n$
+
+$$g_{X_{(i)}, X_{(j)}}(u,v) = \frac{n!}{(i-1)!(j-1-i)!(n-j)!} f_X(u) f_X(v) [F_X(u)]^{i-1} [F_X(v) - F_X(u)]^{j-1-i} [1 - F_X(v)]^{n-j}$$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+
+**Proof**:
+
+An intuitive derivation of the density function of the $j_{th}$ order statistics. This intuitive derivation is based on this result $P(y \leq Y \leq y + dy) \approx f(y) dy$. Consider the $j_{th}$ order statistic $X_{(j)}$. if $X_{(j)}$ is in the neighborhood of $x$, then there are
+- $j-1$ random variables less than $x$, each one with probability $p_1 = P(X \leq x) = F_X(x)$,
+- $1$ random variable near $x$, with probability $p_2 = P(x \leq X \leq x + dx) \approx f_X(x) dx$, and
+- $n-j$ random variables larger than $x$, with probability $p_3 = P(X > x) = 1 - P(X \leq x) = 1 - F_X(x)$.
+
+Therefore,
+
+$$
+\begin{aligned}
+P(x \leq X_{(j)} \leq x + dx) &\approx g_{X_{(j)}}(x)dx \\
+&= \binom{n!}{j-1, 1, n-j} p_1^{j-1} p_2 p_3^{n-j} \qquad \text{multinomial distribution} \\
+&= \frac{n!}{(j-1)! (n-j)!} F_X(x)^{j-1} f_X(x) dx [1-F_X(x)]^{n-j} \\
+\Rightarrow \quad g_{X_{(j)}}(x) &= \frac{n!}{(j-1)! (n-j)!} F_X(x)^{j-1} f_X(x) [1-F_X(x)]^{n-j}
+\end{aligned}
+$$
+
+Using this intuitive derivation, we can now find the joint probability density function of $X_{(i)}$ and $X_{(j)}$. Using the same approximation as above. For $u < v$, we need to have the following arrangement:
+- $i-1$ random variables less than $u$, each one with probability $p_1 = P(X \leq u) = F_X(u)$
+- $1$ random variable near $u$ with probability $p_2 = P(u \leq X \leq u + du) \approx f_X(u) du$
+- $j-1-i$ random variables between $u$ and $v$ with probability $p_3 = P(u \leq X \leq v) = F_X(v) - F_X(u)$
+- $1$ random variable near $v$ with probability $p_4 = P(v \leq X \leq v + dv) \approx f_X(v) dv$
+- $n-j$ random variables larger than $v$, each one with probability $p_5 = P(X > v) = 1 - F_X(v)$
+
+$$
+\begin{aligned}
+&\quad P(u \leq X \leq u + du, v \leq X \leq v + dv) \approx g_{X_{(i)}, X_{(j)}}(u,v) du dv \\
+&= \binom{n!}{i-1, 1, j-1-i, 1, n-j} p_1^{i-1} p_2 p_3^{j-1-i} p_4 p_5^{n-j} \\
+&= \frac{n!}{(i-1)!(j-1-i)!(n-j)!} F_X(u)^{i-1} f_X(u) du [F_X(v) - F_X(u)]^{j-1-i} f_X(v) dv [1 - F_X(v)]^{n-j} \\
+g_{X_{(i)}, X_{(j)}}(u,v) &= \frac{n!}{(i-1)!(j-1-i)!(n-j)!} F_X(u)^{i-1} f_X(u) [F_X(v) - F_X(u)]^{j-1-i} f_X(v) [1 - F_X(v)]^{n-j}
+\end{aligned}
+$$
+
+</div>
+
+### Example
+
