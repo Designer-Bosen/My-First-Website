@@ -2136,3 +2136,16 @@ $$
 
 ### Example
 
+Electronic components of a certain type have a length life (in hours) $X$, that follows $exp(\lambda)$. 
+
+#### (a) Suppose that $n$ such components operate independently and in series in a certain system (the system fails when either component fails). Find the density function for the length of life of the system.
+
+$$
+\begin{aligned}
+g_{X_{(1)}}(x) &= n[1 - F_X(x)]^{n-1} f_X(x) \\
+&= n[1 - (1 - e^{-\lambda x})^{n-1}] \lambda e^{-\lambda x} \\
+&= n\lambda e^{-n\lambda x}
+\end{aligned}
+$$
+
+Therefore, $X_{(1)} \sim exp(n\lambda)$

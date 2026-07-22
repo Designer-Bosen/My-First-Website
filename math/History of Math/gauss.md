@@ -13,8 +13,6 @@ Another big accomplishment concerns his construction of the regular heptadecagon
 ### **Theory**  
 Trigonometrically, construction of 17-gon relies on algebraically deriving the value of $\cos(\frac{2\pi}{17})$ or $\sin(\frac{2\pi}{17})$. Gauss discovers that regular polygons with Fermat number of sides can be sketched ($p$ is a Fermat number if $p = 2^{2^n} + 1$ for $n \in \mathbb{Z}$). That mean equilateral triangle, regular pentagon, and even 257-gon 65537-gon are constructible.
 
-squarerooting is supported by...
-
 ---
 
 ### **SOME REQUIRED IDEAS**
