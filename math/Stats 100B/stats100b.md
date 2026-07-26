@@ -465,7 +465,7 @@ Let $X$ be a random variable with moment genearting function $M_X(t) = E[e^{tX}]
 
 ### Example - MGF of normal random variable
 
-Use the moment generating function of $Z \sim N(0,1)$ to find the moment generating function of $X \sim N(\mu, \sigma)$
+Use the moment generating function of $Z \sim N(0,1)$ to find the moment generating function of $X \sim N(\mu, \sigma^2)$
 
 $$Z = \frac{X - \mu}{\sigma} \quad \Rightarrow \quad X = \mu + \sigma Z$$
 
@@ -489,7 +489,7 @@ $$E[X+Y] = \mu_1 + \mu_2 \qquad var[X+Y] = \sigma_1^2 + \sigma_2^2$$
 $$X+Y \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$$
 
 ### Example
-Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma)$. Use moment generating functions to find the distribution.
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$. Use moment generating functions to find the distribution.
 
 #### (a). $T = X_1 + X_2 + \dots + X_n$
 
@@ -847,7 +847,7 @@ $\psi_{ij}(\mathbf{t}) = \frac{\partial^2 \psi_\mathbf{X}(\mathbf{t})}{\partial 
 Then $E[X_i] = \psi_i(\mathbf{0})$, $var[X_i] = \psi_{ii}(\mathbf{0})$, $cov[X_i, X_j] = \psi_{ij}(\mathbf{0})$.
 
 ### Example
-COnsider the multinomial probability distribution $\mathbf{X} \sim M(n,\mathbf{p})$ with joint moment generating function $M_\mathbf{X}(\mathbf{t}) = (p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r})^n$
+Consider the multinomial probability distribution $\mathbf{X} \sim M(n,\mathbf{p})$ with joint moment generating function $M_\mathbf{X}(\mathbf{t}) = (p_1e^{t_1} + p_2e^{t_2} + \dots + p_re^{t_r})^n$
 
 $$
 \begin{aligned}
@@ -1315,7 +1315,7 @@ Let $X \sim t_n$. Then, $E[X] = 0$ and $var[X] = \frac{n}{n-2}$. The $t$ distrib
 
 ### Application
 
-Let $X_1, X_2, \dots, X_n$ be independent and indentically distributed random variables each one having $N(\mu, \sigma)$. Construct a $t$ distribution using the definition of the $t$ distribution.
+Let $X_1, X_2, \dots, X_n$ be independent and indentically distributed random variables each one having $N(\mu, \sigma^2)$. Construct a $t$ distribution using the definition of the $t$ distribution.
 
 $$\frac{\bar{X}-\mu}{s/\sqrt{n}} = \frac{(\bar{X}-\mu) / (\sigma/\sqrt{n})}{\sqrt{\frac{(n-1)s^2}{\sigma^2} / (n-1)}} \sim t_{n-1}$$
 
@@ -1851,7 +1851,7 @@ L(\theta) &= f(x_1, x_2, \dots, x_n) = \prod_{i=1}^n f(x_i)
 \end{aligned}
 $$
 
-We say the MLE of $\theta$ is $\hat{\theta} = \max(X_1, \dots, X_n)$ or $\hat{\theta} = X_{(n)}$.
+We say the MLE of $\theta$ is $\hat{\theta} = \max(X_1, X_2, \dots, X_n)$ or $\hat{\theta} = X_{(n)}$.
 
 Find the pdf of $X_{(n)}$
 
@@ -2143,9 +2143,317 @@ Electronic components of a certain type have a length life (in hours) $X$, that 
 $$
 \begin{aligned}
 g_{X_{(1)}}(x) &= n[1 - F_X(x)]^{n-1} f_X(x) \\
-&= n[1 - (1 - e^{-\lambda x})^{n-1}] \lambda e^{-\lambda x} \\
-&= n\lambda e^{-n\lambda x}
+&= n[1 - (1 - e^{-\lambda x})]^{n-1} \lambda e^{-\lambda x} \\
+&= n\lambda e^{-n\lambda x} 
 \end{aligned}
 $$
 
 Therefore, $X_{(1)} \sim exp(n\lambda)$
+
+#### (b) Suppose that $n$ such components operate independently and in parallel in a certain system (the system does not fail until both components fail). Find the density function for the length of life of the system.
+
+$$
+\begin{aligned}
+g_{X_{(n)}}(x) &= n[F_X(x)]^{n-1} f_X(x) \\
+&= n(1 - e^{-\lambda x})^{n-1} \lambda e^{-\lambda x} \\
+&= n\lambda e^{-\lambda x} (1 - e^{-\lambda x})^{n-1}
+\end{aligned}
+$$
+
+### Example
+
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} unif(0, \theta)$. Find the pdf of $X_{(1)}$, $X_{(i)}$, $X_{(j)}$, and the joint pdf of $X_{(1)}$, $X_{(n)}$.
+
+$$
+\begin{aligned}
+g_{X_{(1)}}(x) &= n\Big(1 - \frac{x}{\theta}\Big)^{n-1} \frac{1}{\theta} \\
+g_{X_{(n)}}(x) &= n\Big(\frac{x}{\theta}\Big)^{n-1} \frac{1}{\theta} = \frac{n}{\theta^n} x^{n-1} \\
+g_{X_{(j)}}(x) &= \frac{n_!}{(n-j)!(j-1)!} \Big(\frac{x}{\theta}\Big)^{j-1} \Big(1 - \frac{x}{\theta}\Big)^{n-j} \frac{1}{\theta} \\
+g_{X_{(1)}, X_{(n)}}(u,v) &= \frac{n!}{(1-1)!(n-1-1)!(n-n)!} \frac{1}{\theta} \frac{1}{\theta} \Big(\frac{u}{\theta}\Big)^{1-1} \Big(\frac{v}{\theta} - \frac{u}{\theta}\Big)^{n-1-1} \Big(1 - \frac{v}{\theta}\Big)^{n-n} \\
+&= \frac{n!}{(n-2)!} \frac{1}{\theta^2} \Big(\frac{v}{\theta} - \frac{u}{\theta}\Big)^{n-2} \\
+&= \frac{n(n-1)}{\theta^n} (v - u)^{n-2}
+\end{aligned}
+$$
+
+### Example (revisited)
+
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} unif(0, \theta)$. We have seen that the mle of $\theta$ is $\hat{\theta} = X_{(n)}$. Is it biased?
+
+$$
+\begin{aligned}
+g_{X_{(n)}} &= n[F_X(x)]^{n-1} f_X(x) \\
+g_{\hat{\theta}} &= n \Big[ \frac{x - 0}{\theta - 0} \Big]^{n-1} \frac{1}{\theta - 0} = n \frac{x^{n-1}}{\theta^{n-1}} \frac{1}{\theta} = \frac{nx^{n-1}}{\theta^n} \\
+E[\hat{\theta}] &= \int_0^\theta x \frac{nx^{n-1}}{\theta^n} dx = \frac{n}{\theta^n} \int_0^\theta x^n dx = \frac{n}{\theta^n} \Big[ \frac{x^{n+1}}{n+1} \Big]_0^\theta = \frac{n}{n+1}\theta \qquad \text{(biased)}
+\end{aligned}
+$$
+
+
+---
+
+
+# Lec 11: Method of moments
+
+The method of moments is based on the assumption that the sample moments are good estimates of the corresponding population moments.
+
+### Definition
+
+| Population moments | Sample moments |
+|--------------------|----------------|
+| $E[X] = \mu$ is the first population moment | $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ is the first sample moment |
+| $E[X^2]$ is the second population moment | $\frac{1}{n}\sum_{i=1}^n X_i^2$ is the second sample moment |
+| $\vdots$ | $\vdots$ |
+| $E[X^k]$ is the $k_{th}$ population moment | $\frac{1}{n}\sum_{i=1}^n X_i^k$ is the $k_{th}$ sample moment |
+
+Therefore, $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ is a good estimator of $E[X] = \mu$. Similarly, $\frac{1}{n}\sum_{i=1}^n X_i^2$ is a good estimator of $E[X^2]$, etc.
+
+### Example
+
+#### (a) Let $X_1, X_2, \dots, X_n$ denote an i.i.d. random sample from a Poisson distribution with mean $\lambda$. Find the moment estimator of $\lambda$.
+
+$$E[X] = \lambda \quad \Rightarrow \quad \hat{\lambda} = \bar{X}$$
+
+#### (b) Let $X_1, X_2, \dots, X_n$ denote an i.i.d. random sample from unif(0, \theta). Find the method of moments estimator of $\theta$.
+
+$$
+\begin{aligned}
+E[X] &= \frac{\theta}{2} \quad \Rightarrow \quad \hat{\theta} = 2\bar{X} \\
+E[\hat{\theta}] &= 2E[\bar{X}] = 2\mu = 2 \frac{\theta}{2} = \theta \\
+var[\hat{\theta}] &= 4var[\bar{X}] = 4\frac{\sigma^2}{n} = 4\frac{\theta^2}{12n} = \frac{\theta^2}{3n}
+\end{aligned}
+$$
+
+Note: unbiased estimator: $\hat{\theta} = \frac{n+1}{n}X_{(n)}$
+
+#### (c) Let $X_1, X_2, \dots, X_n$ denote an i.i.d. random sample from $N(\mu, \sigma^2)$. Find the moment estimator of $\mu$ and $\sigma^2$.
+
+$$
+\begin{aligned}
+E[X] &= \mu \quad \Rightarrow \quad \hat{\mu} = \bar{X} \\
+\hat{\sigma^2} &= E[X^2] - E[X]^2 = \frac{1}{n}\sum_{i=1}^n X_i^2 - \bar{X}^2 = \frac{1}{n}(\sum_{i=1}^n X_i^2 - n\bar{X}) = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2 \\
+\end{aligned}
+$$
+
+#### (d) Let $X_1, X_2, \dots, X_n$ denote an i.i.d. random sample from $N(0, \sigma^2)$. Find the moment estimator of $\sigma^2$.
+
+$$\hat{\sigma^2} = E[X^2] = \frac{1}{n}\sum_{i=1}^n X_i^2$$
+
+#### (e) Let $X_1, X_2, \dots, X_n$ denote an i.i.d. random sample from the probability density function $f(x;\theta) = (\theta + 1)x^\theta, \quad 0 < x < 1, \quad \theta > -1$. Find the method of moments estimator of $\theta$.
+
+$$
+\begin{aligned}
+E[X] &= \int_0^1 x(\theta + 1)x^\theta dx = \Big[ (\theta + 1)\frac{x^{\theta+2}}{\theta+2} \Big] = \frac{\theta + 1}{\theta + 2} \\
+\Rightarrow \quad \frac{\hat{\theta} + 1}{\hat{\theta} + 2} &= \bar{X} \\
+\Rightarrow \quad \hat{\theta} &= \frac{2\bar{X} - 1}{1 - \bar{X}}
+\end{aligned}
+$$
+
+#### (f) Let $X_1, X_2, \dots, X_n$ denote an i.i.d. random sample from $\Gamma(\alpha, \beta)$. Find the moment estimator of $\alpha$ and $\beta$.
+
+$$
+\begin{aligned}
+\mu &= E[X] = \alpha\beta \quad \Rightarrow \quad \hat{\alpha}\hat{\beta} = \bar{X} \\
+\sigma^2 &= E[X^2] - E[X]^2 = \alpha\beta^2 \quad \Rightarrow \quad \hat{\alpha}\hat{\beta}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2 - (\bar{X})^2 = \frac{1}{n} \sum_{i=1}^2 (X_i - \bar{X})^2 \\
+\Rightarrow \quad \hat{\beta} &= \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n\bar{X}} \\
+\Rightarrow \quad \hat{\alpha} &= \frac{\bar{X}}{\hat{\beta}} = \frac{n\bar{X}^2}{\sum_{i=1}^n (X_i - \bar{X})^2}
+\end{aligned}
+$$
+
+
+---
+
+
+# Lec 12: Data reduction and sufficiency principle
+
+### Introduction
+
+We have seen some examples of estimators, some based on intuition or the method of maximum likelihood or the method of moments. For example, $\bar{X}$ is an unbiased estimator of $\mu$, $s^2$ is an unbiased estimator of $\sigma^2$ etc. Are these estimators sufficient, in the sense that we no longer need the actual data values in order for example, to construct a confidence interval for a parameter $\theta$? Such estimators exist and are called sufficient statistics. An important result is that sufficient statistics can be used to find minimal variance unbiased estimators (MVUE).
+
+### Example 
+
+Suppose we want to construct a confidence interval for the parameter $\lambda$ of an exponential distribution. Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables with $X_i \sim exp(\lambda)$. Construct a $1-\alpha$ confidence interval for $\lambda$. Find a statement $P(L \leq \lambda \leq U) = 1 - \alpha$.
+
+$$
+\begin{aligned}
+M_X(t) &= (1 - \frac{t}{\lambda})^{-1} \\
+M_{\sum_{i=1}^n X_i}(t) &= (1 - \frac{t}{\lambda})^{-n} \\
+M_{2\lambda \sum_{i=1}^n X_i}(t) &= (1 - 2t)^{-\frac{2n}{2}}
+\end{aligned}
+$$
+
+So $2\lambda \sum_{i=1}^n X_i \sim \chi^2_{2n}$
+
+$$
+\begin{aligned}
+&P\Big( \chi^2_{\frac{\alpha}{2}, 2n} \leq 2\lambda \sum_{i=1}^n X_i \leq \chi^2_{1 - \frac{\alpha}{2}, 2n} \Big) = 1 - \alpha \\
+\Rightarrow \quad &P\Big( \frac{\chi^2_{\frac{\alpha}{2}, 2n}}{2\sum_{i=1}^n X_i} \leq \lambda \leq \frac{\chi^2_{1 - \frac{\alpha}{2}, 2n}}{2\sum_{i=1}^n X_i} \Big) = 1 - \alpha
+\end{aligned}
+$$
+
+We see that to construct the confidence interval, we only need $\sum_{i=1}^n X_i$ (not the individual values $X_1, X_2, \dots, X_n$).
+
+### Sufficiency principle
+
+Let $X_1, X_2, \dots, X_n$ be a random sample and let $T(\mathbf{X}) = T(\mathbf{x})$ be a sufficient statistic.
+
+Let $Y_1, Y_2, \dots, Y_n$ be a random sample and let $T(\mathbf{Y}) = T(\mathbf{y})$ be a sufficient statistic.
+
+If $T(\mathbf{x}) = T(\mathbf{y})$, then the inference we make about the parameter $\theta$ of a distribution will be the same (either using $T(\mathbf{x})$ or $T(\mathbf{y})$).
+
+### Definition (Sufficient statistics)
+
+Let $X_1, X_2, \dots, X_n$ be a random sample and let $T(\mathbf{x})$ be a function of $X_1, X_2, \dots, X_n$. A statistic $T(\mathbf{x})$ is a sufficient statistic for a parameter $\theta$ if the conditional distribution of $\mathbf{X} = \mathbf{X}$ given the value $T(\mathbf{X}) = T(\mathbf{x})$ does not depend on $\theta$.
+
+### Theorem
+
+If $L(\mathbf{X} \mid \theta)$ is the joint probability density or joint probability mass function of $\mathbf{X}$ and $q(t \mid \theta)$ is the pdf or pmf of $T(\mathbf{X})$, we say that $T(\mathbf{X})$ is a sufficient statistic of $\theta$ if the ratio $\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)} = H(X_1, X_2, \dots, X_n)$ is a constant as a function of $\theta$.
+
+### Example 
+
+#### (a). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \text{Bernoulli}(p)$. Show that $\sum_{i=1}^n X_i$ is a sufficient statistic for $p$.
+
+$$p(x) = p^x(1-p)^{1-x} \qquad T(\mathbf{X}) = \sum_{i=1}^n X_i \sim bin(n,p)$$
+
+$$
+\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)} = \frac{p^{\sum_{i=1}^n x_i} (1-p)^{n - \sum_{i=1}^n x_i}}{\binom{n}{T(\mathbf{x})} p^{T(\mathbf{x})}(1-p)^{n - T(\mathbf{x})}} = \frac{1}{\binom{n}{T(\mathbf{x})}} \quad \text{(free of } p \text {)}
+$$
+
+Since $\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)}$ is a constant of $p$, $\sum_{i=1}^n X_i$ is a sufficient statistic for $p$.
+
+#### (b). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \Gamma(\alpha,\beta)$. Suppose $\alpha$ is known. Show that $\sum_{i=1}^n X_i$ is a sufficient statistic for $\beta$.
+
+$$f(x) = \frac{x^{\alpha-1} e^{-\frac{x}{\beta}}}{\Gamma(\alpha)\beta^\alpha} \qquad T(\mathbf{X}) = \sum_{i=1}^n X_i \sim \Gamma(n\alpha, \beta)$$
+
+$$
+\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)} = \frac{ 
+\frac{(\prod_{i=1}^n x_i)^{\alpha-1} e^{-\frac{\sum_{i=1}^n x_i}{\beta}}}{\Gamma(\alpha)^n\beta^{n\alpha}} }{ \frac{T(\mathbf{x})^{n\alpha-1} e^{-\frac{T(\mathbf{x})}{\beta}}}{\Gamma(n\alpha)\beta^{n\alpha}} }
+= \frac{(\prod_{i=1}^n x_i)^{\alpha-1} \Gamma(n\alpha)}{\Gamma(\alpha)^n T(\mathbf{x})^{n\alpha-1}}
+\quad \text{(free of } \beta \text {)}
+$$
+
+Since $\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)}$ is a constant of $\beta$, $\sum_{i=1}^n X_i$ is a sufficient statistic for $\beta$.
+
+#### (c). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$ with $\sigma^2$ known. Show that $\bar{X}$ is a sufficient statistic for $\mu$
+
+$$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2} \qquad T(\mathbf{X}) = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i \sim N(\mu, \frac{\sigma^2}{n})$$
+
+Note:
+
+$$
+\sum_{i=1}^n (X_i - \mu)^2
+= \sum_{i=1}^n (X_i - \bar{X} + \bar{X} - \mu)^2
+= \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu)^2 + 2(\bar{X} - \mu) \overbrace{\sum_{i=1}^n (X_i - \bar{X})}^{\text{equal to } 0}
+$$
+
+$$
+\begin{aligned}
+\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)} &= \frac{
+(2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2} }{ 
+(2\pi\frac{\sigma^2}{n})^{-\frac{1}{2}} e^{-\frac{1}{2\frac{\sigma^2}{n}} (T(\mathbf{x}) - \mu)^2} } \\
+&= \frac{
+(2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} (\sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu)^2)} }{ (2\pi\frac{\sigma^2}{n})^{-\frac{1}{2}} e^{-\frac{1}{2\sigma^2} n(T(\mathbf{x}) - \mu)^2} } \\
+&= \frac{ (2\pi\sigma^2)^{-\frac{n}{2}} }{ (2\pi\frac{\sigma^2}{n})^{-\frac{1}{2}} } e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2}
+\qquad \text{(free of } \mu \text {)}
+\end{aligned}
+$$
+
+Since $\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)}$ is a constant of $\mu$, $\bar{X}$ is a sufficient statistic for $\mu$.
+
+#### (d). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \text{Poisson}(\lambda)$. Show that $\sum_{i=1}^n X_i$ a sufficient statistic for $\lambda$.
+
+$$f(x) = \frac{\lambda^x e^{-\lambda}}{x!} \qquad T(\mathbf{X}) = \sum_{i=1}^n X_i \sim \text{Poisson}(n\lambda)$$
+
+$$
+\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)} = \frac{ 
+\frac{\lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}}{\prod_{i=1}^nx!} }{
+\frac{(n\lambda)^{T(\mathbf{x})} e^{-n\lambda}}{T(\mathbf{x})!} } =
+\frac{T(\mathbf{x})!}{n^{T(\mathbf{x})} \prod_{i=1}^nx!}
+\qquad \text{(free of } \lambda \text {)}
+$$
+
+Since $\frac{L(\mathbf{x} \mid \theta)}{q(T(\mathbf{x}) \mid \theta)}$ is a constant of $\lambda$, $\sum_{i=1}^n X_i$ is a sufficient statistic for $\lambda$.
+
+### Factorization theorem
+
+Let $X_1, X_2, \dots, X_n$ be a random sample and let $L(\mathbf{x}; \theta)$ be the likelihood function. The $T(\mathbf{x})$ is a sufficient statistic for the estimation of a parameter $\theta$ iff the likelihood function can be expressed as the product of two non-negative functions:
+
+$$L(\mathbf{x}; \theta) = g(T(\mathbf{x}); \theta) h(\mathbf{x})$$
+
+### Example 
+
+#### (a). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$ with $\sigma^2$ known. Show that $\bar{X}$ is a sufficient statistic for $\mu$ (revisit):
+
+$$L(\mathbf{x}; \theta) 
+= (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2} 
+= \underbrace{(2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \bar{x})^2}}_{h(\mathbf{x})} \underbrace{e^{-\frac{n}{2\sigma^2} (\bar{x} - \mu)^2 }}_{g(T(\mathbf{x}); \mu)}$$
+
+Therefore, $\bar{X}$ is a sufficient statistic of $\mu$.
+
+#### (b). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} exp(\frac{1}{\lambda})$. Show that $T(\mathbf{X}) = \sum_{i=1}^n X_i$ is a sufficient statistic for the estimation of $\lambda$.
+
+$$L(\mathbf{x}; \theta) = \frac{1}{\lambda^n} e^{-\frac{1}{\lambda} \sum_{i=1}^n x_i} \quad \text{so } h(x) = 1$$
+
+Therefore, $\sum_{i=1}^n X_i$ is a sufficient statistic of $\lambda$.
+
+#### (c). Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$ with both $\mu$ and $\sigma^2$ unknown. Show that $(\bar{X}, s^2)$ are sufficient statistics for $(\mu, \sigma^2)$.
+
+$$
+\begin{aligned}
+L(\mathbf{x}; \theta) 
+&= (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2} \\
+&= (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} (\sum_{i=1}^n (x_i - \bar{x})^2 + n(\bar{x} - \mu)^2)} \\
+&= (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} ((n-1)s^2 + n(\bar{x} - \mu)^2)} \qquad \text{where } s^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1} \text{ and } h(\mathbf{x}) = 1
+\end{aligned}
+$$
+
+Therefore, $(\bar{X}, s^2)$ are sufficient statistics for $(\mu, \sigma^2)$.
+
+### Properties of sufficient statistics
+
+#### 1. Functions of sufficient statistics are also sufficient.
+
+##### Example - Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$. Show that $\frac{1}{n} \sum_{i=1}^n X_i^2$ (second sample moment) is a sufficient statistic for $\sigma^2$.
+
+$$
+L(\mathbf{x}; \theta) 
+= (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n x_i^2} 
+= (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} n \frac{1}{n}\sum_{i=1}^n x_i^2}
+$$
+
+Therefore, $\frac{1}{n} \sum_{i=1}^n X_i^2$ is a sufficient statistic of $\sigma^2$.
+
+##### Example - Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$. Show that $(\sum_{i=1}^n X_i, \sum_{i=1}^n X_i^2)$ are sufficient statistics for $(\mu, \sigma^2)$.
+
+Previously have shown that $(\bar{X}, s^2)$ are sufficient statistics for $(\mu, \sigma^2)$.
+
+$s^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n-1} = \frac{\sum_{i=1}^n X_i^2 - n\bar{X}^2}{n-1} \quad \Rightarrow \quad \sum_{i=1}^n X_i^2 = (n-1)s^2 + n\bar{X}^2$.
+
+Thus $(\sum_{i=1}^n X_i, \sum_{i=1}^n X_i^2)$ are sufficient statistics for $(\mu, \sigma^2)$.
+
+#### 2. The maximum likelihood estimates are functions of sufficient statistics.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+Use factorization theorem: $L(\mathbf{x}; \theta) = g(T(\mathbf{x}); \theta) h(\mathbf{x})$
+
+Since $h(\mathbf{x})$ does not depend on $\theta$, maximizing the likelihood with respect to $\theta$ is equivalent to maximizing $g(T(\mathbf{x});\theta)$.
+
+Hence, 
+
+$$\hat{\theta} = \arg\max_{\theta} L(\mathbf{x};\theta) = \arg\max_{\theta} g(T(\mathbf{x});\theta)$$ 
+
+which depends on the sample only through the sufficient statistic $T(\mathbf{x})$. Therefore, the maximum likelihood estimator is a function of the sufficient statistic.
+
+</div>
+
+#### 3. Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables from a pdf or pmf that belongs in an exponential family:
+
+$$f(x \mid \boldsymbol{\theta}) = h(x)c(\boldsymbol{\theta}) \exp\Big(\sum_{i=1}^k w_i(\boldsymbol{\theta})t_i(x)\Big)$$
+
+Then $T(\mathbf{X}) = \Big( \sum_{j=1}^n t_1(X_j), \dots, \sum_{j=1}^n t_k(X_j) \Big)$ is a sufficient statistic of $\boldsymbol{\theta}$.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
