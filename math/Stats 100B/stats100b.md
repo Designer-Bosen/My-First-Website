@@ -2457,3 +2457,142 @@ Then $T(\mathbf{X}) = \Big( \sum_{j=1}^n t_1(X_j), \dots, \sum_{j=1}^n t_k(X_j) 
     
 **Proof**:
 
+Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables from an exponential family. Suppose $k=2$.
+
+$$
+\begin{aligned}
+f(x_i; \boldsymbol{\theta}) &= h(x)c(\boldsymbol{\theta}) e^{w_1(\boldsymbol{\theta})t_1(x) + w_2(\boldsymbol{\theta})t_2(x)}
+L(x; \boldsymbol{\theta}) &= \prod_{j=1}^n f(x_j; \boldsymbol{\theta}) = \prod_{j=1}^n h(x_j) \cdot c(\boldsymbol{\theta})^n \cdot e^{w_1(\boldsymbol{\theta}) \sum_{j=1}^n t_1(x_j) + w_2(\boldsymbol{\theta}) \sum_{j=1}^n t_2(x_j)}
+\end{aligned}
+$$
+
+Using factorization theorem, we conclude $\Big( \sum_{j=1}^n t_1(x_j), \sum_{j=1}^n t_2(x_j) \Big)$ are sufficient statistics for $\mu$, $\sigma^2$
+
+</div>
+
+#### Example
+
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$. Show that $(\sum_{j=1}^n X_j, \sum_{j=1}^n X_j^2)$ are sufficient statistics for $\mu$, $\sigma^2$.
+
+$$
+\begin{aligned}
+f(x) &= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2} \\
+&= (2\pi\sigma^2)^{-\frac{1}{2}} e^{-\frac{\mu^2}{2\sigma^2}} e^{-\frac{1}{2\sigma^2}x^2 + \frac{\mu}{\sigma^2}x} \\
+L(x; \mu, \sigma^2) &= \prod_{i=1}^n f(x_i) = (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{n\mu^2}{2\sigma^2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n x_i^2 + \frac{\mu}{\sigma^2} \sum_{j=1}^n x_j}
+\end{aligned}
+$$
+
+Therefore, $(\sum_{j=1}^n X_j, \sum_{j=1}^n X_j^2)$ are sufficient statistics for $\mu$, $\sigma^2$.
+
+### Expectation and variance of conditioning
+
+$$E[X] = E[E[X \mid Y]] \qquad var[X] = var[E[X \mid Y]] + E[var[X \mid Y]]$$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$
+\begin{aligned}
+E[X] &= \int\int x f(x,y) dxdy \\
+&= \int\int x f(x \mid y) f(y) dxdy \\
+&= \int (\int x f(x \mid y) dx) f(y) dy \\
+&= E[E[X \mid Y]]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+var[E[X \mid Y]] &= E[E[X \mid Y]^2] - E[E[X \mid Y]]^2 \\
+&= E[E[X \mid Y]^2] - E[X]^2 \\
+E[var[X \mid Y]] &= E[ E[(X \mid Y)^2] - E[X \mid Y]^2 ] \\
+&= E[E[X^2 \mid Y]] - E[E[X \mid Y]^2] \\
+&= E[X^2] - E[E[X \mid Y]^2] \\
+\Rightarrow \quad var[X] &= var[E[X \mid Y]] + E[var[X \mid Y]]
+\end{aligned}
+$$
+
+</div>
+
+### Rao-Blackwell theorem - minimal variance unbiased estimators
+
+Let $X_1, X_2, \dots, X_n$ be a random sample from a distribution with a parameter $\theta$. Let $\hat{\theta}$ be an unbiased estimator for $\theta$ and let $U$ be a sufficient statistics for $\theta$. Define a new estimator as $\hat{\theta}^* = E[\hat{\theta} \mid U] = h(U)$. Then, $E[\hat{\theta}^*] = \theta$ and $var[\hat{\theta}] \leq var[\hat{\theta}]$, therefore, $\hat{\theta}^*$ is the minimum variance unbiased estimator (MVUE) of $\theta$.
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$E[\hat{\theta}^*] = E[E[\hat{\theta} \mid U]] = E[\hat{\theta}] = \theta \qquad \text{(unbiased)}$$
+
+$$
+\begin{aligned}
+var[\hat{\theta}] &= var[E[\hat{\theta} \mid U]] + E[var[\hat{\theta} \mid U]] \\
+&= var[\hat{\theta}^*] + a \qquad \text{where } a \geq 0 \\
+&\geq var[\hat{\theta}^*]
+\end{aligned}
+$$
+
+</div>
+
+### Example
+
+Let $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} exp(\frac{1}{\theta})$. Find the MVUE of $\theta$ and $\theta^2$.
+
+$$L(x,\theta) = \frac{1}{\theta^n} e^{-\frac{1}{\theta} \sum_{i=1}^n x_i}$$
+
+By factorization theorem, $\sum_{i=1}^n X_i$ is a sufficient statistic of $\theta$. 
+
+$$E[\sum_{i=1}^n X_i] = \sum_{i=1}^n E[X_i] = n\theta \quad \Rightarrow \quad \hat{\theta}^* = \bar{X} = \frac{\sum_{i=1}^n X_i}{n} \text{ is MVUE of } \theta$$
+
+$$E[\bar{X}^2] = var[\bar{X}] + E[\bar{X}]^2 = \frac{var[X_i]}{n} + E[X_i]^2 = \frac{\theta^2}{n} + \theta^2 = \frac{n+1}{n}\theta^2$$
+
+Using Rao-Blackwell theorem: a function of sufficient statistic
+
+$$\hat{\theta^2} = \frac{n}{n+1}\bar{X}^2 \text{ is MVUE of } \theta^2$$
+
+### Lehmann and Scheffé theorem
+
+Let $X_1, X_2, \dots, X_n$ and $Y_1, Y_2, \dots, Y_n$ be two samples from the same pdf or pmf. Then, if $\frac{L(x_1, x_2, \dots, x_n \mid \theta)}{L(y_1, y_2, \dots, y_n \mid \theta)}$ is free of the unknown parameter $\theta$ when $T(\mathbf{x}) = T(\mathbf{y})$, we say that $T(\mathbf{X})$ is a minimal sufficient statistic of the unknown parameter $\theta$. In addition, If $T(\mathbf{X})$ is an unbiased estimator of a parameter $\theta$ and it it a function of a minimal sufficient statistic, it will be a minimal variance unbiased estimator (MVUE). 
+
+### Example 
+
+#### (a). Let $Y_1, Y_2, \dots, Y_n$ be a random sample from the Bernoulli distribution with parameter $p$. Find the minimal sufficient statistic for $p$ and use it to find the MVUE of $p$.
+
+$$
+\frac{L(x_1, x_2, \dots, x_n \mid \theta)}{L(y_1, y_2, \dots, y_n \mid \theta)} 
+= \frac{p^{\sum_{i=1}^n x_i} (1-p)^{1-\sum_{i=1}^n x_i}}{p^{\sum_{i=1}^n y_i} (1-p)^{1-\sum_{i=1}^n y_i}} 
+= \Big( \frac{p}{1-p} \Big)^{\sum_{i=1}^n x_i - \sum_{i=1}^n y_i}
+$$
+
+The expression is free of $p$ when $\sum_{i=1}^n x_i = \sum_{i=1}^n y_i$. Therefore, $\sum_{i=1}^n X_i$ is a minimal sufficient statistic for $p$. $E[\frac{1}{n}\sum_{i=1}^n X_i] = p$ so $\hat{p} = \frac{1}{n}\sum_{i=1}^n X_i$ is an MVUE of $p$.
+
+#### (b). Let $Y_1, Y_2, \dots, Y_n$ be a random sample from the Weibull distribution $f(y \mid \theta) = (\frac{2y}{\theta})e^{-\frac{y^2}{\theta}}, y > 0$. Find the minimum variance unbiased estimator for $\theta$.
+
+$$
+\frac{L(x_1, x_2, \dots, x_n \mid \theta)}{L(y_1, y_2, \dots, y_n \mid \theta)} 
+= \frac{\frac{2^n}{\theta^n} \prod_{i=1}^n x_i e^{-\frac{1}{\theta}\sum_{i=1}^n x_i^2}}{\frac{2^n}{\theta^n} \prod_{i=1}^n y_i e^{-\frac{1}{\theta}\sum_{i=1}^n y_i^2}}
+= \frac{\prod_{i=1}^n x_i}{\prod_{i=1}^n y_i} e^{-\frac{1}{\theta}(\sum_{i=1}^n x_i^2 - \sum_{i=1}^n y_i^2)}
+$$
+
+The expression is free of $\theta$ when $\sum_{i=1}^n x_i^2 = \sum_{i=1}^n y_i^2$. Therefore, $\sum_{i=1}^n x_i^2$ is a minimal sufficient statistic for $\theta$. $E[\frac{1}{n}\sum_{i=1}^n Y_i^2] = \theta$ so $\hat{\theta} = \frac{1}{n}\sum_{i=1}^n Y_i^2$ is an MVUE of $\theta$.
+
+#### (c). Let $Y_1, Y_2, \dots, Y_n \overset{\text{i.i.d.}}{\sim} N(\mu, \sigma^2)$, with both $\mu$ and $\sigma^2$ unknown. Find the minimum variance unbiased estimators for $(\mu, \sigma^2)$.
+
+$$
+\begin{aligned}
+\frac{L(x_1, x_2, \dots, x_n \mid \theta)}{L(y_1, y_2, \dots, y_n \mid \theta)} \\
+&= \frac{ (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2} }{ (2\pi\sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^n (y_i - \mu)^2} } \\
+&= e^{-\frac{1}{2\sigma^2} (\sum_{i=1}^n (x_i - \mu)^2 - \sum_{i=1}^n (y_i - \mu)^2) } \\
+&= e^{-\frac{1}{2\sigma^2} (\sum_{i=1}^n x_i^2 + n\mu^2 - 2\mu \sum_{i=1}^n x_i - \sum_{i=1}^n y_i^2 - n\mu^2 + 2\mu \sum_{i=1}^n y_i )} \\
+&= e^{-\frac{1}{2\sigma^2} (\sum_{i=1}^n x_i^2 - \sum_{i=1}^n y_i^2 + 2\mu(\sum_{i=1}^n y_i - \sum_{i=1}^n x_i) )}
+\end{aligned}
+$$
+
+The expression is free of $\mu$ and $\sigma^2$ when $\sum_{i=1}^n x_i = \sum_{i=1}^n y_i$ and $\sum_{i=1}^n x_i^2 = \sum_{i=1}^n y_i^2$. Therefore, $\sum_{i=1}^n X_i$ and $\sum_{i=1}^n X_i^2$ are a minimal sufficient statistic for $(\mu, \sigma^2)$. 
+
+$$
+E[\bar{X}] &= E[\frac{1}{n}\sum_{i=1}^n X_i] = \mu
+E[s^2] &= E[\frac{1}{n-1}\sum_{i=1}^n X_i^2] = \sigma^2
+$$
+
+Thus, $(\bar{X}, s^2)$ are MVUE of $(\mu, \sigma^2)$.
