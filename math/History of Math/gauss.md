@@ -92,3 +92,68 @@ Recall $R_1 = \{1,4,16,13\}$. Notice $16\equiv -1$ (mod 17) and $13\equiv -4$ (m
 $$\cos(\frac{2\pi}{17}) = \frac{\sqrt{17}-1+\sqrt{34-2\sqrt{17}} + 2\sqrt{17+3\sqrt{17}-\sqrt{34-2\sqrt{17}}-2\sqrt{34+2\sqrt{17}}}}{16}$$
 
 This completes the proof.
+
+
+---
+
+
+# Euler
+
+## Basel Problem
+
+$$\zeta(2) = \sum_{n=1}^\infty \frac{1}{n^2} = \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \frac{1}{4^2} + \dots = \frac{\pi^2}{6}$$
+
+<div style="border:2px solid black; padding:12px; margin:12px 0; border-radius:4px;">
+    
+**Proof**:
+
+$$
+\begin{aligned}
+\sum_{n=1}^\infty \frac{1}{n^2} 
+= \sum_{n=0}^\infty \frac{1}{(n+1)^2}
+= \sum_{n=0}^n \Big(\frac{1}{(n+1)} \cdot \frac{1}{(n+1)} \Big)
+&= \sum_{n=0}^\infty \Big[ \Big( \int_0^1 x^n dx \Big) \Big( \int_0^1 y^n dy \Big) \Big] \\
+&= \int_0^1 \int_0^1 \sum_{n=0}^\infty (xy)^n dxdy \\
+&= \int_0^1 \int_0^1 \sum_{n=0}^\infty \frac{1}{1 - xy} dxdy \qquad (\star)
+\end{aligned}
+$$
+
+Note: $|xy| \leq 1$, but |xy| = 1 has area $= 0$ on $[0,1] \times [0,1]$.
+
+Let $u = \frac{y+x}{2}$, $v = \frac{y-x}{2} \quad \Rightarrow \quad x = u-v$, $y = u+v$, and 
+
+$$
+\frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix} = \begin{vmatrix} 1 & -1 \\ 1 & 1 \end{vmatrix} = 2 \quad \Rightarrow \quad dxdy = 2 \cdot dvdu
+$$
+
+$$
+\begin{aligned}
+(\star) &= 2 \int_0^\frac{1}{2} \int_0^u \frac{1}{1 - (u+v)(u-v)} 2 \cdot dvdu + 2 \int_\frac{1}{2}^1 \int_0^{1-u} \frac{1}{1 - (u+v)(u-v)} 2 \cdot dvdu \\
+&= 4 \int_0^\frac{1}{2} \int_0^u \frac{1}{1 - u^2 + v^2} dvdu + 4 \int_\frac{1}{2}^1 \int_0^{1-u} \frac{1}{1 - u^2 + v^2} dvdu \qquad \text{Note: } \int \frac{1}{x^2 + a^2} dx = \frac{1}{a} \arctan\Big(\frac{x}{a}\Big) + C \\
+&= 4 \int_0^\frac{1}{2} \frac{1}{\sqrt{1-u^2}} \arctan\Big(\frac{u}{\sqrt{1-u^2}}\Big) du + 4 \int_\frac{1}{2}^1 \frac{1}{\sqrt{1-u^2}} \arctan\Big(\frac{1-u}{\sqrt{1-u^2}}\Big) du \qquad (\star)(\star)
+\end{aligned}
+$$
+
+Let $g(u) = \arctan\Big(\frac{u}{\sqrt{1-u^2}}\Big)$, $h(u) = \arctan\Big(\frac{1-u}{\sqrt{1-u^2}}\Big)$, then
+
+$$
+\begin{aligned}
+g'(u) &= \frac{1}{1 + \frac{u^2}{1-u^2}} \cdot \frac{\sqrt{1-u^2} + u \cdot u (1-u^2)^{-\frac{1}{2}}}{1-u^2} = \frac{(1-u^2+u^2)/\sqrt{1-u^2}}{\frac{1}{1-u^2} \cdot (1-u^2)} = \frac{1}{\sqrt{1-u^2}} \\
+h'(u) &= \frac{1}{1 + \frac{(1-u)^2}{1-u^2}} \cdot \frac{-\sqrt{1-u^2} + (1-u) \cdot u (1-u^2)^{-\frac{1}{2}}}{1-u^2} = \frac{[-(1-u^2)+(1-u)u]/\sqrt{1-u^2}}{\frac{2-2u}{1-u^2} \cdot (1-u^2)} = -\frac{1}{2} \cdot \frac{1}{\sqrt{1-u^2}}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+(\star)(\star) &= 4 \int_0^\frac{1}{2} g'(u) g(u) du + 4 \int_\frac{1}{2}^1 (-2) \cdot h'(u) h(u) du \\
+&= 4 \Big[ \frac{1}{2} g(u)^2 \Big] - 4 \Big[ h(u)^2 \Big] \\
+&= 2 \Big[ \arctan^2 \Big( \frac{u}{\sqrt{1-u^2}} \Big) \Big] - 4 \Big[ \arctan^2 \Big( \frac{1-u}{\sqrt{1-u^2}} \Big) \Big] \\
+&= 2 \Big[ \arctan^2\Big( \frac{u}{\sqrt{1-u^2}} \Big) \Big]_0^\frac{1}{2} - 4 \Big[ \arctan^2\Big( \frac{1-u}{\sqrt{1-u^2}} \Big) \Big]_\frac{1}{2}^1 \\
+&= 2 \Big[ \arctan^2\Big( \frac{1/2}{\sqrt{3/4}} \Big) - \arctan^2(0) \Big] - 4 \Big[ \arctan^2(0) - \arctan^2\Big( \frac{1/2}{\sqrt{3/4}} \Big) \Big] \\
+&= 6 \arctan^2(\frac{1}{\sqrt{3}}) \\
+&= 6 \cdot \Big(\frac{\pi}{6}\Big)^2 \\
+&= \frac{\pi^2}{6}
+\end{aligned}
+$$
+
+</div>

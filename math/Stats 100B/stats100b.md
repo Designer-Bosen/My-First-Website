@@ -1,6 +1,6 @@
 # Stats 100B - Introduction to Mathematical Statistics
 
-**Instructor:** Professor Nicolas Christou
+**Instructor**: Professor Nicolas Christou
 
 ---
 
@@ -2461,7 +2461,7 @@ Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables from an exponential family
 
 $$
 \begin{aligned}
-f(x_i; \boldsymbol{\theta}) &= h(x)c(\boldsymbol{\theta}) e^{w_1(\boldsymbol{\theta})t_1(x) + w_2(\boldsymbol{\theta})t_2(x)}
+f(x_i; \boldsymbol{\theta}) &= h(x)c(\boldsymbol{\theta}) e^{w_1(\boldsymbol{\theta})t_1(x) + w_2(\boldsymbol{\theta})t_2(x)} \\
 L(x; \boldsymbol{\theta}) &= \prod_{j=1}^n f(x_j; \boldsymbol{\theta}) = \prod_{j=1}^n h(x_j) \cdot c(\boldsymbol{\theta})^n \cdot e^{w_1(\boldsymbol{\theta}) \sum_{j=1}^n t_1(x_j) + w_2(\boldsymbol{\theta}) \sum_{j=1}^n t_2(x_j)}
 \end{aligned}
 $$
@@ -2591,8 +2591,216 @@ $$
 The expression is free of $\mu$ and $\sigma^2$ when $\sum_{i=1}^n x_i = \sum_{i=1}^n y_i$ and $\sum_{i=1}^n x_i^2 = \sum_{i=1}^n y_i^2$. Therefore, $\sum_{i=1}^n X_i$ and $\sum_{i=1}^n X_i^2$ are a minimal sufficient statistic for $(\mu, \sigma^2)$. 
 
 $$
-E[\bar{X}] &= E[\frac{1}{n}\sum_{i=1}^n X_i] = \mu
+\begin{aligned}
+E[\bar{X}] &= E[\frac{1}{n}\sum_{i=1}^n X_i] = \mu \\
 E[s^2] &= E[\frac{1}{n-1}\sum_{i=1}^n X_i^2] = \sigma^2
+\end{aligned}
 $$
 
 Thus, $(\bar{X}, s^2)$ are MVUE of $(\mu, \sigma^2)$.
+
+
+---
+
+
+# Lec 13: Confidence intervals
+
+## A. Confidence intervals for the population mean $\mu$ of normal distribution with known variance $\sigma^2$
+
+Let $X_1, X_2, \dots, X_n$ be a random sample from $N(\mu, \sigma^2)$. Since $\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$, then
+
+$$
+P\Big( -z_{\frac{\alpha}{2}} \leq \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \leq z_{\frac{\alpha}{2}} \Big) 
+= P\Big( \bar{X} - z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \Big)
+= 1 - \alpha
+$$
+
+The area $1 - \alpha$ is called confidence level. When we construct confidendce intervals, we usually use the following confidence levels:
+
+| Confidence level: $1-\alpha$ | $z_{\frac{\alpha}{2}}$ |
+|----------------------|------------------|
+| 0.90 | 1.645 |
+| 0.95 | 1.960 |
+| 0.98 | 2.325 |
+| 0.99 | 2.575 |
+
+**Note**: We should never use the word probability to interpret a confidence interval. Instead, we say: "We are $(1-\alpha)\%$ confident that $\theta$ falls in the interval we constructed."
+
+### Sample size determination for a given length of the confidence interval
+
+Find the sample size $n$ needed when we want the width of the confidence interval to be $\pm SE = \pm z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}$ (margin of error) with confidence level alpha. Therefore
+
+$$SE = z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \quad \Rightarrow \quad n = \Big( \frac{z_{\frac{\alpha}{2}}\sigma}{SE} \Big)^2$$
+
+### Example 
+
+Suppose that the length of iron rods from a certain factory follows the normal distribution with known standard deviation $\sigma = 0.2 m$, but unknown mean $\mu$. Construct a $95\%$ confidence interval for the population mean $\mu$ if a random sample of $n = 16$ of these iron rods has sample mean $\bar{x} = 6 m$. Also, find the sample size $n$ needed if we want the entire width of the confidence interval to be $0.05 m$.
+
+$$
+\begin{aligned}
+P\Big( \bar{X} - z_{0.025}\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{0.025}\frac{\sigma}{\sqrt{n}} \Big) &= 1 - 0.05 \\
+P\Big( 6 - 1.96 \cdot \frac{0.2}{\sqrt{16}} \leq \mu \leq 6 + 1.96 \cdot \frac{0.2}{\sqrt{16}} \Big) &= 0.95 \\
+P\Big( 5.902 \leq \mu \leq 6.098 \Big) &= 0.95
+\end{aligned}
+$$
+
+The $95\%$ confidence interval for $\mu$ is $[5.902, 6.098]$.
+
+If the desired with of the confidence interval is $0.05 m$, then $SE = 0.025 m$.
+
+$$n = \Big( \frac{z_{\frac{\alpha}{2}}\sigma}{SE} \Big)^2 = \Big( \frac{1.96 \cdot 0.02}{0.025} \Big)^2 = 245.86$$
+
+Therefore, if desired with of the confidence interval is $0.05 m$, the minimal sample size $n$ should be $246$.
+
+## B. Confidence intervals for the population mean $\mu$ with known population variance $\sigma^2$
+
+From the central limit theorem, when $n \geq 30$ the distribution of the smaple mean $\bar{X}$ approximately follows:
+
+$$\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$$
+
+Therefore, the confidence interval for the population mean $\mu$ is given by the expression we found in part (A):
+
+$$P\Big( \bar{X} - z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \Big) \approx 1 - \alpha$$
+
+### Example
+
+A sample size $n = 50$ is taken from the production of lightbulbs at a certain factory. The sample mean of the lifetime of these 50 lightbulbs is found to be $\bar{x} = 1570$ hours. Assume that the population standard deviation is $\sigma = 120$ hours. Construct a $95\%$ confidence interval for $\mu$. What smaple size is needed so that the length of the interval is $30$ hours with $95\%$ confidence?
+
+$$
+\begin{aligned}
+P\Big( \bar{X} - z_{0.025}\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{0.025}\frac{\sigma}{\sqrt{n}} \Big) &= 1 - 0.05 \\
+P\Big( 1570 - 1.96 \cdot \frac{120}{\sqrt{50}} \leq \mu \leq 1570 + 1.96 \cdot \frac{120}{\sqrt{50}} \Big) &= 0.95 \\
+P\Big( 1536.74 \leq \mu \leq 1603.26 \Big) &= 0.95
+\end{aligned}
+$$
+
+The $95\%$ confidence interval for $\mu$ is $[1536.74, 1603.26]$.
+
+If the desired with of the confidence interval is $30$ hours, then $SE = 15$ hours.
+
+$$n = \Big( \frac{z_{\frac{\alpha}{2}}\sigma}{SE} \Big)^2 = \Big( \frac{1.96 \cdot 120}{15} \Big)^2 = 245.86$$
+
+Therefore, if the desired with of the confidence interval is $30$ hours, the minimal sample size $n$ should be $246$.
+
+## C. Confidence intervals for the population mean of normal distribution when the population variance $\sigma^2$ is known
+
+Let $X_1, X_2, \dots, X_n$ be a random sample from $N(\mu, \sigma^2)$. We know that $\frac{\bar{X} - \mu}{s/\sqrt{n}} \sim t_{n-1}$. Therefore,
+
+$$
+P\Big( -t_{\frac{\alpha}{2};n-1} \leq \frac{\bar{X} - \mu}{s/\sqrt{n}} \leq t_{\frac{\alpha}{2};n-1} \Big) = 
+P\Big( \bar{x} - t_{\frac{\alpha}{2};n-1} \frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + t_{\frac{\alpha}{2};n-1} \frac{s}{\sqrt{n}} \Big) = 1 - \alpha
+$$
+
+$$\text{where } s = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}} = \sqrt{\frac{1}{n-1} \Big[ \sum_{i=1}^n x_i^2 - \frac{(\sum_{i=1}^n x_i)^2}{n}\Big]}$$
+
+The area $1 - \alpha$ is called confidence level. When we construct confidendce intervals, we usually use the following confidence levels:
+
+| Confidence level: $1-\alpha$ | n |$t_{\frac{\alpha}{2};n-1}$ |
+|----------------------|----|------------------|
+| 0.90 | 13 | 1.782 |
+| 0.95 | 21 | 2.086 |
+| 0.98 | 31 | 2.457 |
+| 0.99 | 61 | 2.660 |
+
+### Example 
+
+The daily production of a chemical product last week in tons was: 785, 805, 790, 793, and 902. Assume the sample is drawn from a normally distributed population. Construct a $95\%$ confidence interval for the population mean $\mu$. 
+
+$$
+s = \sqrt{\frac{1}{5-1} \Big( (785-795)^2 + (805-795)^2 + (790-795)^2 + (793-795)^2 + (802-795)^2 \Big)} =  7.953
+$$
+
+$$
+\begin{aligned}
+P\Big( \bar{x} - t_{0.025;4} \frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + t_{0.025;4} \frac{s}{\sqrt{n}} \Big) &= 1 - 0.05 \\
+P\Big( 795 - 2.7769 \cdot \frac{7.953}{\sqrt{5}} \leq \mu \leq 795 - 2.7769 \cdot \frac{7.953}{\sqrt{5}} \Big) &= 0.95 \\
+P\Big( 785.12 \leq \mu \leq 804.88 \Big) &= 0.95
+\end{aligned}
+$$
+
+The $95\%$ confidence interval for $\mu$ is $[785.12, 804.88]$.
+
+## D. Confidence interval for the population variance $\sigma^2$ of normal distribution
+
+Let $X_1, X_2, \dots, X_n$ be a random sample from $N(\mu, \sigma^2)$. Then
+
+$$
+\begin{aligned}
+P\Big( \chi^2_{\frac{\alpha}{2};n-1} \leq \frac{(n-1)s^2}{\sigma^2} \leq \chi^2_{1-\frac{\alpha}{2};n-1} \Big) = P\Big( \frac{(n-1)s^2}{\chi^2_{1-\frac{\alpha}{2};n-1}} \leq \sigma^2 \leq \frac{(n-1)s^2}{\chi^2_{\frac{\alpha}{2};n-1}} \Big) = 1 - \alpha
+\end{aligned}
+$$
+
+| Confidence level: $1-\alpha$ | n |$\chi^2_{\frac{\alpha}{2};n-1}$ | $\chi^2_{1-\frac{\alpha}{2};n-1}$|
+|----------------------|----|------------------|------------------|
+| 0.90 | 4 | 0.352 | 7.81 |
+| 0.95 | 16 | 6.26 | 27.49 |
+| 0.98 | 25 | 10.86 | 42.98 |
+| 0.99 | 41 | 20.71 | 66.77 |
+
+**Commment**: When the sample size $n$ is large, the $\chi^2_{n-1}$ distribution can be approximated by $N(n-1,2(n-1))$. Therefore, in this situation, the confidence interval for the variance can be computed as follows:
+
+$$\frac{s^2}{1 + z_{\frac{\alpha}{2}}\sqrt{\frac{2}{n-1}}} \leq \sigma^2 \leq \frac{s^2}{1 - z_{\frac{\alpha}{2}}\sqrt{\frac{2}{n-1}}}$$
+
+**Note**: if the population is not normal, the convergence is poor (the $\chi^2$ is not robust). In these situations (sampling from non-normal populations), an asymptotically distribution-free confidence interval for the variance can be obtained using the large sample theory result:
+
+$$\frac{\sqrt{n}(s^2 - \sigma^2)}{\sqrt{\mu_4 - \sigma^4}} \Rightarrow N(0,1)$$
+
+where $\mu_4 = E[(X - \mu)^4]$ is the fourth moment of the distribution and can be estimated by the fourth sample moment $m_4 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^4$. The confidence interval for the population variance is computed as follows:
+
+$$s^2 - z_{\frac{\alpha}{2}}\frac{\sqrt{m_4 - s^4}}{\sqrt{n}} \leq \sigma^2 \leq s^2 + z_{\frac{\alpha}{2}}\frac{\sqrt{m_4 - s^4}}{\sqrt{n}}$$
+
+### Example
+
+A precision instrument is guaranteed to read accurately to within 2 units. A sample of 4 instrument readings on the same object yielded the measurements 353, 351, 351, and 355. Assume the sample is drawn from a normally distributed population. Find a $95\%$ confidence interval for the population variance.
+
+$$s^2 = \frac{1}{4-1}\Big( (353-352.5)^2 + (351-352.5)^2 + (351-352.5)^2 + (355-352.5)^2 \Big) = 3.667$$
+
+$$
+\begin{aligned}
+P\Big( \frac{(n-1)s^2}{\chi^2_{1-0.025;n-1}} \leq \sigma^2 \leq \frac{(n-1)s^2}{\chi^2_{0.025;n-1}} \Big) &= 1 - 0.05 \\ 
+P\Big( \frac{3(3.667)}{9.348} \leq \sigma^2 \leq \frac{3(3.667)}{0.2158} \Big) &= 0.95 \\
+P\Big( 1.18 \leq \sigma^2 \leq 50.97 \Big) &= 0.95
+\end{aligned}
+$$
+
+The $95\%$ confidence interval for $\sigma^2$ is $[1.18, 50.97]$.
+
+## E. Confidence interval for the population proportion $p$
+
+Let $Y_1, Y_2, \dots, Y_n$ be a random sample from the Bernoulli distribution with probability of success $p$. Construct a confidence interval for $p$. By central limit theorem, when $n$ is large, $X \sim N(np, np(1-p))$ where $X = Y_1 + Y_2 + \dots + Y_n$. Therefore,
+
+$$
+P\Big( -z_{\frac{\alpha}{2}} \leq \frac{X - np}{\sqrt{np(1-p)}} \leq z_{\frac{\alpha}{2}} \Big) = 
+P\Big( \frac{X}{n} - z_{\frac{\alpha}{2}}\sqrt{\frac{p(1-p)}{n}} \leq p \leq \frac{X}{n} + z_{\frac{\alpha}{2}}\sqrt{\frac{p(1-p)}{n}} \Big) = 1 - \alpha
+$$
+
+The ratio $\frac{x}{n}$ is the point estimate of the population $p$ and it is denoted with $\hat{p} = \frac{x}{n}$. The problem with this interval is that the unknown $p$ appears also at the end points of the interval. As an approximation, we can simply replace $p$ with its estimate $\hat{p} = \frac{x}{n}$. Finally, the confidence interval is given as:
+
+$$P\Big( \hat{p} - z_{\frac{\alpha}{2}}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq p \leq \hat{p} + z_{\frac{\alpha}{2}}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \Big) = 1 - \alpha$$
+
+### Sample size determination
+
+Determine the sample size needed so that the resulting confidence interval will have margin of error $SE$ with confidence interval level $1 - \alpha$. We simply solve for $n$:
+
+$$SE = z_{\frac{\alpha}{2}}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \quad \Rightarrow \quad n = \frac{z_{\frac{\alpha}{2}}^2\hat{p}(1-\hat{p})}{SE^2}$$
+
+However, the value of $\hat{p}$ is unknown because we have not selected our sample yet. If we use $\hat{p} = 0.5$, we will obtain the largest possible sample size. 
+
+### Example
+
+At a survey poll before the elections candidates $A$ receives the support of 650 voters in a sample of 1200 voters. Construct a $95\%$ confidence interval for the population proportion $p$ that supports candidate $A$. Also, find the sample size needed so that the margin of error will be $\pm 0.01$ with confidence level $95\%$.
+
+$$
+\begin{aligned}
+P\Big( \hat{p} - z_{0.025}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq p \leq \hat{p} + z_{0.025}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \Big) &= 1 - 0.05 \\
+P\Big( 0.542 - 1.96 \sqrt{\frac{0.542(1-0.542)}{1200}} \leq p \leq 0.542 + 1.96 \sqrt{\frac{0.542(1-0.542)}{1200}} \Big) &= 0.95 \\
+P\Big( 0.5138 \leq p \leq 0.5702 \Big) &= 0.95
+\end{aligned}
+$$
+
+The $95\%$ confidence interval for $p$ is $[0.5138, 0.5702]$.
+
+$$n = \frac{z_{0.025}^2 \hat{p}(1-\hat{p})}{SE^2} = \frac{1.96^2 \cdot 0.5(1-0.5)}{0.01^2} = 9604$$
+
+The minimal sample size $n$ should be $9604$ in order to have margin of error of $\pm 0.01$.
+
